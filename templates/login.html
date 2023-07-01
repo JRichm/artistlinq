@@ -13,13 +13,11 @@
             {{ loginForm.csrf_token }}
             <h2>Login</h4>
             <div>
-                {{ loginForm.email() }}
+                {{ loginForm.username() }}
                 {{ loginForm.password() }}
-                {{ loginForm.submit() }}
+                <input type="submit" name="login" value="Login" class="submit-button">
             </div>
-            <!-- add error messages using Jinja2
-                    
-                {% for error in loginForm.email.errors %}
+                {% for error in loginForm.username.errors %}
                     <span style="color: red;">{{ error }}</span>
                 {% endfor %}
                 
@@ -27,20 +25,19 @@
                     <span style="color: red;">{{ error }}</span>
                 {% endfor %}
 
-            -->
+           
         </form>
 
         <form class="new-user-box" method="POST" action="{{ url_for('login') }}">
             {{ newUserForm.csrf_token }}
             <h2>Create Account</h4>
             <div>
+                {{ newUserForm.username() }}
                 {{ newUserForm.email() }}
                 {{ newUserForm.password() }}
                 {{ newUserForm.confirm_password() }}
-                {{ newUserForm.submit() }}
+                <input type="submit" name="new-user" value="Create Account" class="submit-button">
             </div>
-            <!-- add error messages using Jinja2
-
                 {% for error in newUserForm.email.errors %}
                     <span style="color: red;">{{ error }}</span>
                 {% endfor %}
@@ -53,7 +50,7 @@
                     <span style="color: red;">{{ error }}</span>
                 {% endfor %}
 
-            -->
+           
         </form>
     </main>
 </body>
