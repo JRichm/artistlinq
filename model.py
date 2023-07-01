@@ -1,3 +1,7 @@
+
+
+
+
 """"""""""""""""""""""""""""""""""""""""""
 """  ###  PostgreSQL  Model  File ###  """
 """"""""""""""""""""""""""""""""""""""""""
@@ -49,7 +53,7 @@ class Comment(db.Model):
 
 """ Commission Request Table """
 class CommissionRequest(db.Model):
-    __tablename__ = 'commissionRequests'
+    __tablename__ = 'commission_requests'
     
     request_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
@@ -61,7 +65,7 @@ class CommissionRequest(db.Model):
 
 """ Artist Table """
 class Artists(db.Model):
-    __tablename__ = 'Artists'
+    __tablename__ = 'artists'
     
     artist_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
@@ -85,7 +89,7 @@ class Likes(db.Model):
 """ ###       Database Config      ### """
 """"""""""""""""""""""""""""""""""""""""""
 
-def connect_to_db(flask_app, db_uri="postgresql:///ratings", echo=True):
+def connect_to_db(flask_app, db_uri="postgresql:///art_station", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["POSTGRES_URI"]
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
