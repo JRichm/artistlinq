@@ -9,12 +9,52 @@
 </head>
 <body>
     <main>
-        <article class="login-box">
+        <form class="login-box" method="POST" action="{{ url_for('login') }}">
+            {{ loginForm.csrf_token }}
+            <h2>Login</h4>
+            <div>
+                {{ loginForm.email() }}
+                {{ loginForm.password() }}
+                {{ loginForm.submit() }}
+            </div>
+            <!-- add error messages using Jinja2
+                    
+                {% for error in loginForm.email.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+                
+                {% for error in loginForm.password.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
 
-        </article>
-        <article class="new-user-box">
+            -->
+        </form>
 
-        </article>
+        <form class="new-user-box" method="POST" action="{{ url_for('login') }}">
+            {{ newUserForm.csrf_token }}
+            <h2>Create Account</h4>
+            <div>
+                {{ newUserForm.email() }}
+                {{ newUserForm.password() }}
+                {{ newUserForm.confirm_password() }}
+                {{ newUserForm.submit() }}
+            </div>
+            <!-- add error messages using Jinja2
+
+                {% for error in newUserForm.email.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+
+                {% for error in newUserForm.password.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+
+                {% for error in newUserForm.confirm_password.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+
+            -->
+        </form>
     </main>
 </body>
 </html>
