@@ -1,0 +1,1 @@
+when creating a new account, after submitting username, email, and password, open to new window asking if the user is an artist

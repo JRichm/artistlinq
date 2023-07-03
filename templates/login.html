@@ -24,8 +24,6 @@
                 {% for error in loginForm.password.errors %}
                     <span style="color: red;">{{ error }}</span>
                 {% endfor %}
-
-           
         </form>
 
         <form class="new-user-box" method="POST" action="{{ url_for('login') }}">
@@ -49,8 +47,6 @@
                 {% for error in newUserForm.confirm_password.errors %}
                     <span style="color: red;">{{ error }}</span>
                 {% endfor %}
-
-           
         </form>
     </main>
 </body>
