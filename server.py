@@ -2,7 +2,7 @@
 """      ### Server Imports ###        """
 """"""""""""""""""""""""""""""""""""""""""
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import Flask, render_template, redirect, request, url_for, flash
+from flask import Flask, render_template, redirect, request, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from model import connect_to_db, db
 import forms
@@ -47,7 +47,14 @@ def user_view(username):
     ### " New Post " ###
 @app.route('/post')
 def new_post():
-    return render_template('new_post.html', )
+    return render_template('new_post.html')
+
+@app.route('/search_tags', methods=['GET'])
+def search_tags():
+    search_key = request.args.get('key')
+    print(search_key)
+    tags = crud.get_tags_from_substring(search_key)
+    return tags
 
 
 """"""""""""""""""""""""""""""""""""""""""

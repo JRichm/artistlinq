@@ -1,6 +1,7 @@
-from model import db, User
+from model import db, User, Tag
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
+from flask import jsonify
 
 """"""""""""""""""""""""""""""""""""""""""
 """       ### CRUD Funtions ###        """
@@ -37,6 +38,12 @@ def get_user_by_email(email):
 # get user by username
 def get_user_by_username(username):
     return User.query.filter(User.username == username).first()
+
+def get_tags_from_substring(substring):
+    substring = substring.lower()
+    tags = Tag.query.filter(Tag.tag_name.ilike(f'{substring}%')).all()
+    tags_data = [{'id': tag.tag_id, 'name': tag.tag_name} for tag in tags]
+    return jsonify(tags_data)
 
 """     Update      """
 
