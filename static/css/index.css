@@ -1,5 +1,9 @@
 * {box-sizing:border-box}
 
+hr {
+  color: white;
+}
+
 /* Slideshow container */
 .slideshow-container {
     justify-content: center;
@@ -76,4 +80,56 @@
 
 .active, .dot:hover {
   background-color: #717171;
+}
+
+
+/* featured area */
+
+.section-title {
+  margin: 50px 0px 35px 100px;
+  color: white;
+}
+
+.featured-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+/* featured item */
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
+  padding: 20px;
+  transition: all 0.1s;
+}
+
+.feature-item:hover {
+  cursor: pointer;
+  background-color: #243149;
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+
+.feature-item > * {
+  color: white;
+}
+
+.feature-item img {
+  height: 100px; width: 100px;
+}
+
+.feature-item h5 {
+}
+
+.feature-item p {
+  max-width: 250px;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
