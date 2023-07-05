@@ -86,7 +86,7 @@ hr {
 /* featured area */
 
 .section-title {
-  margin: 50px 0px 35px 100px;
+  margin: 25px 0px 25px 100px;
   color: white;
 }
 
@@ -132,4 +132,18 @@ hr {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.image-board {
+  display: flex;
+  justify-content: center;
+}
+
+.image-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.image-column img {
+  margin: 5px;
 }

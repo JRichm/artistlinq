@@ -6,14 +6,10 @@
 
 {% block body %}
 <main>
-    <header>
-        <nav>
-
-        </nav>
-    </header>
     <section>
         <hr>
         <article class='hero'>
+            <h1 class="section-title">Today's top rated</h1>
             <!-- Slideshow container -->
             <div class="slideshow-container">
 
@@ -82,7 +78,18 @@
         </article>
         <hr>
         <article class="posts">
-
+            <h1 class="section-title">Posts</h1>
+            <div class="image-board">
+                {% for column in range(4) %}
+                  <div class="image-column">
+                    {% for image in images %}
+                      {% if loop.index0 % 4 == column %}
+                        <img src="{{ image.url }}" alt="{{ image.alt }}" width="400">
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                {% endfor %}
+              </div>
         </article>
     </section>
     <footer>

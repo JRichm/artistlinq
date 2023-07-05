@@ -21,7 +21,17 @@ app.config['SECRET_KEY'] = 'dev'
     
 @app.route('/')
 def index():
-    return render_template('index.html')
+    image_folder = './static/images/'
+    images = []
+    
+    for filename in os.listdir(image_folder):
+        if filename.endswith('.jpg') or filename.endswith('.png'):
+            image_path = os.path.join(image_folder, filename)
+            image_url = '/static/images/' + filename
+            images.append({'path': image_path, 'url': image_url})
+            
+    
+    return render_template('index.html', images=images)
   
   
     ### " View Login/New User" ###

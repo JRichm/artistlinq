@@ -1,3 +1,8 @@
+let imageColumns = document.getElementsByClassName('img-column');
+console.log(imageColumns.length)
+
+
+
 let slideIndex = 1;
 showSlides(slideIndex);
 
