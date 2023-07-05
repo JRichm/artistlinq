@@ -28,9 +28,32 @@ main {
   text-overflow: ellipsis;
 }
 
+/* User Section */
 .user-section {
     display: flex;
     flex-direction: column;
+}
+
+.content-controller {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #2d3e5f;
+}
+
+.content-controller a {
+    color:white;
+    text-decoration: none;
+    margin-right: 5px;
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+    background-color: #2a3a5a;
+}
+
+.content-controller a:hover {
+    transition: all 0.3s;
+    background-color: #203050;
 }
 
 .image-board {
