@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Art-Station [INDEX]{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="../static/css/user_view.css">
+{% endblock %}
+
+{% block body %}
+<main>
+    <aside class="user-card">
+        <img src="/static/images/user_icon.png" height="200px" width="200px">
+        <h3>Username</h3>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    </aside>
+    <section class="user-section">
+        <span class="content-controller">
+            <a href="">Posts</a>
+            <a href="">Likes</a>
+            <a href="">About</a>
+        </span>
+        <article>
+            <div class="image-board">
+                {% for column in range(4) %}
+                  <div class="image-column">
+                    {% for image in images %}
+                      {% if loop.index0 % 4 == column %}
+                        <div class="image-container">
+                            <img class="image-board-img" src="{{ image.url }}" alt="{{ image.alt }}" width="400">
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                {% endfor %}
+            </div>
+        </article>
+    </section>
+</main>
+{% endblock %}
+

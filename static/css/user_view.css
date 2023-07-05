@@ -1,0 +1,61 @@
+main {
+    display: flex;
+    flex-direction: row;
+    margin: 150px;
+}
+
+
+/* User Card */
+.user-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+}
+
+.user-card > * {
+    color:  white;
+    text-align: center;
+}
+
+.user-card p {
+  max-width: 250px;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-board {
+    display: flex;
+    flex-direction: row;
+    margin: 50px;
+}
+
+.image-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-container {
+    width: 250px;
+    height: 250px;
+    margin: 30px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container img {
+    width: 100%; /* Make the image fill the width of the container */
+    height: 100%; /* Make the image fill the height of the container */
+    object-fit: contain; /* Preserve aspect ratio and fit the image within the container */
+  }
