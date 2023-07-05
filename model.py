@@ -28,10 +28,10 @@ class User(db.Model):
 
 
 """ Image Table """
-class Image(db.Model):
-    __tablename__ = 'images'
+class Post(db.Model):
+    __tablename__ = 'posts'
     
-    image_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    post_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     image_url = db.Column(db.VARCHAR, unique=True, nullable=False)
     caption = db.Column(db.VARCHAR)
@@ -45,7 +45,7 @@ class Comment(db.Model):
     
     comment_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    image_id = db.Column(db.Integer, db.ForeignKey('images.image_id'), nullable=False)
+    image_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), nullable=False)
     comment_text = db.Column(db.VARCHAR)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
@@ -64,8 +64,8 @@ class CommissionRequest(db.Model):
     updated_at = db.Column(db.TIMESTAMP)
 
 """ Artist Table """
-class Artists(db.Model):
-    __tablename__ = 'artists'
+class Artist(db.Model):
+    __tablename__ = 'artist_table'
     
     artist_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
@@ -74,14 +74,27 @@ class Artists(db.Model):
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
 
+""" Tag Table """
+class Tag(db.Model):
+    __tablename__ = 'tag_table'
+    
+    tag_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    tag_name = db.Column(db.VARCHAR, unique=True, nullable=False)
+
+""" Posted Tag Table """
+class PostedTag(db.Model):
+    __tablename__ = 'posted_tag'
+    post_tag_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tag_table.tag_id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'))
 
 """ Like Table """
-class Likes(db.Model):
-    __tablename__ = 'likes'
+class Like(db.Model):
+    __tablename__ = 'like_table'
     
     like_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    image_id = db.Column(db.Integer, db.ForeignKey('images.image_id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), nullable=False)
     created_at = db.Column(db.TIMESTAMP)
     
 
