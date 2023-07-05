@@ -1,9 +1,5 @@
 * {box-sizing:border-box}
 
-hr {
-  color: white;
-}
-
 /* Slideshow container */
 .slideshow-container {
     justify-content: center;

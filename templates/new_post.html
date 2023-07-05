@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Art-Station [NEW POST]{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="../static/css/new_post.css">
+{% endblock %}
+
+{% block body %}
+<main>
+    <section>
+        <hr>
+        <article class="new-post">
+            <div class="new-post-box">
+                <div class="post-input" >
+                    <input type="file" id="fileInput" class="hidden" />
+                    <label for="fileInput" class="custom-file-label">Drag or </label>
+                </div>
+                <div class="post-preview hidden">
+                    <img id="post-preview-img" src="">
+                </div>
+                <div class="input-info">
+                    <input id="post-title-input" type="text" placeholder="Post Title">
+                    <hr style="height:0px; margin:-10px 20px -10px 10px">
+                    <input id="tag-search-input" type="text" placeholder="search tags">
+                    <div class="tag-list-box">
+
+                    </div>
+                    <input id="post-button" type="submit" value="Post">
+                </div>
+            </div>
+        </article>
+    </section>
+</main>
+<script src="/static/javascript/new_post.js"></script>
+{% endblock %}

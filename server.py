@@ -44,6 +44,12 @@ def user_view(username):
     return render_template('user_view.html', user=user, images=get_images())
 
 
+    ### " New Post " ###
+@app.route('/post')
+def new_post():
+    return render_template('new_post.html', )
+
+
 """"""""""""""""""""""""""""""""""""""""""
 """  ###     Server Methods     ###    """
 """"""""""""""""""""""""""""""""""""""""""

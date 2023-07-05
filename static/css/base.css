@@ -31,3 +31,11 @@ nav a:hover {
     color: #bfbfbf;
     transition: color .2s;
 }
+
+hr {
+  color: white;
+}
+
+.hidden {
+    display: none !important;
+}
