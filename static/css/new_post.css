@@ -99,19 +99,31 @@
     position: absolute;
     bottom: 0;
     justify-content: center;
+    align-self: center;
+    width: 95%;
 }
 
 #tag-list-box {
     display: flex;
     flex-wrap: wrap;
+    width: 500px;
 }
 
 .searched-tag {
-    color: white;
-    display: inline-block;
-    padding: 5px 10px;
-    margin: 5px;
-    background-color: #ccc;
     border-radius: 5px;
     cursor: pointer;
+    padding: 5px 10px;
+    margin: 5px;
+    color: #415a77;
+    background-color: transparent;
+    border: 1px solid #415a77;
+}
+
+.added-tag {
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 5px;
+    color: white;
+    background-color: #415a77;
 }

@@ -42,7 +42,7 @@ tagSearch.addEventListener('input', (e) => {
   clearTags()
 
   // create tag element for users input
-  createTagElement(userInput)
+  createTagElement(userInput, 'searched-tag')
 
   clearTimeout(timerId);
   timerId = setTimeout(() => {
@@ -54,7 +54,7 @@ tagSearch.addEventListener('input', (e) => {
       const filteredData = data.filter(item => item.name !== userInput);
 
         filteredData.forEach(item => {
-          createTagElement(item.name);
+          createTagElement(item.name, 'searched-tag');
       });
     })
     .catch(error => {
@@ -80,7 +80,7 @@ tagSearch.addEventListener('keydown', (e) => {
           body: JSON.stringify({ tag: e.target.value })
         })
         .then(res => res.json())
-        .then(dat => console.log(dat))
+        .then(dat => createTagElement(e.target.value, 'added-tag'))
     })
   // clear search when the user presses backspace and search is too short
   } else if (e.key === 'Backspace' && tagSearch.value.length <= 2) {
@@ -94,14 +94,31 @@ function clearTags() {
   document.querySelectorAll('.searched-tag').forEach(e => e.remove())
 }
 
-function createTagElement(tagName) {
+function createTagElement(tagName, className) {
   tag = document.createElement('p');
   tag.innerText = tagName;
-  tag.classList.add('searched-tag');
+  tag.classList.add(className);
   tag.addEventListener('click', e => clickTag(e))
   tagContainer.appendChild(tag);
 }
 
 function clickTag(e) {
-  console.log(e.target.innerText)
+  createTagElement(e.target.innerText, 'added-tag')
+  e.target.remove()
+  
+  fetch(`/get_tag_by_name?tag=${encodeURIComponent(e.target.innerText)}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.error)
+        fetch(`/create_new_tag`, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ tag: e.target.innerText })
+        })
+        .then(res => res.json())
+        .then(dat => {
+        })
+    })
 }

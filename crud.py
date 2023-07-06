@@ -32,7 +32,7 @@ def create_new_tag(tag_name):
     db.session.commit()
     
     tag_data = { 'tag_name': tag.tag_name }
-    return tag
+    return tag_data
 
 """      Read       """
 # get all users
