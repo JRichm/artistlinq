@@ -100,3 +100,18 @@
     bottom: 0;
     justify-content: center;
 }
+
+#tag-list-box {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.searched-tag {
+    color: white;
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
