@@ -1,4 +1,4 @@
-from model import db, User, Tag
+from model import db, User, Tag, Post
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from flask import jsonify
@@ -33,6 +33,17 @@ def create_new_tag(tag_name):
     
     tag_data = { 'tag_name': tag.tag_name }
     return tag_data
+
+# new post
+def publish_post(title, tags, file, caption, user_id):
+    post = Post(
+        user_id = user_id,
+        image_url = '',
+        caption = caption,
+        created_at = datetime.now(),
+        updated_at = datetime.now()
+        
+    )
 
 """      Read       """
 # get all users

@@ -2,7 +2,7 @@
 """      ### Server Imports ###        """
 """"""""""""""""""""""""""""""""""""""""""
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import Flask, render_template, redirect, request, url_for, flash, jsonify
+from flask import Flask, render_template, redirect, request, url_for, flash, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from model import connect_to_db, db
 import forms
@@ -48,6 +48,17 @@ def user_view(username):
 @app.route('/post')
 def new_post():
     return render_template('new_post.html')
+
+@app.route('publish_post', methods=['POST'])
+def publish_new_post():
+    post_data = request.get_json()
+    post_title = post_data.get('title')
+    post_tags = post_data.get('tags')
+    post_description = post_data.data.get('description')
+    post_file = post_data.get('file')
+    user_id = session.get('user_id')
+    
+    new_post = crud.publish_post(post_title, post_tags, post_file, post_description, user_id)
 
 
     ### " Search Tags from Substring " ###
