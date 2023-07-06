@@ -49,12 +49,29 @@ def user_view(username):
 def new_post():
     return render_template('new_post.html')
 
+
+    ### " Search Tags from Substring " ###
 @app.route('/search_tags', methods=['GET'])
 def search_tags():
     search_key = request.args.get('key')
-    print(search_key)
     tags = crud.get_tags_from_substring(search_key)
     return tags
+
+
+    ### " Search Tags by name " ###
+@app.route('/get_tag_by_name', methods=['GET'])
+def get_tag_name():
+    tag_name = request.args.get('tag')
+    tag = crud.get_tag_from_name(tag_name)
+    return tag
+
+
+    ### " Search Tags by name " ###
+@app.route('/create_new_tag', methods=['POST'])
+def create_new_tag():
+    tag_data = request.get_json()
+    tag_name = tag_data.get('tag')
+    return crud.create_new_tag(tag_name)
 
 
 """"""""""""""""""""""""""""""""""""""""""

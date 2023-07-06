@@ -22,6 +22,18 @@ def create_user(username, email, password):
     db.session.add(user)
     db.session.commit()
 
+
+# create tag
+def create_new_tag(tag_name):
+    tag = Tag(
+        tag_name = tag_name
+    )
+    db.session.add(tag)
+    db.session.commit()
+    
+    tag_data = { 'tag_name': tag.tag_name }
+    return tag
+
 """      Read       """
 # get all users
 def get_users():
@@ -44,6 +56,16 @@ def get_tags_from_substring(substring):
     tags = Tag.query.filter(Tag.tag_name.ilike(f'{substring}%')).all()
     tags_data = [{'id': tag.tag_id, 'name': tag.tag_name} for tag in tags]
     return jsonify(tags_data)
+
+def get_tag_from_name(tag_name):
+    tag_name = tag_name.lower()
+    tag = Tag.query.filter(Tag.tag_name == tag_name).first()
+    if tag is None:
+        return jsonify({'error': 'Tag not found'})
+
+    tag_data = {'id': tag.tag_id, 'name': tag.tag_name}
+    return jsonify(tag_data)
+
 
 """     Update      """
 
