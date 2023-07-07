@@ -84,6 +84,12 @@ def get_tag_from_name(tag_name):
     tag_data = {'id': tag.tag_id, 'name': tag.tag_name}
     return jsonify(tag_data)
 
+
+def get_users_images(username):
+    user = get_user_by_username(username)
+    post_query = Post.query.filter(Post.user_id == user.user_id).all()
+    image_list = [{'id': post.post_id, 'url': post.image_url, 'caption': post.caption} for post in post_query]
+    
 """     Update      """
 
 

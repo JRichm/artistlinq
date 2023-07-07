@@ -52,8 +52,8 @@ def logout():
     ### " View User " ###
 @app.route('/user/<username>')
 def user_view(username):
-    user = crud.get_user_by_username(username)
-    return render_template('user_view.html', user=user, images=get_images())
+    view_user = crud.get_user_by_username(username)
+    return render_template('user_view.html', view_user=view_user, images=get_images())
 
 
     ### " New Post " ###
@@ -110,6 +110,18 @@ def create_new_tag():
     tag_data = request.get_json()
     tag_name = tag_data.get('tag')
     return crud.create_new_tag(tag_name)
+
+
+    ### " Get users images " ###
+@app.route('/get_users_images', methods=['GET'])
+def get_users_images():
+    request_data = request.get_json()
+    view_username = request_data.get('username')
+    return crud.get_users_images()
+    
+    
+
+
 
 
 """"""""""""""""""""""""""""""""""""""""""

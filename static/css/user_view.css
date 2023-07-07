@@ -38,8 +38,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-radius: 10px;
-    padding: 15px 5px 15px 5px;
+    border-radius: 15px;
+    padding: 18px 2px 15px 5px;
     background-color: #2d3e5f;
 }
 
@@ -83,3 +83,7 @@ main {
     height: 100%; /* Make the image fill the height of the container */
     object-fit: contain; /* Preserve aspect ratio and fit the image within the container */
   }
+
+.user-settings {
+    background-color: #196340 !important;
+}
