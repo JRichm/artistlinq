@@ -20,8 +20,18 @@
         </span>
         <span>
             <input type="text" placeholder="search">
-            <a href="/user/{{ session.get('username') }}"><i class="fa-solid fa-user"></i></a>
-            <a href="/logout">logout</a>
+
+            {% if username %}
+            
+                <a href="/user/{{ session.get('username') }}"><i class="fa-solid fa-user"></i></a>
+                <a href="/logout">logout</a>
+
+            {% else %}
+
+                <a href="/login">login</a>
+
+            {% endif %}
+            
         </span>
     </nav>
 </header>

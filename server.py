@@ -23,10 +23,11 @@ app.config['SECRET_KEY'] = 'dev'
 @app.route('/')
 def index():
     images=get_images()
-    return render_template('index.html', images=images)
+    username = check_login()
+    return render_template('index.html', username=username, images=images)
   
   
-    ### " View Login/New User" ###
+    ### " View Login/New User " ###
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     loginForm = forms.LoginForm()
@@ -39,7 +40,13 @@ def login():
         return newUserForm.create_user()
         
     return render_template('login.html', loginForm=loginForm, newUserForm=newUserForm)
+
   
+    ### " User Logout " ###
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
     ### " View User " ###
 @app.route('/user/<username>')
@@ -52,10 +59,12 @@ def user_view(username):
 @app.route('/post')
 def new_post():
     if not check_login():
-        return render_template(url_for('login'))
+        return redirect(url_for('login'))
     else: 
         return render_template('new_post.html')
 
+
+    ### " Publish Post " ###
 @app.route('/publish_post', methods=['POST'])
 def publish_new_post():
     post_title = request.form['title']
