@@ -49,16 +49,20 @@ def user_view(username):
 def new_post():
     return render_template('new_post.html')
 
-@app.route('publish_post', methods=['POST'])
+@app.route('/publish_post', methods=['POST'])
 def publish_new_post():
-    post_data = request.get_json()
-    post_title = post_data.get('title')
-    post_tags = post_data.get('tags')
-    post_description = post_data.data.get('description')
-    post_file = post_data.get('file')
-    user_id = session.get('user_id')
+    post_title = request.form['title']
+    post_description = request.form['description']
+    post_tags = request.form.getlist('tags')
+    post_file = request.files['file']
     
-    new_post = crud.publish_post(post_title, post_tags, post_file, post_description, user_id)
+    # Process the data, save the file, etc.
+    print(post_title)
+    print(post_description)
+    print(post_tags)
+    print(post_file)
+    
+    return jsonify({'message': 'Post published successfully'})
 
 
     ### " Search Tags from Substring " ###

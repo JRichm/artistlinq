@@ -6,8 +6,41 @@ const fileInput = document.getElementById('fileInput');
 const customFileLabel = document.querySelector('.custom-file-label');
 const previewImg = document.getElementById('post-preview-img');
 
+const postTitleInput = document.getElementById('post-title-input')
 const tagSearch = document.getElementById('tag-search-input');
 const tagContainer = document.getElementById('tag-list-box');
+
+const postButton = document.getElementById('post-button')
+
+
+postButton.addEventListener('click', (e) => {
+  console.log('\n\n\nnew post!')
+
+  let description = '';
+
+  let formData = new FormData();
+  formData.append('title', postTitleInput.value);
+  formData.append('description', description);
+  Array.from(document.getElementsByClassName('added-tag')).forEach(item => {
+    formData.append('tags', item.innerText);
+  });
+  formData.append('file', fileInput.files[0]);
+
+  console.log(formData);
+
+  fetch('/publish_post', {
+    method: 'POST',
+    body: formData
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
 
 // show preview of file after uploading
 fileInput.addEventListener('change', function() {
