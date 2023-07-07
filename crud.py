@@ -35,15 +35,16 @@ def create_new_tag(tag_name):
     return tag_data
 
 # new post
-def publish_post(title, tags, file, caption, user_id):
+def add_new_post(user_id, image_url, post_title):
     post = Post(
         user_id = user_id,
-        image_url = '',
-        caption = caption,
+        image_url = image_url,
+        caption = post_title,
         created_at = datetime.now(),
         updated_at = datetime.now()
-        
     )
+    
+    
 
 """      Read       """
 # get all users

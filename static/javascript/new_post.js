@@ -32,13 +32,21 @@ postButton.addEventListener('click', (e) => {
     method: 'POST',
     body: formData
   })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  .then(response => {
+    if (response.redirected) {
+      // Redirected response, no need to handle further
+      window.location.href = response.url;
+    } else {
+      // Handle other responses (e.g., JSON)
+      return response.json();
+    }
+  })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(err => {
+    console.log(err);
+  });
 });
 
 

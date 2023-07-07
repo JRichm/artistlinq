@@ -9,6 +9,9 @@ import forms
 import crud
 import os
 
+image_foler = './static/posts/images'
+os.makedirs(image_foler, exist_ok=True)
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dev'
 
@@ -19,7 +22,8 @@ app.config['SECRET_KEY'] = 'dev'
     ### " View Homepage " ###
 @app.route('/')
 def index():
-    return render_template('index.html', images=get_images())
+    images=get_images()
+    return render_template('index.html', images=images)
   
   
     ### " View Login/New User" ###
@@ -52,17 +56,23 @@ def new_post():
 @app.route('/publish_post', methods=['POST'])
 def publish_new_post():
     post_title = request.form['title']
-    post_description = request.form['description']
     post_tags = request.form.getlist('tags')
     post_file = request.files['file']
+    user_id = session.get('user_id')
+    image_url = ''
     
     # Process the data, save the file, etc.
     print(post_title)
-    print(post_description)
     print(post_tags)
-    print(post_file)
+    print(user_id)
     
-    return jsonify({'message': 'Post published successfully'})
+    if request.method == 'POST':
+        image_url = os.path.join(image_foler, post_file.filename)
+        post_file.save(image_url)
+        
+        crud.add_new_post(user_id, image_url, post_title)
+        
+    return redirect(url_for('index'))
 
 
     ### " Search Tags from Substring " ###
@@ -94,13 +104,13 @@ def create_new_tag():
 """"""""""""""""""""""""""""""""""""""""""
     ### " Temporary images " ###
 def get_images():
-    image_folder = './static/images/'
+    image_folder = './static/posts/images/'
     images = []
     
     for filename in os.listdir(image_folder):
         if filename.endswith('.jpg') or filename.endswith('.png'):
             image_path = os.path.join(image_folder, filename)
-            image_url = '/static/images/' + filename
+            image_url = './static/posts/images/' + filename
             images.append({'path': image_path, 'url': image_url})
             
     return images
