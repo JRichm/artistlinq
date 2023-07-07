@@ -35,7 +35,10 @@ def create_new_tag(tag_name):
     return tag_data
 
 # new post
-def add_new_post(user_id, image_url, post_title):
+def add_new_post(username, image_url, post_title):
+    
+    user_id = get_user_by_username(username).user_id
+    
     post = Post(
         user_id = user_id,
         image_url = image_url,
@@ -43,7 +46,10 @@ def add_new_post(user_id, image_url, post_title):
         created_at = datetime.now(),
         updated_at = datetime.now()
     )
+    db.session.add(post)
+    db.session.commit()
     
+    return post
     
 
 """      Read       """
@@ -77,7 +83,6 @@ def get_tag_from_name(tag_name):
 
     tag_data = {'id': tag.tag_id, 'name': tag.tag_name}
     return jsonify(tag_data)
-
 
 """     Update      """
 

@@ -51,26 +51,29 @@ def user_view(username):
     ### " New Post " ###
 @app.route('/post')
 def new_post():
-    return render_template('new_post.html')
+    if not check_login():
+        return render_template(url_for('login'))
+    else: 
+        return render_template('new_post.html')
 
 @app.route('/publish_post', methods=['POST'])
 def publish_new_post():
     post_title = request.form['title']
     post_tags = request.form.getlist('tags')
     post_file = request.files['file']
-    user_id = session.get('user_id')
+    username = session.get('username')
     image_url = ''
     
     # Process the data, save the file, etc.
     print(post_title)
     print(post_tags)
-    print(user_id)
+    print(username)
     
     if request.method == 'POST':
         image_url = os.path.join(image_foler, post_file.filename)
         post_file.save(image_url)
         
-        crud.add_new_post(user_id, image_url, post_title)
+        crud.add_new_post(username, image_url, post_title)
         
     return redirect(url_for('index'))
 
@@ -102,13 +105,21 @@ def create_new_tag():
 """"""""""""""""""""""""""""""""""""""""""
 """  ###     Server Methods     ###    """
 """"""""""""""""""""""""""""""""""""""""""
+
+
+    ### " Check Login " ###
+def check_login():
+    session['username'] = session.get('username') or None
+    return crud.get_user_by_username(session['username']).username if session['username'] else None
+
+
     ### " Temporary images " ###
 def get_images():
     image_folder = './static/posts/images/'
     images = []
     
     for filename in os.listdir(image_folder):
-        if filename.endswith('.jpg') or filename.endswith('.png'):
+        if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.jpeg'):
             image_path = os.path.join(image_folder, filename)
             image_url = './static/posts/images/' + filename
             images.append({'path': image_path, 'url': image_url})
