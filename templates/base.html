@@ -18,12 +18,15 @@
             <a href="">Commission</a>
             <a href="/post">Post</a>
         </span>
-        <span>
+        <span class="right-span">
             <input type="text" placeholder="search">
 
             {% if username %}
-            
-                <a href="/user/{{ session.get('username') }}"><i class="fa-solid fa-user"></i></a>
+
+                <div class="account-button">
+                    <a href="/user/{{ session.get('username') }}"><i class="fa-solid fa-user"></i></a>
+                    <a href="/user/{{ session.get('username') }}">{{ username }}</a>
+                </div>
                 <a href="/logout">logout</a>
 
             {% else %}

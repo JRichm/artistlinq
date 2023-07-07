@@ -48,6 +48,7 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
+
     ### " View User " ###
 @app.route('/user/<username>')
 def user_view(username):

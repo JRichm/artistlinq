@@ -36,6 +36,30 @@ hr {
   color: white;
 }
 
+.right-span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.right-span input {
+    margin: 0px 25px 0px 25px;
+}
+
+.account-button {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin: 0px 25px 0px 25px;
+}
+
+.account-button a {
+    margin: 0px;
+    text-align: center;
+    font-size: 24px;
+}
+
 .hidden {
     display: none !important;
 }
+
