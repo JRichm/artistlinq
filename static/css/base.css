@@ -33,7 +33,9 @@ nav a:hover {
 }
 
 hr {
-  color: white;
+  color: #415a77;
+  background-color: #415a77;
+  height: 2px;
 }
 
 .right-span {

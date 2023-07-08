@@ -95,7 +95,7 @@ def get_tag_from_name(tag_name):
         return jsonify({'error': 'Tag not found'})
 
     tag_data = {'id': tag.tag_id, 'name': tag.tag_name}
-    return jsonify(tag_data)
+    return tag_data
 
 def get_post_from_id(post_id):
     return Post.query.get(post_id)

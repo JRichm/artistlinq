@@ -9,7 +9,6 @@
     <section>
         <hr>
         <article class='hero'>
-            <h1 class="section-title">Today's top rated</h1>
             <div class="slideshow-container">
 
                 {% for slide in range(3) %}
@@ -19,7 +18,7 @@
                     <div class="text">Caption Text</div>
                 </div>
                 {% endfor %}
-            
+
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <a class="next" onclick="plusSlides(1)">&#10095;</a>
             </div>
@@ -32,7 +31,6 @@
         </article>
         <hr>
         <article class="featured">
-            <h1 class="section-title">Featured Artists</h1>
             <span class="featured-container">
 
                 {% for user in featured %}
@@ -47,7 +45,6 @@
         </article>
         <hr>
         <article class="posts">
-            <h1 class="section-title">Posts</h1>
             <div class="image-board">
 
                 {% for column in range(4) %}

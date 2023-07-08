@@ -89,16 +89,15 @@ def publish_new_post():
     username = session.get('username')
     image_url = ''
     
-    # Process the data, save the file, etc.
-    print(post_title)
-    print(post_tags)
-    print(username)
-    
+        
     if request.method == 'POST':
         image_url = os.path.join(image_foler, post_file.filename)
         post_file.save(image_url)
         
-        crud.add_new_post(username, image_url, post_title)
+        post = crud.add_new_post(username, image_url, post_title)
+        for tag_name in post_tags:
+            tag = crud.get_tag_from_name(tag_name)
+            crud.add_tag_to_post(tag['id'], post.post_id)
         
     return redirect(url_for('index'))
 

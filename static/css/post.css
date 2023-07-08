@@ -1,5 +1,22 @@
 .post-section {
     display: flex;
+    justify-content: center;
+}
+
+.post-container {
+    background-color: #0d1b2a;
+    width: 1111px;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-details {
+    border-left: 2px solid #1b263b;
+    background-color: #0d1b2a;
+    width: 555px;
+    padding: 50px 50px 25px 50px;
 }
 
 .post-details h1 {
@@ -8,4 +25,26 @@
 
 .post-details h3 {
     color: white;
+}
+
+.tag-list-box {
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+}
+
+.added-tag {
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 5px;
+    color: white;
+    background-color: #415a77;
+}
+
+.post-image {
+    max-width: 90%;
+    max-height: 90%;
+    margin: 50px 25px 25px 50px;
+    object-fit: contain;
 }
