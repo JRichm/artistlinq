@@ -87,6 +87,9 @@ def get_tag_from_name(tag_name):
     tag_data = {'id': tag.tag_id, 'name': tag.tag_name}
     return jsonify(tag_data)
 
+def get_post_from_id(post_id):
+    return Post.query.get(post_id)
+
 
 def get_users_images(user_id):
     post_query = Post.query.filter(Post.user_id == user_id).all()
@@ -103,6 +106,7 @@ def get_featured_users():
     user_query = db.session.query(User).order_by(User.user_id.desc()).limit(5).all()
     user_list = [{'id': user.user_id, 'username': user.username, 'created_at': user.created_at, 'updated_at': user.updated_at} for user in user_query]
     return user_list
+
     
 """     Update      """
 

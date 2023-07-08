@@ -70,7 +70,8 @@ def new_post():
     ### " View Post " ###
 @app.route('/post/<post_id>')
 def view_post(post_id):
-        return render_template('post.html', username=check_login())
+    post = crud.get_post_from_id(post_id)
+    return render_template('post.html', username=check_login(), post=post)
 
 
 """"""""""""""""""""""""""""""""""""""""""
