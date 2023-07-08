@@ -1,14 +1,21 @@
 * {box-sizing:border-box}
 
+.hero {
+  max-height: 600px;
+}
+
 /* Slideshow container */
 .slideshow-container {
     justify-content: center;
     align-items: center;
-    background-color: rebeccapurple;
-    max-width: 1000px;
-    position: relative;
+    max-height: 444px;
     margin: auto;
 }
+.slideshow-container img {
+  max-height: 444px;
+  object-fit:contain; /* Preserve aspect ratio and fit the image within the container */
+}
+
 
 /* Hide the images by default */
 .mySlides {
@@ -138,5 +145,5 @@
 }
 
 .image-column img {
-  margin: 5px;
+  margin: 0px 7px 0px 7px;
 }

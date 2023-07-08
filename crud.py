@@ -95,9 +95,14 @@ def get_users_images(user_id):
 
 
 def get_50_images():
-    post_query = db.session.query(Post).order_by(Post.post_id.desc()).limit(5).all()
-    image_list = [{'id': post.post_id, 'url': post.image_url, 'caption': post.caption} for post in post_query]
+    post_query = db.session.query(Post).order_by(Post.post_id.desc()).limit(50).all()
+    image_list = [{'id': post.post_id, 'user_id': post.user_id, 'url': post.image_url, 'caption': post.caption} for post in post_query]
     return image_list
+
+def get_featured_users():
+    user_query = db.session.query(User).order_by(User.user_id.desc()).limit(5).all()
+    user_list = [{'id': user.user_id, 'username': user.username, 'created_at': user.created_at, 'updated_at': user.updated_at} for user in user_query]
+    return user_list
     
 """     Update      """
 

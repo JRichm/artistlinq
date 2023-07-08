@@ -23,8 +23,9 @@ app.config['SECRET_KEY'] = 'dev'
 @app.route('/')
 def index():
     images=crud.get_50_images()
+    featured = crud.get_featured_users()
     username = check_login()
-    return render_template('index.html', username=username, images=images)
+    return render_template('index.html', username=username, images=images, featured=featured)
   
   
     ### " View Login/New User " ###
@@ -58,13 +59,23 @@ def user_view(username):
 
 
     ### " New Post " ###
-@app.route('/post')
+@app.route('/new_post')
 def new_post():
     if not check_login():
         return redirect(url_for('login'))
     else: 
         return render_template('new_post.html', username=check_login())
 
+
+    ### " View Post " ###
+@app.route('/post')
+def view_post():
+    psss
+
+
+""""""""""""""""""""""""""""""""""""""""""
+"""     ###     API Routes     ###     """
+""""""""""""""""""""""""""""""""""""""""""
 
     ### " Publish Post " ###
 @app.route('/publish_post', methods=['POST'])
