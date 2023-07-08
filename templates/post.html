@@ -13,18 +13,29 @@
             </div>
         </article>
         <aside class="post-details">
-            <h1>{{ post.caption }}</h1>
-            <h3>{{ post_author.username }}</h3>
-            <hr>
-            <div id="tag-list-box" class="tag-list-box">
-                {% for tag in post_tags %}
-                    <p class="added-tag">{{ tag['tag_id'] }}</p>
-                {% endfor %}
+            <div class="top-container">
+                <h1>{{ post.caption }}</h1>
+                <h3>{{ post_author.username }}</h3>
+                <hr>
+                <div id="tag-list-box" class="tag-list-box">
+                    {% for tag in post_tags %}
+                        <p class="added-tag">{{ tag['tag_id'] }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="bottom-container">
+                <form class="post-buttons">
+                    <button type="submit" class="like-button fa fa-thumbs-up" aria-label="Thumbs Up"></button>
+                    <button type="submit" class="favorite-button fa fa-heart" aria-label="Favorite"></button>
+                    <button type="submit" class="star-button fa fa-star" aria-label="Star"></button>
+                </form>
             </div>
         </aside>
+        <hr style="position: absolute; align-self: flex-end; width: 1555px; height: 2px; margin: -15px;">
     </section>
     <section class="comment-section">
 
     </section>
 </main>
 {% endblock %}
+

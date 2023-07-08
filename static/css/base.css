@@ -65,3 +65,41 @@ hr {
     display: none !important;
 }
 
+.like-button {
+    color: #198754;
+    border: 2px solid #198754;
+    background-color: transparent;
+    transition: all 0.3s;
+}
+
+.like-button:hover {
+    color: #09472a;
+    background-color: #198754;
+    transition: all 0.3s;
+}
+
+.favorite-button {
+    color: #dc3545;
+    border: 2px solid #dc3545;
+    background-color: transparent;
+    transition: all 0.3s;
+}
+
+.favorite-button:hover {
+    color: #701d25;
+    background-color: #dc3545;
+    transition: all 0.3s;
+}
+
+.star-button {
+    color: #ffc412;
+    border: 2px solid #ffc412;
+    background-color: transparent;
+    transition: all 0.3s;
+}
+
+.star-button:hover {
+    color: #8a681e;
+    background-color: #ffc412;
+    transition: all 0.3s;
+}

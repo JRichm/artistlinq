@@ -4,8 +4,7 @@
 }
 
 .post-container {
-    background-color: #0d1b2a;
-    width: 1111px;
+    max-width: 1111px;
     min-height: 100px;
     display: flex;
     justify-content: center;
@@ -13,8 +12,9 @@
 }
 
 .post-details {
-    border-left: 2px solid #1b263b;
-    background-color: #0d1b2a;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 555px;
     padding: 50px 50px 25px 50px;
 }
@@ -47,4 +47,15 @@
     max-height: 90%;
     margin: 50px 25px 25px 50px;
     object-fit: contain;
+}
+
+.post-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.post-buttons button {
+    width: 30%;
+    height: 35px;
+    border-radius: 10px;
 }
