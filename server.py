@@ -68,9 +68,9 @@ def new_post():
 
 
     ### " View Post " ###
-@app.route('/post')
-def view_post():
-    psss
+@app.route('/post/<post_id>')
+def view_post(post_id):
+        return render_template('post.html', username=check_login())
 
 
 """"""""""""""""""""""""""""""""""""""""""
