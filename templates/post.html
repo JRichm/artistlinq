@@ -33,9 +33,28 @@
         </aside>
         <hr style="position: absolute; align-self: flex-end; width: 1555px; height: 2px; margin: -15px;">
     </section>
-    <section class="comment-section">
+    <section class="secondary-section">
+        <div class="comment-container">
+            <div class="new-comment-container">
+                <div class="user-info">
+                    <img src="../static/images/user_icon.png">
+                    <p>{{ username }}</p>
+                </div>
+                <div class="new-comment-box">
+                    <textarea id="new-comment-input" placeholder="comment" oninput="autoResize()"></textarea>
+                    <button id="new-comment-post-button" type="submit">Post</button>
+                </div>
+            </div>
+            <hr style="margin-right: 50px;">
+            <div class="post-comments-container">
 
+            </div>
+        </div>
+        <div class="related-posts">
+
+        </div>
     </section>
 </main>
+<script src="/static/javascript/post.js"></script>
 {% endblock %}
 
