@@ -71,7 +71,9 @@ def new_post():
 @app.route('/post/<post_id>')
 def view_post(post_id):
     post = crud.get_post_from_id(post_id)
-    return render_template('post.html', username=check_login(), post=post)
+    post_author = crud.get_user_by_id(post.user_id)
+    post_tags = crud.get_tags_from_post_id(post_id)
+    return render_template('post.html', username=check_login(), post=post, post_author=post_author, post_tags=post_tags)
 
 
 """"""""""""""""""""""""""""""""""""""""""

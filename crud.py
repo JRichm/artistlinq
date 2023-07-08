@@ -1,7 +1,7 @@
 
 
 
-from model import db, User, Tag, Post
+from model import db, User, Tag, Post, PostedTag
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from flask import jsonify
@@ -53,6 +53,16 @@ def add_new_post(username, image_url, post_title):
     db.session.commit()
     
     return post
+
+def add_tag_to_post(tag_id, post_id):
+    
+    tag = PostedTag(
+        tag_id = tag_id,
+        post_id = post_id
+    )
+    
+    db.session.add(tag)
+    db.session.commit()
     
 
 """      Read       """
@@ -89,6 +99,12 @@ def get_tag_from_name(tag_name):
 
 def get_post_from_id(post_id):
     return Post.query.get(post_id)
+
+
+def get_tags_from_post_id(post_id):
+    tag_query = PostedTag.query.filter(PostedTag.post_id == post_id).all()
+    tag_list = [{'tag_id': tag.tag_id, 'post_id': tag.post_id} for tag in tag_query]
+    return tag_list
 
 
 def get_users_images(user_id):

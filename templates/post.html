@@ -5,4 +5,21 @@
 {% endblock %}
 
 {% block body %}
+<main>
+    <section class="post-section">
+        <article class="main-post">
+            <img src="../{{ post.image_url }}">
+        </article>
+        <aside class="post-details">
+            <h1>{{ post.caption }}</h1>
+            <h3>{{ post_author.username }}</h3>
+            <div id="tag-list-box" class="tag-list-box">
+                {% for tag in post. %}
+            </div>
+        </aside>
+    </section>
+    <section class="comment-section">
+
+    </section>
+</main>
 {% endblock %}

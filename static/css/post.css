@@ -1,0 +1,11 @@
+.post-section {
+    display: flex;
+}
+
+.post-details h1 {
+    color: white
+}
+
+.post-details h3 {
+    color: white;
+}
