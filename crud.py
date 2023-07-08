@@ -1,3 +1,6 @@
+
+
+
 from model import db, User, Tag, Post
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
@@ -85,10 +88,16 @@ def get_tag_from_name(tag_name):
     return jsonify(tag_data)
 
 
-def get_users_images(username):
-    user = get_user_by_username(username)
-    post_query = Post.query.filter(Post.user_id == user.user_id).all()
+def get_users_images(user_id):
+    post_query = Post.query.filter(Post.user_id == user_id).all()
     image_list = [{'id': post.post_id, 'url': post.image_url, 'caption': post.caption} for post in post_query]
+    return image_list
+
+
+def get_50_images():
+    post_query = db.session.query(Post).order_by(Post.post_id.desc()).limit(5).all()
+    image_list = [{'id': post.post_id, 'url': post.image_url, 'caption': post.caption} for post in post_query]
+    return image_list
     
 """     Update      """
 

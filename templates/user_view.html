@@ -28,7 +28,7 @@
                     {% for image in images %}
                       {% if loop.index0 % 4 == column %}
                         <div class="image-container">
-                            <img class="image-board-img" src="{{ image.url }}" alt="{{ image.alt }}" width="400">
+                            <img class="image-board-img" src="../{{ image.url }}" width="400">
                         </div>
                       {% endif %}
                     {% endfor %}

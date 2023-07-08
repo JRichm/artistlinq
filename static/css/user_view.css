@@ -32,6 +32,7 @@ main {
 .user-section {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .content-controller {
@@ -66,6 +67,7 @@ main {
 .image-column {
     display: flex;
     flex-direction: column;
+    width: 25%;
 }
 
 .image-container {

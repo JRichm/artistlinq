@@ -22,7 +22,7 @@ app.config['SECRET_KEY'] = 'dev'
     ### " View Homepage " ###
 @app.route('/')
 def index():
-    images=get_images()
+    images=crud.get_50_images()
     username = check_login()
     return render_template('index.html', username=username, images=images)
   
@@ -53,7 +53,8 @@ def logout():
 @app.route('/user/<username>')
 def user_view(username):
     view_user = crud.get_user_by_username(username)
-    return render_template('user_view.html', view_user=view_user, images=get_images())
+    images = crud.get_users_images(view_user.user_id)
+    return render_template('user_view.html', view_user=view_user, images=images, username=check_login())
 
 
     ### " New Post " ###
@@ -62,7 +63,7 @@ def new_post():
     if not check_login():
         return redirect(url_for('login'))
     else: 
-        return render_template('new_post.html')
+        return render_template('new_post.html', username=check_login())
 
 
     ### " Publish Post " ###
@@ -116,11 +117,8 @@ def create_new_tag():
 @app.route('/get_users_images', methods=['GET'])
 def get_users_images():
     request_data = request.get_json()
-    view_username = request_data.get('username')
-    return crud.get_users_images()
-    
-    
-
+    view_user = crud.get_user_by_username(request_data.get('username'))
+    return crud.get_users_images(view_user.user_id)
 
 
 
@@ -137,6 +135,7 @@ def check_login():
 
     ### " Temporary images " ###
 def get_images():
+    
     image_folder = './static/posts/images/'
     images = []
     
