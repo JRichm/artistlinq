@@ -3,7 +3,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import flash, redirect, url_for, session
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, EqualTo
 import crud
 
@@ -58,3 +58,27 @@ class RegistrationForm(FlaskForm):
                 return redirect(url_for('index'))
         
         return redirect(url_for('login'))  # Return a valid response
+    
+    
+    
+
+class CommentForm(FlaskForm):
+    comment = TextAreaField('Comment', validators=[DataRequired()], render_kw={"placeholder": " leave a comment"})
+    submit = SubmitField(validators=[DataRequired()])
+    
+    def post_comment(self, user_id, post_id):
+        print('\n validating')
+        print(self.comment.data)
+        print(self.submit.data)
+        print(self.validate_on_submit())
+        if self.validate_on_submit():
+            comment_data = self.comment.data
+
+            print('\n posting new comment')
+            crud.post_comment(
+                user_id=user_id,
+                post_id=post_id,
+                comment_data=comment_data
+            )
+
+            return "Comment Submitted Successfully"

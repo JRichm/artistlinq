@@ -1,7 +1,9 @@
+
+
 {% extends 'base.html' %}
 {% block title %}Art-Station [POST - {{post.post_id}}]{% endblock %}
 {% block head %}
-    <link rel="stylesheet" href="../static/css/post.css">
+    <link rel="stylesheet" href="../../static/css/post.css">
 {% endblock %}
 
 {% block body %}
@@ -9,7 +11,7 @@
     <section class="post-section">
         <article class="main-post">
             <div class="post-container">
-                <img class="post-image" src="../{{ post.image_url }}">
+                <img class="post-image" src="../../{{ post.image_url }}">
             </div>
         </article>
         <aside class="post-details">
@@ -37,13 +39,13 @@
         <div class="comment-container">
             <div class="new-comment-container">
                 <div class="user-info">
-                    <img src="../static/images/user_icon.png">
+                    <img src="../../static/images/user_icon.png">
                     <p>{{ username }}</p>
                 </div>
-                <div class="new-comment-box">
-                    <textarea id="new-comment-input" placeholder="comment" oninput="autoResize()"></textarea>
-                    <button id="new-comment-post-button" type="submit">Post</button>
-                </div>
+                <form class="new-comment-box" method="POST" action="{{ url_for('view_post', post_id=post.post_id) }}">
+                    {{ commentForm.comment(id="new-comment-input") }}
+                    {{ commentForm.submit(id="new-comment-post-button", type="submit") }}
+                </form>
             </div>
             <hr style="margin-right: 50px;">
             <div class="post-comments-container">

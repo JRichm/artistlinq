@@ -12,7 +12,7 @@ import os
 image_foler = './static/posts/images'
 os.makedirs(image_foler, exist_ok=True)
 
-app = Flask(__name__)
+app = Flask(__name__, root_path=os.path.dirname(os.path.abspath(__file__)))
 app.config['SECRET_KEY'] = 'dev'
 
 """"""""""""""""""""""""""""""""""""""""""
@@ -68,12 +68,21 @@ def new_post():
 
 
     ### " View Post " ###
-@app.route('/post/<post_id>')
+@app.route('/post/<post_id>/', methods=['GET', 'POST'])
 def view_post(post_id):
     post = crud.get_post_from_id(post_id)
     post_author = crud.get_user_by_id(post.user_id)
     post_tags = crud.get_tags_from_post_id(post_id)
-    return render_template('post.html', username=check_login(), post=post, post_author=post_author, post_tags=post_tags)
+    commentForm = forms.CommentForm()
+    username=check_login()
+    
+    if request.method == 'POST':
+        print('\n\n\n\n\n\n\n')
+        print('request new comment')
+        user_id = crud.get_user_by_username(username).user_id
+        commentForm.post_comment(user_id, post_id)
+    
+    return render_template('post.html', username=username, post=post, post_author=post_author, post_tags=post_tags, commentForm=commentForm)
 
 
 """"""""""""""""""""""""""""""""""""""""""

@@ -1,7 +1,7 @@
 
 
 
-from model import db, User, Tag, Post, PostedTag
+from model import db, User, Tag, Post, PostedTag, Comment
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from flask import jsonify
@@ -63,6 +63,22 @@ def add_tag_to_post(tag_id, post_id):
     
     db.session.add(tag)
     db.session.commit()
+    
+def post_comment(user_id, post_id, comment_data): 
+    
+    print('\n\n\n\n')
+    comment = Comment(
+        user_id=user_id,
+        post_id=post_id,
+        comment_data=comment_data,
+        created_at=datetime.now(),
+        updated_at=datetime.now()
+    )
+    print(comment)
+    
+    db.session.add(comment)
+    db.session.commit()
+
     
 
 """      Read       """

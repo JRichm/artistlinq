@@ -7,10 +7,11 @@ main {
 .post-section {
     display: flex;
     justify-content: center;
+    max-width: 80vw;
 }
 
 .post-container {
-    max-width: 1111px;
+    max-width: 100%;
     min-height: 100px;
     display: flex;
     justify-content: center;
@@ -21,7 +22,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 555px;
+    width: 25vw;
     padding: 50px 50px 25px 50px;
 }
 
@@ -69,7 +70,7 @@ main {
 .secondary-section {
     display: flex;
     justify-content: space-between;
-    max-width: 1555px;
+    max-width: 80vw;
     width: 100%;
     margin-top: 50px;
 }
@@ -115,7 +116,7 @@ main {
     display: flex;
     flex-direction: column;
     background-color: #415a77;
-    width: 600px;
+    width: 25vw;
 }
 
 #new-comment-input {
