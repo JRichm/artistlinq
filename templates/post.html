@@ -45,6 +45,7 @@
                 <form class="new-comment-box" method="POST" action="{{ url_for('view_post', post_id=post.post_id) }}">
                     {{ commentForm.comment(id="new-comment-input") }}
                     {{ commentForm.submit(id="new-comment-post-button", type="submit") }}
+                    {{ commentForm.csrf_token }}
                 </form>
             </div>
             <hr style="margin-right: 50px;">

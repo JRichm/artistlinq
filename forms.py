@@ -82,3 +82,5 @@ class CommentForm(FlaskForm):
             )
 
             return "Comment Submitted Successfully"
+        
+        print(self.errors)

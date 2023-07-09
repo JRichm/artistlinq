@@ -69,8 +69,8 @@ def post_comment(user_id, post_id, comment_data):
     print('\n\n\n\n')
     comment = Comment(
         user_id=user_id,
-        post_id=post_id,
-        comment_data=comment_data,
+        image_id=post_id,
+        comment_text=comment_data,
         created_at=datetime.now(),
         updated_at=datetime.now()
     )
