@@ -159,14 +159,22 @@ main {
 }
 
 .comment-text {
-    outline: 2px solid #415a77;
     border: none;
     overflow: hidden;
     resize: none;
     height: auto;
     border-radius: 5px;
-    padding: 5px;
+    padding: 15px;
     margin: 5px;
     color: white;
-    background-color: transparent;
+    background-color: #203349;
+}
+
+.comment-text:focus {
+    border: none;
+    outline: none;
+}
+
+.comment-text:hover {
+    cursor: default;
 }

@@ -80,7 +80,8 @@ class CommentForm(FlaskForm):
                 post_id=post_id,
                 comment_data=comment_data
             )
-
-            return "Comment Submitted Successfully"
+            self.comment.data = ""
+            
+            return redirect(url_for('view_post', post_id=post_id))
         
         print(self.errors)
