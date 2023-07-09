@@ -51,6 +51,19 @@
             <hr style="margin-right: 50px;">
             <div class="post-comments-container">
 
+                {% for comment in post_comments %}
+                <div class="comment-template">
+                    <div class="user-info">
+                        <img src="../../static/images/user_icon.png">
+                        <p>{{ username }}</p>
+                    </div>
+                    <div class="comment-area">
+                        <textarea class="comment-text">{{ comment.comment_text }}</textarea>
+                        <div class="comment-buttons"></div>
+                    </div>
+                </div>
+                {% endfor %}
+                
             </div>
         </div>
         <div class="related-posts">

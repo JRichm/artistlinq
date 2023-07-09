@@ -139,6 +139,16 @@ def get_featured_users():
     user_list = [{'id': user.user_id, 'username': user.username, 'created_at': user.created_at, 'updated_at': user.updated_at} for user in user_query]
     return user_list
 
+def get_comments_from_post_id(post_id):
+    comment_query = db.session.query(Comment).filter(Comment.image_id == post_id).order_by(Comment.comment_id.desc()).all()
+    comment_list = [{'comment_id': comment.comment_id,
+                     'user_id': comment.user_id,
+                     'image_id': comment.image_id,
+                     'comment_text': comment.comment_text,
+                     'created_at': comment.created_at,
+                     'updated_at': comment.updated_at} for comment in comment_query]
+    return comment_list
+
     
 """     Update      """
 

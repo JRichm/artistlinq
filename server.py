@@ -73,6 +73,7 @@ def view_post(post_id):
     post = crud.get_post_from_id(post_id)
     post_author = crud.get_user_by_id(post.user_id)
     post_tags = crud.get_tags_from_post_id(post_id)
+    post_comments = crud.get_comments_from_post_id(post_id)
     commentForm = forms.CommentForm()
     username=check_login()
     
@@ -82,7 +83,7 @@ def view_post(post_id):
         user_id = crud.get_user_by_username(username).user_id
         commentForm.post_comment(user_id, post_id)
     
-    return render_template('post.html', username=username, post=post, post_author=post_author, post_tags=post_tags, commentForm=commentForm)
+    return render_template('post.html', username=username, post=post, post_author=post_author, post_tags=post_tags, post_comments=post_comments, commentForm=commentForm)
 
 
 """"""""""""""""""""""""""""""""""""""""""

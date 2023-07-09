@@ -140,3 +140,33 @@ main {
     color: white;
     background-color: #415a77;
 }
+
+.comment-template {
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-area {
+    display: flex;
+    flex-direction: column;
+    margin: 25px;
+    max-width: 750px;
+    width: 100%;
+}
+
+.comment-area {
+    margin: 25px
+}
+
+.comment-text {
+    outline: 2px solid #415a77;
+    border: none;
+    overflow: hidden;
+    resize: none;
+    height: auto;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    color: white;
+    background-color: transparent;
+}
