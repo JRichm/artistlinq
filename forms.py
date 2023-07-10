@@ -63,8 +63,8 @@ class RegistrationForm(FlaskForm):
     
 
 class CommentForm(FlaskForm):
-    comment = TextAreaField('Comment', validators=[DataRequired()], render_kw={"placeholder": " leave a comment"})
-    submit = SubmitField(validators=[DataRequired()])
+    comment = TextAreaField('Comment', validators=[DataRequired()], render_kw={"placeholder": "leave a comment"})
+    submit = SubmitField(validators=[DataRequired()], render_kw={"value": "post"})
     
     def post_comment(self, user_id, post_id):
         print('\n validating')

@@ -117,8 +117,8 @@ def get_post_from_id(post_id):
     return Post.query.get(post_id)
 
 def get_tags_from_post_id(post_id):
-    tag_query = PostedTag.query.filter(PostedTag.post_id == post_id).all()
-    tag_list = [{'tag_id': tag.tag_id, 'post_id': tag.post_id} for tag in tag_query]
+    tag_query = db.session.query(Tag.tag_name).join(PostedTag).filter(PostedTag.post_id == post_id).all()
+    tag_list = [{'tag_name': tag.tag_name} for tag in tag_query]
     return tag_list
 
 def get_users_images(user_id):

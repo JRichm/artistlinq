@@ -14,7 +14,7 @@
                 {% for slide in range(3) %}
                 <div class="mySlides">
                     <div class="numbertext">1 / 3</div>
-                    <img src=" {{ images[slide].url }} " style="width:100%">
+                    <a href="/post/{{ images[slide].id }}"><img src=" {{ images[slide].url }} " style="width:100%"></a>
                     <div class="text">Caption Text</div>
                 </div>
                 {% endfor %}
