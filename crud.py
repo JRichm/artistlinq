@@ -69,7 +69,7 @@ def post_comment(user_id, post_id, comment_data):
     print('\n\n\n\n')
     comment = Comment(
         user_id=user_id,
-        image_id=post_id,
+        post_id=post_id,
         comment_text=comment_data,
         created_at=datetime.now(),
         updated_at=datetime.now()
@@ -116,18 +116,15 @@ def get_tag_from_name(tag_name):
 def get_post_from_id(post_id):
     return Post.query.get(post_id)
 
-
 def get_tags_from_post_id(post_id):
     tag_query = PostedTag.query.filter(PostedTag.post_id == post_id).all()
     tag_list = [{'tag_id': tag.tag_id, 'post_id': tag.post_id} for tag in tag_query]
     return tag_list
 
-
 def get_users_images(user_id):
     post_query = Post.query.filter(Post.user_id == user_id).all()
     image_list = [{'id': post.post_id, 'url': post.image_url, 'caption': post.caption} for post in post_query]
     return image_list
-
 
 def get_50_images():
     post_query = db.session.query(Post).order_by(Post.post_id.desc()).limit(50).all()
@@ -140,10 +137,10 @@ def get_featured_users():
     return user_list
 
 def get_comments_from_post_id(post_id):
-    comment_query = db.session.query(Comment).filter(Comment.image_id == post_id).order_by(Comment.comment_id.desc()).all()
+    comment_query = db.session.query(Comment).filter(Comment.post_id == post_id).order_by(Comment.comment_id.desc()).all()
     comment_list = [{'comment_id': comment.comment_id,
                      'user_id': comment.user_id,
-                     'image_id': comment.image_id,
+                     'post_id': comment.post_id,
                      'comment_text': comment.comment_text,
                      'created_at': comment.created_at,
                      'updated_at': comment.updated_at} for comment in comment_query]

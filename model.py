@@ -18,6 +18,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.VARCHAR, unique=True, nullable=False)
     email = db.Column(db.VARCHAR, unique=True, nullable=False)
+    bio = db.Column(db.TEXT)
     password_hash = db.Column(db.VARCHAR, nullable=False)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
@@ -41,7 +42,7 @@ class Comment(db.Model):
     
     comment_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    image_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), nullable=False)
     comment_text = db.Column(db.VARCHAR)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
@@ -65,7 +66,6 @@ class Artist(db.Model):
     
     artist_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    bio = db.Column(db.TEXT)
     skills = db.Column(db.ARRAY(db.VARCHAR))
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
@@ -89,6 +89,24 @@ class Like(db.Model):
     __tablename__ = 'like_table'
     
     like_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), nullable=False)
+    created_at = db.Column(db.TIMESTAMP)
+
+""" Favorite Table """
+class Favorite(db.Model):
+    __tablename__ = 'favorite_table'
+    
+    favorite_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), nullable=False)
+    created_at = db.Column(db.TIMESTAMP)
+
+""" Like Table """
+class Star(db.Model):
+    __tablename__ = 'star_table'
+    
+    star_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), nullable=False)
     created_at = db.Column(db.TIMESTAMP)
