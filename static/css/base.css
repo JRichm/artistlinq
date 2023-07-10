@@ -79,6 +79,12 @@ hr {
     transition: all 0.3s;
 }
 
+.like-button-pressed {
+    border: none;
+    color: #09472a;
+    background-color: #198754;
+}
+
 .favorite-button {
     color: #dc3545;
     border: 2px solid #dc3545;
@@ -92,6 +98,12 @@ hr {
     transition: all 0.3s;
 }
 
+.favorite-button-pressed {
+    border: none;
+    color: #701d25;
+    background-color: #dc3545;
+}
+
 .star-button {
     color: #ffc412;
     border: 2px solid #ffc412;
@@ -103,4 +115,10 @@ hr {
     color: #8a681e;
     background-color: #ffc412;
     transition: all 0.3s;
+}
+
+.star-button-pressed {
+    border: none;
+    color: #8a681e;
+    background-color: #ffc412;
 }

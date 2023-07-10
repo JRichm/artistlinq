@@ -24,11 +24,11 @@
                     <a href="/user/{{ session.get('username') }}"><i class="fa-solid fa-user"></i></a>
                     <a href="/user/{{ session.get('username') }}">{{ username }}</a>
                 </div>
-                <a href="/logout">logout</a>
+                <a href="/logout" style="font-size: 18px;">logout</a>
 
             {% else %}
 
-                <a href="/login">login</a>
+                <a href="/login" style="font-size: 18px;">login</a>
 
             {% endif %}
             

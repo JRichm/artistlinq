@@ -7,6 +7,7 @@ from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, EqualTo
 import crud
 
+
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()], render_kw={"placeholder": "Username"})
     password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "Password"})
@@ -59,18 +60,12 @@ class RegistrationForm(FlaskForm):
         
         return redirect(url_for('login'))  # Return a valid response
     
-    
-    
 
 class CommentForm(FlaskForm):
     comment = TextAreaField('Comment', validators=[DataRequired()], render_kw={"placeholder": "leave a comment"})
     submit = SubmitField(validators=[DataRequired()], render_kw={"value": "post"})
     
     def post_comment(self, user_id, post_id):
-        print('\n validating')
-        print(self.comment.data)
-        print(self.submit.data)
-        print(self.validate_on_submit())
         if self.validate_on_submit():
             comment_data = self.comment.data
 
