@@ -90,14 +90,3 @@ class LikeButtonsForm(FlaskForm):
     like_button = SubmitField(validators=[DataRequired()], render_kw={"id": "like-button"})
     favorite_button = SubmitField(validators=[DataRequired()], render_kw={"id": "favorite-button"})
     star_button = SubmitField(validators=[DataRequired()], render_kw={"id": "star-button"})
-    
-# Create a mapping for the button names to Font Awesome icons
-button_icons = {
-    'like_button': 'like-button fa fa-thumbs-up',
-    'favorite_button': 'favorite-button fa fa-heart',
-    'star_button': 'star-button fa fa-star'
-}
-
-# Render the icons as HTML using the Markup class
-for button_name, icon_class in button_icons.items():
-    setattr(LikeButtonsForm, button_name, Markup(f'<i class="{icon_class}" aria-label="{button_name}"></i>'))

@@ -3,3 +3,7 @@ function autoResize() {
     textarea.style.height = "auto";
     textarea.style.height = textarea.scrollHeight + "px";
 }
+
+document.getElementById('post-buttons').addEventListener('submit', e => {
+    console.log('fart')
+})
