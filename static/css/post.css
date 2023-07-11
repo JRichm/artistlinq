@@ -61,10 +61,17 @@ main {
     justify-content: space-around;
 }
 
-.post-buttons button {
+.post-buttons > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 30%;
     height: 35px;
     border-radius: 10px;
+}
+
+.post-buttons i:hover {
+    cursor: pointer;
 }
 
 .secondary-section {

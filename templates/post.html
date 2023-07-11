@@ -26,10 +26,11 @@
                 </div>
             </div>
             <div class="bottom-container">
-                <form class="post-buttons">
-                    <button type="submit" id="like-button" class="like-button fa fa-thumbs-up" aria-label="Thumbs Up" value="false"></button>
-                    <button type="submit" id="favorite-button" class="favorite-button fa fa-heart" aria-label="Favorite" value="false"></button>
-                    <button type="submit" id="star-button" class="star-button fa fa-star" aria-label="Star" value="false"></button>
+                <form class="post-buttons" action="/handle_buttons" method="POST">
+                    {{ likeButtonsForm.csrf_token }}
+                    {{ likeButtonsForm.like_button }}
+                    {{ likeButtonsForm.favorite_button }}
+                    {{ likeButtonsForm.star_button }}
                 </form>
             </div>
         </aside>

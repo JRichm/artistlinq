@@ -1,3 +1,6 @@
+
+
+
 """"""""""""""""""""""""""""""""""""""""""
 """      ### Server Imports ###        """
 """"""""""""""""""""""""""""""""""""""""""
@@ -75,6 +78,7 @@ def view_post(post_id):
     post_tags = crud.get_tags_from_post_id(post_id)
     post_comments = crud.get_comments_from_post_id(post_id)
     commentForm = forms.CommentForm()
+    likeButtonsForm = forms.LikeButtonsForm()
     username=check_login()
     
     if request.method == 'POST':
@@ -83,7 +87,14 @@ def view_post(post_id):
         user_id = crud.get_user_by_username(username).user_id
         commentForm.post_comment(user_id, post_id)
     
-    return render_template('post.html', username=username, post=post, post_author=post_author, post_tags=post_tags, post_comments=post_comments, commentForm=commentForm)
+    return render_template('post.html',
+                           username=username,
+                           post=post,
+                           post_author=post_author,
+                           post_tags=post_tags,
+                           post_comments=post_comments,
+                           commentForm=commentForm,
+                           likeButtonsForm=likeButtonsForm)
 
 
 """"""""""""""""""""""""""""""""""""""""""
@@ -143,6 +154,28 @@ def get_users_images():
     view_user = crud.get_user_by_username(request_data.get('username'))
     return crud.get_users_images(view_user.user_id)
 
+
+@app.route('/handle_buttons', methods=['POST'])
+def handle_buttons():
+    
+    print('time to handle buttons\n\n\n\n\n')
+    
+    like_button = request.form.get('like-button')
+    favorite_button = request.form.get('favorite-button')
+    star_button = request.form.get('star-button')
+    
+    print('farting')
+    
+    if like_button == 'false':
+        print('like_button clicked')
+        
+    if favorite_button == 'false':
+        print('favorite_button clicked')
+        
+    if star_button == 'false':
+        print('star_button clicked')
+        
+    return
 
 
 """"""""""""""""""""""""""""""""""""""""""

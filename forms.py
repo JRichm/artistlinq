@@ -1,3 +1,6 @@
+
+
+
 """ ### Flask Forms ### """
 
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -5,6 +8,7 @@ from flask import flash, redirect, url_for, session
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, EqualTo
+from markupsafe import Markup
 import crud
 
 
@@ -80,3 +84,20 @@ class CommentForm(FlaskForm):
             return redirect(url_for('view_post', post_id=post_id))
         
         print(self.errors)
+
+
+class LikeButtonsForm(FlaskForm):
+    like_button = SubmitField(validators=[DataRequired()], render_kw={"id": "like-button"})
+    favorite_button = SubmitField(validators=[DataRequired()], render_kw={"id": "favorite-button"})
+    star_button = SubmitField(validators=[DataRequired()], render_kw={"id": "star-button"})
+    
+# Create a mapping for the button names to Font Awesome icons
+button_icons = {
+    'like_button': 'like-button fa fa-thumbs-up',
+    'favorite_button': 'favorite-button fa fa-heart',
+    'star_button': 'star-button fa fa-star'
+}
+
+# Render the icons as HTML using the Markup class
+for button_name, icon_class in button_icons.items():
+    setattr(LikeButtonsForm, button_name, Markup(f'<i class="{icon_class}" aria-label="{button_name}"></i>'))
