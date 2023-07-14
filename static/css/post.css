@@ -185,3 +185,15 @@ main {
 .comment-text:hover {
     cursor: default;
 }
+
+#no-user-box {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#no-user-box p {
+    color: white;
+    margin: 0px 0px 0px 5px;
+}

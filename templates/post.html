@@ -38,6 +38,9 @@
     <section class="secondary-section">
         <div class="comment-container">
             <div class="new-comment-container">
+
+                {% if username %}
+
                 <div class="user-info">
                     <img src="../../static/images/user_icon.png">
                     <p>{{ username }}</p>
@@ -47,6 +50,14 @@
                     {{ commentForm.submit(id="new-comment-post-button", type="submit") }}
                     {{ commentForm.csrf_token }}
                 </form>
+
+                {% else %}
+
+                <div id="no-user-box">
+                    <a href="/login" id="no-user">Log in</a><p> to leave a comment</p>
+                </div>
+
+                {% endif %}
             </div>
             <hr style="margin-right: 50px;">
             <div class="post-comments-container">
