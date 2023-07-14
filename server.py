@@ -152,27 +152,25 @@ def get_users_images():
     return crud.get_users_images(view_user.user_id)
 
 
-@app.route('/handle_buttons', methods=['POST'])
-def handle_buttons():
+@app.route('/handle_buttons/<post_id>', methods=['POST'])
+def handle_buttons(post_id):
     
-    print('time to handle buttons\n\n\n\n\n')
+    print('\n\n\n\n\ntime to handle buttons:')
     
     like_button = request.form.get('like-button')
     favorite_button = request.form.get('favorite-button')
     star_button = request.form.get('star-button')
-    
-    print('farting')
-    
-    if like_button == 'false':
+        
+    if like_button == 'like':
         print('\nlike_button clicked')
         
-    if favorite_button == 'false':
+    if favorite_button == 'favorite':
         print('\nfavorite_button clicked')
         
-    if star_button == 'false':
+    if star_button == 'star':
         print('\nstar_button clicked')
         
-    return
+    return redirect(url_for('view_post', post_id=post_id))
 
 
 """"""""""""""""""""""""""""""""""""""""""

@@ -26,10 +26,10 @@
                 </div>
             </div>
             <div class="bottom-container">
-                <form id="post-buttons" class="post-buttons" action="/handle_buttons" method="POST">
-                    <button type="submit" class="like-button" id="{{ likeButtonsForm.like_button.id }}" aria-label="Thumbs Up" name="{{ likeButtonsForm.like_button.name }}" value="{{ likeButtonsForm.like_button.value }}"><i class="fa fa-thumbs-up"></i></button>
-                    <button type="submit" class="favorite-button" id="{{ likeButtonsForm.favorite_button.id }}" aria-label="Favorite" name="{{ likeButtonsForm.favorite_button.name }}" value="{{ likeButtonsForm.favorite_button.value }}"><i class="fa fa-heart"></i></button>
-                    <button type="submit" class="star-button" id="{{ likeButtonsForm.star_button.id }}" aria-label="Star" name="{{ likeButtonsForm.star_button.name }}" value="{{ likeButtonsForm.star_button.value }}"><i class="fa fa-star"></i></button>
+                <form id="post-buttons" class="post-buttons" action="{{ url_for('handle_buttons', post_id=post.post_id) }}" method="POST">
+                    <button type="submit" class="like-button" name="like-button" value="like"><i class="fa-solid fa-thumbs-up"></i></button>
+                    <button type="submit" class="favorite-button" name="favorite-button" value="favorite"><i class="fa-solid fa-heart"></i></button>
+                    <button type="submit" class="star-button" name="star-button" value="star"><i class="fa-solid fa-star"></i></button>
                 </form>
             </div>
         </aside>
