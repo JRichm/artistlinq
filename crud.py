@@ -4,7 +4,7 @@
 from model import db, User, Tag, Post, PostedTag, Comment, Like, Favorite, Star
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
-from flask import jsonify
+from flask import jsonify, session
 
 """"""""""""""""""""""""""""""""""""""""""
 """       ### CRUD Funtions ###        """
@@ -177,13 +177,39 @@ def get_comments_from_post_id(post_id):
                      'updated_at': comment.updated_at} for comment in comment_query]
     return comment_list
 
+def get_user_like_data(post_id, user_id):
+    like_query = db.session.query(Like).filter(Like.post_id == post_id, Like.user_id == user_id).first()
+    fav_query = db.session.query(Favorite).filter(Favorite.post_id == post_id, Favorite.user_id == user_id).first()
+    star_query = db.session.query(Star).filter(Star.post_id == post_id, Star.user_id == user_id).first()
+    
+    return [
+        bool(like_query),
+        bool(fav_query),
+        bool(star_query)
+    ]
     
 """     Update      """
 
 
 """     Delete      """
 
+def remove_like_from_post(post_id, user_id):
+    like = db.session.query(Like).filter(Like.post_id == post_id, Like.user_id == user_id).first()
+    if like:
+        session.delete(like)
+        session.commit()
 
+def remove_post_from_favorites(post_id, user_id):
+    favorite = db.session.query(Favorite).filter(Favorite.post_id == post_id, Favorite.user_id == user_id).first()
+    if favorite:
+        session.delete(favorite)
+        session.commit()
+
+def remove_star_from_post(post_id, user_id):
+    star = db.session.query(Star).filter(Star.post_id == post_id, Star.user_id == user_id).first()
+    if star:
+        session.delete(star)
+        session.commit()
 
 """"""""""""""""""""""""""""""""""""""""""
 """  ###     Server Methods     ###    """
