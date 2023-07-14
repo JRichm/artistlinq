@@ -80,6 +80,9 @@ def view_post(post_id):
     commentForm = forms.CommentForm()
     likeButtonsForm = forms.LikeButtonsForm()
     username = check_login()
+    userLikes = [True, True, True]
+    if (session.get('user_id')):
+        userLikes = crud.get_user_like_data(post_id, get_current_user_id())
 
     if request.method == 'POST':
         return commentForm.post_comment(crud.get_user_by_username(username).user_id, post_id)
@@ -91,7 +94,8 @@ def view_post(post_id):
                            post_tags=post_tags,
                            post_comments=post_comments,
                            commentForm=commentForm,
-                           likeButtonsForm=likeButtonsForm)
+                           likeButtonsForm=likeButtonsForm, 
+                           userLikes=userLikes)
 
 
 """"""""""""""""""""""""""""""""""""""""""
@@ -163,16 +167,26 @@ def handle_buttons(post_id):
     
     print(session.get('username'))
     
-    user_id = crud.get_user_by_username(session.get('username')).user_id
+    user_id = get_current_user_id()
+    likeData = crud.get_user_like_data()
         
     if like_button == 'like':
-        crud.add_like_to_post(post_id=post_id, user_id=user_id)
+        if (likeData[0]):
+            crud.remove_like_from_post(post_id=post_id, user_id=user_id)
+        else:
+            crud.add_like_to_post(post_id=post_id, user_id=user_id)
         
     if favorite_button == 'favorite':
-        crud.add_post_to_favorites(post_id=post_id, user_id=user_id)
+        if (likeData[1]):
+            crud.remove_post_from_favorites(post_id=post_id, user_id=user_id)
+        else:
+            crud.add_post_to_favorites(post_id=post_id, user_id=user_id)
         
     if star_button == 'star':
-        crud.add_star_to_post(post_id=post_id, user_id=user_id)
+        if (likeData[2]):
+            crud.remove_star_from_post(post_id=post_id, user_id=user_id)
+        else:
+            crud.add_star_to_post(post_id=post_id, user_id=user_id)
         
     return redirect(url_for('view_post', post_id=post_id))
 
@@ -187,6 +201,11 @@ def check_login():
     session['username'] = session.get('username') or None
     return crud.get_user_by_username(session['username']).username if session['username'] else None
 
+def get_current_user_id():
+    session['user_id'] = session.get('user_id') or None
+    return crud.get_user_by_id(session['user_id']).user_id if session['user_id'] else None
+    
+    
 
     ### " Temporary images " ###
 def get_images():
