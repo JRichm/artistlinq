@@ -27,6 +27,7 @@ class LoginForm(FlaskForm):
             if user and check_password_hash(user.password_hash, password):
                 # Authentication successful
                 session['username'] = username
+                session['user_id'] = user.user_id
                 return redirect(url_for('index'))
             else:
                 flash('invalid deets')
@@ -58,7 +59,9 @@ class RegistrationForm(FlaskForm):
                     password=password,
                     email=email
                 )
+                
                 session['username'] = username
+                session['user_id'] = crud.get_user_by_username(username).user_id
                 flash('Account created successfully!')
                 return redirect(url_for('index'))
         

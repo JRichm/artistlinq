@@ -59,14 +59,14 @@
 
                 {% endif %}
             </div>
-            <hr style="margin-right: 50px;">
+            <hr>
             <div class="post-comments-container">
 
                 {% for comment in post_comments %}
                 <div class="comment-template">
                     <div class="user-info">
                         <img src="../../static/images/user_icon.png">
-                        <p>{{ username }}</p>
+                        <p>{{ comment.username }}</p>
                     </div>
                     <div class="comment-area">
                         <textarea class="comment-text" readonly>{{ comment.comment_text }}</textarea>
@@ -82,6 +82,9 @@
         </div>
     </section>
 </main>
+<script>
+    var userLikes = {{ userLikes|tojson }}
+</script>
 <script src="/static/javascript/post.js"></script>
 {% endblock %}
 
