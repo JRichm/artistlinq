@@ -1,1 +1,0 @@
-export POSTGRES_URI="postgresql://postgres:#hemnesBrimnes1#@localhost:5432/art_station"
