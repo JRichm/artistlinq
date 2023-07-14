@@ -79,14 +79,11 @@ def view_post(post_id):
     post_comments = crud.get_comments_from_post_id(post_id)
     commentForm = forms.CommentForm()
     likeButtonsForm = forms.LikeButtonsForm()
-    username=check_login()
-    
+    username = check_login()
+
     if request.method == 'POST':
-        print('\n\n\n\n\n\n\n')
-        print('request new comment')
-        user_id = crud.get_user_by_username(username).user_id
-        commentForm.post_comment(user_id, post_id)
-    
+        return commentForm.post_comment(crud.get_user_by_username(username).user_id, post_id)
+
     return render_template('post.html',
                            username=username,
                            post=post,
@@ -167,13 +164,13 @@ def handle_buttons():
     print('farting')
     
     if like_button == 'false':
-        print('like_button clicked')
+        print('\nlike_button clicked')
         
     if favorite_button == 'false':
-        print('favorite_button clicked')
+        print('\nfavorite_button clicked')
         
     if star_button == 'false':
-        print('star_button clicked')
+        print('\nstar_button clicked')
         
     return
 
@@ -202,6 +199,12 @@ def get_images():
             images.append({'path': image_path, 'url': image_url})
             
     return images
+
+def flash_errors(form):
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(f"Error in field '{getattr(form, field).label.text}': {error}", "error")
+
 
 if __name__ == "__main__":
     connect_to_db(app)

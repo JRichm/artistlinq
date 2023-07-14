@@ -4,7 +4,7 @@
 """ ### Flask Forms ### """
 
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import flash, redirect, url_for, session
+from flask import flash, redirect, url_for, session, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, EqualTo
@@ -81,7 +81,7 @@ class CommentForm(FlaskForm):
             )
             self.comment.data = ""
             
-            return redirect(url_for('view_post', post_id=post_id))
+            return redirect(url_for(request.endpoint, post_id=post_id, _external=True, _anchor='comment-section'))
         
         print(self.errors)
 
