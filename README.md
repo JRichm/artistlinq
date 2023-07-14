@@ -11,5 +11,4 @@ a website where arists can showcase and advertise art/commissions
 - Browse Artists
 - Portfolio Gallery
 - About Us
-- FAQs
 - Contact Us
