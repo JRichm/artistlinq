@@ -1,7 +1,7 @@
 
 
 
-from model import db, User, Tag, Post, PostedTag, Comment
+from model import db, User, Tag, Post, PostedTag, Comment, Like, Favorite, Star
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from flask import jsonify
@@ -37,11 +37,10 @@ def create_new_tag(tag_name):
     tag_data = { 'tag_name': tag.tag_name }
     return tag_data
 
+
 # new post
 def add_new_post(username, image_url, post_title):
-    
     user_id = get_user_by_username(username).user_id
-    
     post = Post(
         user_id = user_id,
         image_url = image_url,
@@ -54,8 +53,8 @@ def add_new_post(username, image_url, post_title):
     
     return post
 
+
 def add_tag_to_post(tag_id, post_id):
-    
     tag = PostedTag(
         tag_id = tag_id,
         post_id = post_id
@@ -64,9 +63,8 @@ def add_tag_to_post(tag_id, post_id):
     db.session.add(tag)
     db.session.commit()
     
-def post_comment(user_id, post_id, comment_data): 
     
-    print('\n\n\n\n')
+def post_comment(user_id, post_id, comment_data): 
     comment = Comment(
         user_id=user_id,
         post_id=post_id,
@@ -74,12 +72,44 @@ def post_comment(user_id, post_id, comment_data):
         created_at=datetime.now(),
         updated_at=datetime.now()
     )
-    print(comment)
     
     db.session.add(comment)
     db.session.commit()
 
+
+def add_like_to_post(post_id, user_id):
+    like = Like(
+        user_id=user_id,
+        post_id=post_id,
+        created_at=datetime.now()
+    )
     
+    db.session.add(like)
+    db.session.commit()
+
+
+def add_post_to_favorites(post_id, user_id):
+    favorite = Favorite(
+        user_id=user_id,
+        post_id=post_id,
+        created_at=datetime.now()
+    )
+    
+    db.session.add(favorite)
+    db.session.commit()
+
+
+def add_star_to_post(post_id, user_id):
+    star = Star(
+        user_id=user_id,
+        post_id=post_id,
+        created_at=datetime.now()
+    )
+    
+    db.session.add(star)
+    db.session.commit()
+    
+
 
 """      Read       """
 # get all users
@@ -140,6 +170,7 @@ def get_comments_from_post_id(post_id):
     comment_query = db.session.query(Comment).filter(Comment.post_id == post_id).order_by(Comment.comment_id.desc()).all()
     comment_list = [{'comment_id': comment.comment_id,
                      'user_id': comment.user_id,
+                     'username': get_user_by_id(comment.user_id).username,
                      'post_id': comment.post_id,
                      'comment_text': comment.comment_text,
                      'created_at': comment.created_at,
