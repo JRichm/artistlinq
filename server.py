@@ -160,15 +160,19 @@ def handle_buttons(post_id):
     like_button = request.form.get('like-button')
     favorite_button = request.form.get('favorite-button')
     star_button = request.form.get('star-button')
+    
+    print(session.get('username'))
+    
+    user_id = crud.get_user_by_username(session.get('username')).user_id
         
     if like_button == 'like':
-        print('\nlike_button clicked')
+        crud.add_like_to_post(post_id=post_id, user_id=user_id)
         
     if favorite_button == 'favorite':
-        print('\nfavorite_button clicked')
+        crud.add_post_to_favorites(post_id=post_id, user_id=user_id)
         
     if star_button == 'star':
-        print('\nstar_button clicked')
+        crud.add_star_to_post(post_id=post_id, user_id=user_id)
         
     return redirect(url_for('view_post', post_id=post_id))
 
