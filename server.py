@@ -168,7 +168,7 @@ def handle_buttons(post_id):
     print(session.get('username'))
     
     user_id = get_current_user_id()
-    likeData = crud.get_user_like_data()
+    likeData = crud.get_user_like_data(post_id, user_id)
         
     if like_button == 'like':
         if (likeData[0]):
