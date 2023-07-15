@@ -1,1 +1,7 @@
-when creating a new account, after submitting username, email, and password, open to new window asking if the user is an artist
+1) when creating a new user, check to see if email is already taken.
+2) when searching for tags, clear search input if enter key pushed
+3) when searching for tags, do not show duplicate tag bubbles
+        if user searches for 'nature', the bubble for the users input shows up
+        but another bubble for the already saved 'nature' tag also shows up
+        only show one
+    

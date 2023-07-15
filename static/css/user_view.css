@@ -1,91 +1,72 @@
 main {
-    display: flex;
-    flex-direction: row;
-    margin: 150px;
+    background-color: black;
+    display: grid;
+    justify-self: center;
+    margin: 0px 15vw 0px 15vw;
+    grid-template-columns: auto 444px;
 }
 
-
-/* User Card */
-.user-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 50px;
+.user-info-head {
+    background-color: red;
+    grid-column: 1 / 3;
+    height: 300px;
 }
 
-.user-card > * {
-    color:  white;
-    text-align: center;
+.main-section {
+    background-color: green;
 }
 
-.user-card p {
-  max-width: 250px;
-  text-align: center;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* User Section */
-.user-section {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.content-controller {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 15px;
-    padding: 18px 2px 15px 5px;
-    background-color: #2d3e5f;
-}
-
-.content-controller a {
-    color:white;
-    text-decoration: none;
-    margin-right: 5px;
-    padding: 10px 20px 10px 20px;
-    border-radius: 10px;
-    background-color: #2a3a5a;
-}
-
-.content-controller a:hover {
-    transition: all 0.3s;
-    background-color: #203050;
+aside {
+    background-color: blue;
 }
 
 .image-board {
-    display: flex;
-    flex-direction: row;
-    margin: 50px;
-}
-
-.image-column {
-    display: flex;
-    flex-direction: column;
-    width: 25%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 15px;
 }
 
 .image-container {
-    width: 250px;
-    height: 250px;
-    margin: 30px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    padding-bottom: 90%;
+    border: 2px #205010 solid;
+    border-radius: 2px;
 }
 
-.image-container img {
-    width: 100%; /* Make the image fill the width of the container */
-    height: 100%; /* Make the image fill the height of the container */
-    object-fit: contain; /* Preserve aspect ratio and fit the image within the container */
-  }
+.image-board-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 
-.user-settings {
-    background-color: #196340 !important;
+.post-info {
+    position: absolute;
+    background-color: antiquewhite;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.post-info div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 2px 1px 2px 1px;
+    padding: 0px 2px 0px 2px;
+    border-radius: 2px;
+}
+
+.post-info p {
+    margin: 0px 2px 0px 2px;
+}
+
+.post-info i {
+    color: rgb(66, 32, 73);
+    opacity: 60%;
 }
