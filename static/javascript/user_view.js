@@ -21,6 +21,10 @@ function onUserNavClick(e) {
 
     if (buttonName == currentPage) return
 
+    for (var child of userNav.children) {
+        child.classList.remove('nav-button-highlighted')
+    }
+
     userViews.forEach(div => {
         div.classList.add('hidden')
     })
@@ -29,14 +33,17 @@ function onUserNavClick(e) {
         case buttonName == 'showcase':
             currentPage = 'showcase'
             showcaseDiv.classList.remove('hidden')
+            e.target.classList.add('nav-button-highlighted')
             break;
         case buttonName == 'gallary':
             currentPage = 'gallary'
             gallaryDiv.classList.remove('hidden')
+            e.target.classList.add('nav-button-highlighted')
             break;
         case buttonName == 'commission':
             currentPage = 'commission'
             commissionDiv.classList.remove('hidden')
+            e.target.classList.add('nav-button-highlighted')
             break;
     }
 }

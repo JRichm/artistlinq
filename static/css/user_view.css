@@ -16,6 +16,8 @@ main {
 
 aside {
     background-color: blue;
+    width: 444;
+    height: 680px;
 }
 
 .user-nav {
@@ -39,6 +41,11 @@ aside {
     margin-bottom: -2px;
 }
 
+.nav-button-highlighted {
+    background-color: #364b6d !important;
+    color: white !important;
+
+}
 
 .image-board {
     display: grid;
