@@ -4,6 +4,10 @@ const showcaseDiv = document.getElementById('showcase');
 const gallaryDiv = document.getElementById('gallary');
 const commissionDiv = document.getElementById('commission');
 
+const showcaseNav = document.getElementById('showcaseNav')
+const gallaryNav = document.getElementById('gallaryNav')
+const commissionNav = document.getElementById('commissionNav')
+
 const userViews = [
     showcaseDiv,
     gallaryDiv,
@@ -20,7 +24,12 @@ function onUserNavClick(e) {
     buttonName = e.target.innerHTML.toLowerCase()
 
     if (buttonName == currentPage) return
+    else {
+        changeViews(buttonName)
+    }
+}
 
+function changeViews(changeToName) {
     for (var child of userNav.children) {
         child.classList.remove('nav-button-highlighted')
     }
@@ -30,20 +39,22 @@ function onUserNavClick(e) {
     })
 
     switch (true) {
-        case buttonName == 'showcase':
+        case changeToName == 'showcase':
             currentPage = 'showcase'
             showcaseDiv.classList.remove('hidden')
-            e.target.classList.add('nav-button-highlighted')
+            showcaseNav.classList.add('nav-button-highlighted')
             break;
-        case buttonName == 'gallary':
+        case changeToName == 'gallary':
             currentPage = 'gallary'
             gallaryDiv.classList.remove('hidden')
-            e.target.classList.add('nav-button-highlighted')
+            gallaryNav.classList.add('nav-button-highlighted')
             break;
-        case buttonName == 'commission':
+        case changeToName == 'commission':
             currentPage = 'commission'
             commissionDiv.classList.remove('hidden')
-            e.target.classList.add('nav-button-highlighted')
+            commissionNav.classList.add('nav-button-highlighted')
             break;
     }
 }
+
+changeViews('gallary')

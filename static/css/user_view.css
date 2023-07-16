@@ -44,7 +44,8 @@ aside {
 .nav-button-highlighted {
     background-color: #364b6d !important;
     color: white !important;
-
+    padding-bottom: 6px;
+    margin-bottom: -2px;
 }
 
 .image-board {
