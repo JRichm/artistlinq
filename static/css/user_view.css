@@ -1,5 +1,4 @@
 main {
-    background-color: black;
     display: grid;
     justify-self: center;
     margin: 0px 15vw 0px 15vw;
@@ -13,12 +12,33 @@ main {
 }
 
 .main-section {
-    background-color: green;
 }
 
 aside {
     background-color: blue;
 }
+
+.user-nav {
+    display: flex;
+    justify-content: left;
+}
+
+.user-nav p {
+    background-color: #24334a;
+    color: #3f516d;
+    padding: 3px 5px 3px 5px;
+    margin: 0px 2px 1px 0px;
+    border-radius: 5px 5px 0 0 ;
+}
+
+.user-nav p:hover {
+    background-color: #293b57;
+    color: #dcdfe2;
+    cursor: pointer;
+    padding-bottom: 6px;
+    margin-bottom: -2px;
+}
+
 
 .image-board {
     display: grid;
@@ -30,8 +50,8 @@ aside {
 .image-container {
     position: relative;
     padding-bottom: 90%;
-    border: 2px #205010 solid;
-    border-radius: 2px;
+    background-color: #0d1b2a;
+    border-radius: 3px;
 }
 
 .image-board-img {
@@ -40,6 +60,7 @@ aside {
     left: 0;
     width: 100%;
     height: 100%;
+    padding: 5px;
     object-fit: contain;
 }
 
