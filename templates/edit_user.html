@@ -1,25 +1,46 @@
 {% extends 'base.html' %}
-{% block title %}Art-Station [USER - {{ session.get('username') }}]{% endblock %}
+{% block title %}Art-Station [EDIT - {{ session.get('username') }}]{% endblock %}
 {% block head %}
-    <link rel="stylesheet" href="../static/css/edit_user.css">
+    <link rel="stylesheet" href="/static/css/edit_user.css">
 {% endblock %}
 
 {% block body %}
 <main>
-    <header>
-
-    </header>
+    <section class="user-info-head">
+        <article class="user-info-container">
+            <div class="user-image-container">
+              <img class="user-image" src="/static/images/user_icon.png">
+            </div>
+            <div class="user-info">
+              <h4>{{ user.username }}</h4>
+              <p>{{ endpoint }}</p>
+            </div>
+        </article>
+    </section>
     <section>
         <aside class="settings-nav">
-            <ol>
-                <li><a href='/user/{{ username }}/edit_user/info'>General</a></li>
-                <li><a href='/user/{{ username }}/edit_user/avatar'>Avatar</a></li>
-                <li><a href='/user/{{ username }}/edit_user/background'>Profile Backgorund</a></li>
-                <li><a href='/user/{{ username }}/edit_user/showcase'>Showcase</a></li>
-                <li><a href='/user/{{ username }}/edit_user/commission'>Commission</a></li>
-                <li><a href='/user/{{ username }}/edit_user/privacy'>Privacy Settings</a></li>
-            </ol>
+            <a href='/user/{{ user.username }}/edit_user/info'>General</a>
+            <a href='/user/{{ user.username }}/edit_user/avatar'>Avatar</a>
+            <a href='/user/{{ user.username }}/edit_user/background'>Profile Backgorund</a>
+            <a href='/user/{{ user.username }}/edit_user/showcase'>Showcase</a>
+            <a href='/user/{{ user.username }}/edit_user/commission'>Commission</a>
+            <a href='/user/{{ user.username }}/edit_user/privacy'>Privacy Settings</a>
         </aside>
+        <article>
+            {% if endpoint == 'info' %}
+                <h1>info</h1>
+            {% elif endpoint == 'avatar' %}
+                <h1>avatar</h1>
+            {% elif endpoint == 'background' %}
+                <h1>background image</h1>
+            {% elif endpoint == 'showcase' %}
+                <h1>showcase</h1>
+            {% elif endpoint == 'commission' %}
+                <h1>commission</h1>
+            {% elif endpoint == 'privacy' %}
+                <h1>privacy settings</h1>
+            {% endif %}
+        </article>  
     </section>
 </main>
 {% endblock %}

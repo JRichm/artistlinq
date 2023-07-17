@@ -1,0 +1,23 @@
+.user-info-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-image-container {
+    width: 150px;
+    height: 150px;
+}
+
+.user-image {
+    height: 100%;
+    width: 100%;
+}
+
+.settings-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+section {
+    background-color: red;
+}
