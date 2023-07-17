@@ -96,7 +96,12 @@ def view_post(post_id):
                            commentForm=commentForm,
                            likeButtonsForm=likeButtonsForm, 
                            userLikes=userLikes)
+    
 
+    ### " Edit Profile View " ###
+@app.route('/user/<username>/edit_user')
+def edit_user(username):
+    return render_template('edit_user.html')
 
 """"""""""""""""""""""""""""""""""""""""""
 """     ###     API Routes     ###     """

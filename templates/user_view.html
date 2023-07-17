@@ -17,13 +17,14 @@
       </div>
     </article>
     <aside class="user-options-container">
+      {% if view_user.username == username %} 
+      <button id="edit-profile-button" onclick="window.location.href='/user/{{ username }}/edit_user/info'">Edit Profile</button>
+      {% else %}
       <div class="user-buttons">
         <button><i class="fa-solid fa-ellipsis"></i></button>
         <button><i class="fa-solid fa-message"></i></button>
         <button>Follow</button>
       </div>
-      {% if view_user.username == username %} 
-      <button id="edit-profile-button">Edit Profile</button>
       {% endif %}
     </aside>
   </section>

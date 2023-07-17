@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Art-Station [USER - {{ session.get('username') }}]{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="../static/css/edit_user.css">
+{% endblock %}
+
+{% block body %}
+<main>
+    <header>
+
+    </header>
+    <section>
+        <aside class="settings-nav">
+            <ol>
+                <li><a href='/user/{{ username }}/edit_user/info'>General</a></li>
+                <li><a href='/user/{{ username }}/edit_user/avatar'>Avatar</a></li>
+                <li><a href='/user/{{ username }}/edit_user/background'>Profile Backgorund</a></li>
+                <li><a href='/user/{{ username }}/edit_user/showcase'>Showcase</a></li>
+                <li><a href='/user/{{ username }}/edit_user/commission'>Commission</a></li>
+                <li><a href='/user/{{ username }}/edit_user/privacy'>Privacy Settings</a></li>
+            </ol>
+        </aside>
+    </section>
+</main>
+{% endblock %}
