@@ -1,6 +1,13 @@
+main {
+    margin: 0px 200px 0px 200px;
+}
+
 .user-info-container {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    background-color: #415a77;
+    padding: 25px;
 }
 
 .user-image-container {
@@ -13,11 +20,12 @@
     width: 100%;
 }
 
+.settings-container {
+    display: flex;
+    flex-direction: row;
+}
+
 .settings-nav {
     display: flex;
     flex-direction: column;
-}
-
-section {
-    background-color: red;
 }

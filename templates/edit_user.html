@@ -11,13 +11,11 @@
             <div class="user-image-container">
               <img class="user-image" src="/static/images/user_icon.png">
             </div>
-            <div class="user-info">
-              <h4>{{ user.username }}</h4>
-              <p>{{ endpoint }}</p>
-            </div>
+            <h4>{{ user.username }}</h4>
+            <p>{{ endpoint }}</p>
         </article>
     </section>
-    <section>
+    <section class="settings-container">
         <aside class="settings-nav">
             <a href='/user/{{ user.username }}/edit_user/info'>General</a>
             <a href='/user/{{ user.username }}/edit_user/avatar'>Avatar</a>
