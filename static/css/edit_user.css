@@ -48,6 +48,10 @@ main {
     transition: all 0.1s;
 }
 
+.edit-user-selected-nav-button {
+    background-color: #273753 !important;
+}
+
 .settings-nav a:hover {
     background-color: #223049;
     color: white;
@@ -107,7 +111,7 @@ main {
 
 #save-changes-button {
     background-color: transparent;
-    color: #198754;
+    color: #1ba565;
     border: 2px #198754 solid;
     margin: 15px;
     height: 40px;

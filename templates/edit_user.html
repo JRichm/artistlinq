@@ -13,18 +13,17 @@
             </div>
             <div class="user-info">
                 <h2 style="margin: 10px 10px 15px 0px;">{{ user.username }}</h2>
-                <h5 style="margin: 10px;">{{ endpoint }}</h5>
             </div>
         </article>
     </section>
     <section class="settings-container">
         <aside class="settings-nav">
-            <a href='/user/{{ user.username }}/edit_user/general'>General</a>
-            <a href='/user/{{ user.username }}/edit_user/avatar'>Avatar</a>
-            <a href='/user/{{ user.username }}/edit_user/background'>Profile Backgorund</a>
-            <a href='/user/{{ user.username }}/edit_user/showcase'>Showcase</a>
-            <a href='/user/{{ user.username }}/edit_user/commission'>Commission</a>
-            <a href='/user/{{ user.username }}/edit_user/privacy'>Privacy Settings</a>
+            <a id="general-button" href='/user/{{ user.username }}/edit_user/general'>General</a>
+            <a id="avatar-button" href='/user/{{ user.username }}/edit_user/avatar'>Avatar</a>
+            <a id="background-button" href='/user/{{ user.username }}/edit_user/background'>Profile Backgorund</a>
+            <a id="showcase-button" href='/user/{{ user.username }}/edit_user/showcase'>Showcase</a>
+            <a id="commission-button" href='/user/{{ user.username }}/edit_user/commission'>Commission</a>
+            <a id="privacy-button" href='/user/{{ user.username }}/edit_user/privacy'>Privacy Settings</a>
         </aside>
         <article class="settings-box">
             {% if endpoint == 'general' %}
@@ -62,4 +61,8 @@
         </article>  
     </section>
 </main>
+<script>
+    selectedButton = document.getElementById('{{ endpoint }}' + '-button')
+    selectedButton.classList.add('edit-user-selected-nav-button')
+</script>
 {% endblock %}
