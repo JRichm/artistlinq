@@ -1,5 +1,12 @@
 main {
-    margin: 0px 200px 0px 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-info-head {
+    width: 1200px;
+    color: white;
 }
 
 .user-info-container {
@@ -7,12 +14,13 @@ main {
     flex-direction: row;
     align-items: center;
     background-color: #415a77;
-    padding: 25px;
+    height: 200px;
 }
 
 .user-image-container {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
+    margin: 50px;
 }
 
 .user-image {
@@ -23,9 +31,105 @@ main {
 .settings-container {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .settings-nav {
     display: flex;
     flex-direction: column;
+    width: 300px;
+}
+
+.settings-nav a {
+    text-decoration: none;
+    color:#abc;
+    background-color: transparent;
+    padding: 7px;
+    transition: all 0.1s;
+}
+
+.settings-nav a:hover {
+    background-color: #223049;
+    color: white;
+    font-weight: bold;
+    transition: all 0.2s;
+
+}
+
+.settings-box {
+    background-color: #223049;
+    width: 900px;
+}
+
+.settings-box h1 {
+    color: white;
+    margin: 33px;
+}
+
+.general-settings {
+    display: flex;
+    flex-direction: column;
+}
+
+.general-settings span {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+}
+
+.general-settings label {
+    color: white;
+
+}
+
+.general-settings input {
+    max-width: 500px;
+}
+
+.general-settings input:focus {
+    border-radius: 3px;
+    border: #415a77 1px solid;
+    outline: none;
+}
+
+.general-settings input, textarea {
+    background-color: #223049;
+    border-radius: 3px;
+    border: #415a77 1px solid;
+    color: white;
+}
+
+.general-settings textarea:focus {
+    border-radius: 3px;
+    border: #415a77 1px solid;
+    outline: none;
+}
+
+#save-changes-button {
+    background-color: transparent;
+    color: #198754;
+    border: 2px #198754 solid;
+    margin: 15px;
+    height: 40px;
+    width: 150px;
+    align-self: end;
+    border-radius: 10px;
+}
+
+#save-changes-button:hover {
+    background-color: #198754;
+    color: #09472a;
+    border-radius: 8px;
+    transition: all 0.1s;
+    font-weight: bold;
+}
+
+.general-settings input:-webkit-autofill,
+.general-settings input:-webkit-autofill:hover, 
+.general-settings input:-webkit-autofill:focus, 
+.general-settings input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #ffffff;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #223049;
 }

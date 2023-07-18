@@ -102,7 +102,10 @@ def view_post(post_id):
 @app.route('/user/<username>/edit_user/<edit_endpoint>')
 def edit_user(username, edit_endpoint):
     user = crud.get_user_by_username(username)
-    return render_template('edit_user.html', user=user, endpoint=edit_endpoint)
+    settings = {
+        'general': forms.UserSettingsGeneral()
+    }
+    return render_template('edit_user.html', user=user, endpoint=edit_endpoint, settings=settings)
 
 """"""""""""""""""""""""""""""""""""""""""
 """     ###     API Routes     ###     """

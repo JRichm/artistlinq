@@ -93,3 +93,11 @@ class LikeButtonsForm(FlaskForm):
     like_button = SubmitField(validators=[DataRequired()], render_kw={"id": "like-button"})
     favorite_button = SubmitField(validators=[DataRequired()], render_kw={"id": "favorite-button"})
     star_button = SubmitField(validators=[DataRequired()], render_kw={"id": "star-button"})
+
+class UserSettingsGeneral(FlaskForm):
+    username = StringField('Username')
+    new_password = PasswordField('Update Password')
+    new_password_confirm = PasswordField('Confirm Password')
+    old_password = PasswordField('Old Password')
+    bio = TextAreaField()
+    

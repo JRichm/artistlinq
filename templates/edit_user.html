@@ -9,34 +9,55 @@
     <section class="user-info-head">
         <article class="user-info-container">
             <div class="user-image-container">
-              <img class="user-image" src="/static/images/user_icon.png">
+                <img class="user-image" src="/static/images/user_icon.png">
             </div>
-            <h4>{{ user.username }}</h4>
-            <p>{{ endpoint }}</p>
+            <div class="user-info">
+                <h2 style="margin: 10px 10px 15px 0px;">{{ user.username }}</h2>
+                <h5 style="margin: 10px;">{{ endpoint }}</h5>
+            </div>
         </article>
     </section>
     <section class="settings-container">
         <aside class="settings-nav">
-            <a href='/user/{{ user.username }}/edit_user/info'>General</a>
+            <a href='/user/{{ user.username }}/edit_user/general'>General</a>
             <a href='/user/{{ user.username }}/edit_user/avatar'>Avatar</a>
             <a href='/user/{{ user.username }}/edit_user/background'>Profile Backgorund</a>
             <a href='/user/{{ user.username }}/edit_user/showcase'>Showcase</a>
             <a href='/user/{{ user.username }}/edit_user/commission'>Commission</a>
             <a href='/user/{{ user.username }}/edit_user/privacy'>Privacy Settings</a>
         </aside>
-        <article>
-            {% if endpoint == 'info' %}
-                <h1>info</h1>
+        <article class="settings-box">
+            {% if endpoint == 'general' %}
+            <h1>General Settings</h1>
+            <hr>
+            <form class="general-settings">
+                {{ settings['general'].csrf_token }}
+
+                {% for field in settings['general'] %}
+                    {% if field.type != 'CSRFTokenField' %}
+                    <span>
+                        {{ field.label }} {{ field }}
+                    </span>
+                    {% endif %}
+                {% endfor %}
+
+                <input type="submit" value="Save Changes" id="save-changes-button">
+            </form>
             {% elif endpoint == 'avatar' %}
-                <h1>avatar</h1>
+                <h1>Change Avatar</h1>
+                <hr>
             {% elif endpoint == 'background' %}
-                <h1>background image</h1>
+                <h1>Change Background Image</h1>
+                <hr>
             {% elif endpoint == 'showcase' %}
-                <h1>showcase</h1>
+                <h1>Update Showcase</h1>
+                <hr>
             {% elif endpoint == 'commission' %}
-                <h1>commission</h1>
+                <h1>Commission Form</h1>
+                <hr>
             {% elif endpoint == 'privacy' %}
-                <h1>privacy settings</h1>
+                <h1>Privacy settings</h1>
+                <hr>
             {% endif %}
         </article>  
     </section>
