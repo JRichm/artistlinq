@@ -66,6 +66,10 @@ main {
     margin: 5px;
 }
 
+.user-buttons button:focus {
+    outline: 1px solid #415a77;
+}
+
 .user-buttons > * {
     color: #dadbdd !important;
 }
@@ -177,4 +181,17 @@ main {
 .post-info i {
     color: rgb(66, 32, 73);
     opacity: 60%;
+}
+
+#follow-button {
+    width: 75px;
+    transition: all 0.3s;
+}
+
+#followed-button {
+    background-color: #2f4363 !important;
+    color: white !important;
+    width: 45px;
+    transition: all 0.3s;
+    outline: none;
 }

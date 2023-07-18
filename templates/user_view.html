@@ -23,7 +23,7 @@
       <div class="user-buttons">
         <button><i class="fa-solid fa-ellipsis"></i></button>
         <button><i class="fa-solid fa-message"></i></button>
-        <button>Follow</button>
+        <button id="follow-button" value="false">Follow</button>
       </div>
       {% endif %}
     </aside>
@@ -35,7 +35,7 @@
       <p id="commissionNav">Commission</p>
     </nav>
     <article id="showcase" class="hidden">
-      <h1> showcase test</h1>
+      <h1> showcase test </h1>
     </article>
     <article id="gallary" class="image-board hidden">
       {% for image in images %}
