@@ -6,7 +6,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import flash, redirect, url_for, session, request
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, FileField
 from wtforms.validators import DataRequired, Email, EqualTo
 from markupsafe import Markup
 import crud
@@ -155,3 +155,10 @@ class UserSettingsGeneral(FlaskForm):
 
         flash("User profile updated successfully.")
         return user
+    
+    
+class UserSettingsAppearance(FlaskForm):
+    new_icon = FileField('User Icon')
+    new_background = FileField('Profile Background')
+    
+    

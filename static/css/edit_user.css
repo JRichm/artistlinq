@@ -70,43 +70,74 @@ main {
     margin: 33px;
 }
 
-.general-settings {
+.settings {
     display: flex;
     flex-direction: column;
 }
 
-.general-settings span {
+.settings span {
     display: flex;
     flex-direction: column;
     margin: 15px 30px 10px 30px;
 }
 
-.general-settings label {
+.settings label {
     color: white;
 
 }
 
-.general-settings input {
+.settings input {
     max-width: 500px;
 }
 
-.general-settings input:focus {
+.settings input:focus {
     border-radius: 3px;
     border: #415a77 1px solid;
     outline: none;
 }
 
-.general-settings input, textarea {
+.settings input, textarea {
     background-color: #223049;
     border-radius: 3px;
     border: #415a77 1px solid;
     color: white;
 }
 
-.general-settings textarea:focus {
+.settings textarea:focus {
     border-radius: 3px;
     border: #415a77 1px solid;
     outline: none;
+}
+
+.user-icons-header, .user-backgrounds-header {
+    background-color: #415a77;
+    color: white;
+    width: fit-content;
+    margin: 0px;
+    padding: 1px 8px 0px 8px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+#user-icons, #user-backgrounds {
+    background-color: #1c2a42;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    padding: 15px;
+    width: fit-content;
+}
+
+.user-icon {
+    width: 100px; height: 100px;
+    background-color: #1ba565;
+    margin: 8px;
+}
+
+.user-background {
+    width: 200px; height: 100px;
+    background-color: #1ba565;
+    margin: 8px;
 }
 
 #save-changes-button {

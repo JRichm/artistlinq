@@ -103,7 +103,8 @@ def view_post(post_id):
 def edit_user(username, edit_endpoint):
     user = crud.get_user_by_username(username)
     settings = {
-        'general': forms.UserSettingsGeneral()
+        'general': forms.UserSettingsGeneral(),
+        'appearance': forms.UserSettingsAppearance()
     }
 
     print(f"Edit User - Initial user object: {user}")
@@ -113,15 +114,13 @@ def edit_user(username, edit_endpoint):
             updated_user = settings['general'].save_changes(user)
 
             if updated_user is not None:
-                flash('User profile updated successfully')
-                # The `save_changes` method returns the updated user object, so we should use that object.
                 user = updated_user
             else:
                 flash('Failed to update user profile')
 
             return redirect(url_for('edit_user', username=user.username, edit_endpoint=edit_endpoint))
 
-    return render_template('edit_user.html', user=user, endpoint=edit_endpoint, settings=settings)
+    return render_template('edit_user.html', user=user, endpoint=edit_endpoint, settings=settings, username=user.username)
 
 """"""""""""""""""""""""""""""""""""""""""
 """     ###     API Routes     ###     """

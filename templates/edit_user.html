@@ -19,7 +19,7 @@
     <section class="settings-container">
         <aside class="settings-nav">
             <a id="general-button" href='/user/{{ user.username }}/edit_user/general'>General</a>
-            <a id="avatar-button" href='/user/{{ user.username }}/edit_user/appearance'>Appearance</a>
+            <a id="appearance-button" href='/user/{{ user.username }}/edit_user/appearance'>Appearance</a>
             <a id="showcase-button" href='/user/{{ user.username }}/edit_user/showcase'>Showcase</a>
             <a id="commission-button" href='/user/{{ user.username }}/edit_user/commission'>Commission</a>
             <a id="privacy-button" href='/user/{{ user.username }}/edit_user/privacy'>Privacy Settings</a>
@@ -28,7 +28,7 @@
             {% if endpoint == 'general' %}
             <h1>General Settings</h1>
             <hr>
-            <form class="general-settings" method="post">
+            <form class="general-settings settings" method="post">
                 {{ settings['general'].csrf_token }}
 
                 {% for field in settings['general'] %}
@@ -44,6 +44,39 @@
             {% elif endpoint == 'appearance' %}
                 <h1>Appearance</h1>
                 <hr>
+                <form class="appearance-settings settings" method="post">
+                    {{ settings['appearance'].csrf_token }}
+                    <span>
+                        {{ settings['appearance'].new_icon.label }}
+                        {{ settings['appearance'].new_icon }}
+                    </span>
+                    <span class="user-icons-span">
+                        <p class="user-icons-header">Your Icons</p>
+                        <div id="user-icons">
+                            {% for square in range(4) %}
+                            <div class="user-icon">
+
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </span>
+                    <span>
+                        {{ settings['appearance'].new_background.label }}
+                        {{ settings['appearance'].new_background }}
+                    </span>
+                    <span class="user-backgrounds-span">
+                        <p class="user-backgrounds-header">Your Icons</p>
+                        <div id="user-backgrounds">
+                            {% for square in range(3) %}
+                            <div class="user-background">
+
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </span>
+    
+                    <input type="submit" value="Save Changes" id="save-changes-button">
+                </form>
             {% elif endpoint == 'showcase' %}
                 <h1>Update Showcase</h1>
                 <hr>
