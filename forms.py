@@ -171,3 +171,6 @@ class UserSettingsPrivacy(FlaskForm):
 class ReportPostForm(FlaskForm):
     hateful = BooleanField('Hateful or Abusive Content')
     spam = BooleanField('Spam or Misleading')
+    violence = BooleanField('Violence')
+    prohibiten = BooleanField('Prohibited Content')
+    other = BooleanField('Other')

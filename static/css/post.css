@@ -229,7 +229,6 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 400px;
     width: 600px;
     margin: 75px;
     border-radius: 5px;
@@ -245,10 +244,22 @@ main {
     margin: 7px;
     border-radius: 7px 7px 0px 0px;
 }
+
 .report-form {
-    margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    padding: 20px;
     background-color: #203349;
     width: 100%;
+}
+
+.report-form span {
+    color: white;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .dialog-footer {
@@ -256,4 +267,36 @@ main {
     background-color: #415a77;
     width: 100%;
     border-radius: 0px 0px 7px 7px;
+}
+
+.report-buttons {
+    display: flex;
+    justify-content: end;
+    margin: 10px;
+}
+
+#report-menu-close {
+    color: #dc3545;
+    border: 2px solid #dc3545;
+    background-color: transparent;
+    transition: all 0.3s;
+}
+
+#report-menu-close:hover {
+    color: #701d25;
+    background-color: #dc3545;
+    transition: all 0.3s;
+}
+
+#confirm-report {
+    color: #dc3545;
+    border: 2px solid #dc3545;
+    background-color: transparent;
+    transition: all 0.3s;
+}
+
+#confirm-report:hover {
+    color: #701d25;
+    background-color: #dc3545;
+    transition: all 0.3s;
 }
