@@ -63,9 +63,10 @@ main {
 .settings-box {
     background-color: #223049;
     width: 900px;
+    min-height: 400px;
 }
 
-.settings-box h1 {
+.settings-box h1, h2 {
     color: white;
     margin: 33px;
 }
@@ -83,10 +84,11 @@ main {
 
 .settings label {
     color: white;
+    width: fit-content;
 
 }
 
-.settings input {
+.settings input, select {
     max-width: 500px;
 }
 
@@ -96,19 +98,24 @@ main {
     outline: none;
 }
 
-.settings input, textarea {
-    background-color: #223049;
-    border-radius: 3px;
-    border: #415a77 1px solid;
-    color: white;
-}
-
 .settings textarea:focus {
     border-radius: 3px;
     border: #415a77 1px solid;
     outline: none;
 }
 
+.settings select:focus {
+    border-radius: 3px;
+    border: #415a77 1px solid;
+    outline: none;
+}
+
+.settings input, textarea, select {
+    background-color: #223049;
+    border-radius: 3px;
+    border: #415a77 1px solid;
+    color: white;
+}
 .user-icons-header, .user-backgrounds-header {
     background-color: #415a77;
     color: white;
@@ -124,7 +131,7 @@ main {
     flex-direction: row;
     width: 100%;
     flex-wrap: wrap;
-    padding: 15px;
+    padding: 10px;
     width: fit-content;
 }
 
@@ -138,6 +145,27 @@ main {
     width: 200px; height: 100px;
     background-color: #1ba565;
     margin: 8px;
+}
+
+#blocked_users_button {
+    color:white;
+}
+
+#blocked_users_button {
+    background-color: transparent;
+    color: #dc3545;
+    border: 2px #dc3545 solid;
+    height: 40px;
+    width: 150px;
+    border-radius: 10px;
+}
+
+#blocked_users_button:hover {
+    background-color: #dc3545;
+    color: #701d25;
+    border-radius: 8px;
+    transition: all 0.1s;
+    font-weight: bold;
 }
 
 #save-changes-button {

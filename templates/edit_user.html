@@ -80,12 +80,27 @@
             {% elif endpoint == 'showcase' %}
                 <h1>Update Showcase</h1>
                 <hr>
+                <h2>no items to showcase</h2>
             {% elif endpoint == 'commission' %}
                 <h1>Commission Form</h1>
                 <hr>
+                <h2>commission feature is temporarily unavailable</h2>
             {% elif endpoint == 'privacy' %}
                 <h1>Privacy settings</h1>
                 <hr>
+                <form class="privacy-settings settings" method="post">
+                    {{ settings['privacy'].csrf_token }}
+    
+                    {% for field in settings['privacy'] %}
+                        {% if field.type != 'CSRFTokenField' %}
+                        <span>
+                            {{ field.label }} {{ field }}
+                        </span>
+                        {% endif %}
+                    {% endfor %}
+    
+                    <input type="submit" value="Save Changes" id="save-changes-button">
+                </form>
             {% endif %}
         </article>  
     </section>

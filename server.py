@@ -104,7 +104,8 @@ def edit_user(username, edit_endpoint):
     user = crud.get_user_by_username(username)
     settings = {
         'general': forms.UserSettingsGeneral(),
-        'appearance': forms.UserSettingsAppearance()
+        'appearance': forms.UserSettingsAppearance(),
+        'privacy': forms.UserSettingsPrivacy()
     }
 
     print(f"Edit User - Initial user object: {user}")
