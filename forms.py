@@ -118,24 +118,25 @@ class UserSettingsGeneral(FlaskForm):
             # user must input old password to update
             if not old_password:
                 self.old_password.errors.append("Please enter password to update username/email/password")
-                return False
+                return None
             
             # validate old password
             if new_password:
                 if not check_password_hash(user.password_hash, old_password):
                     self.old_password.errors.append("Incorrect passord")
-                    return False
+                    return None
         
         # New password validation
         if new_password or new_password_confirm:
             if new_password != new_password_confirm:
                 self.new_password.errors.append("Passwords do not match")
-                return False
+                return None
             
         # update user information
         if new_username:
             user.username = new_username
             crud.update_username(user.user_id, user.username)
+            session['username'] = user.username
             
         if new_password:
             user.password_hash = generate_password_hash(new_password)
@@ -144,6 +145,9 @@ class UserSettingsGeneral(FlaskForm):
         if new_email:
             user.email = new_email
             crud.update_email(user.user_id, user.email)
+            
+        if new_bio:
+            user.bio = new_bio
+            crud.update_bio(user.user_id, user.bio)
     
-    
-    
+        return user

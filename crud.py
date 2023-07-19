@@ -188,9 +188,25 @@ def get_user_like_data(post_id, user_id):
         bool(star_query)
     ]
     
+    
+    
 """     Update      """
+def update_username(user_id, new_username):
+    get_user_by_id(user_id).username = new_username
+    db.session.commit()
 
+def update_email(user_id, new_email):
+    get_user_by_id(user_id).email = new_email
+    db.session.commit()
 
+def update_password(user_id, new_password_hash):
+    get_user_by_id(user_id).password_hash = new_password_hash
+    db.session.commit()
+
+def update_bio(user_id, new_bio):
+    get_user_by_id(user_id).bio = new_bio
+    db.session.commit()
+    
 """     Delete      """
 
 def remove_like_from_post(post_id, user_id):

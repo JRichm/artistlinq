@@ -41,6 +41,24 @@
             
         </span>
     </nav>
+    <span class="messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="flash-message">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </span>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const messageContainer = document.getElementById("flash-messages");
+    
+            // Remove messages after the animation is complete
+            messageContainer.addEventListener("animationend", function () {
+                this.innerHTML = "";
+            });
+        });</script>
 </header>
 {% block body %}{% endblock %}
 </html>

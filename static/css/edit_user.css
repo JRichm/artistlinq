@@ -50,6 +50,7 @@ main {
 
 .edit-user-selected-nav-button {
     background-color: #273753 !important;
+    color:white !important;
 }
 
 .settings-nav a:hover {
@@ -57,7 +58,6 @@ main {
     color: white;
     font-weight: bold;
     transition: all 0.2s;
-
 }
 
 .settings-box {
@@ -78,7 +78,7 @@ main {
 .general-settings span {
     display: flex;
     flex-direction: column;
-    margin: 15px;
+    margin: 15px 30px 10px 30px;
 }
 
 .general-settings label {
@@ -113,7 +113,7 @@ main {
     background-color: transparent;
     color: #1ba565;
     border: 2px #198754 solid;
-    margin: 15px;
+    margin: 25px;
     height: 40px;
     width: 150px;
     align-self: end;

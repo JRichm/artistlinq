@@ -29,7 +29,7 @@
             {% if endpoint == 'general' %}
             <h1>General Settings</h1>
             <hr>
-            <form class="general-settings">
+            <form class="general-settings" method="post">
                 {{ settings['general'].csrf_token }}
 
                 {% for field in settings['general'] %}

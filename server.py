@@ -99,12 +99,20 @@ def view_post(post_id):
     
 
     ### " Edit Profile View " ###
-@app.route('/user/<username>/edit_user/<edit_endpoint>')
+@app.route('/user/<username>/edit_user/<edit_endpoint>', methods=['GET', 'POST'])
 def edit_user(username, edit_endpoint):
     user = crud.get_user_by_username(username)
     settings = {
         'general': forms.UserSettingsGeneral()
     }
+    
+    if request.method == 'POST':
+        if settings['general'].validate_on_submit():
+            settings['general'].save_changes(user)
+            user = crud.get_user_by_id(user.user_id)
+            flash('user profile updated successfully')
+            return redirect(url_for('edit_user', username=user.username, edit_endpoint='general'))
+    
     return render_template('edit_user.html', user=user, endpoint=edit_endpoint, settings=settings)
 
 """"""""""""""""""""""""""""""""""""""""""
@@ -207,8 +215,12 @@ def handle_buttons(post_id):
 
     ### " Check Login " ###
 def check_login():
-    session['username'] = session.get('username') or None
-    return crud.get_user_by_username(session['username']).username if session['username'] else None
+    session_username = session.get('username')
+    if session_username:
+        user = crud.get_user_by_username(session_username)
+        if user:
+            return user.username
+    return None
 
 def get_current_user_id():
     session['user_id'] = session.get('user_id') or None
