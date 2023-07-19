@@ -96,8 +96,54 @@ class LikeButtonsForm(FlaskForm):
 
 class UserSettingsGeneral(FlaskForm):
     username = StringField('Username')
+    email = StringField('Email')
     new_password = PasswordField('Update Password')
     new_password_confirm = PasswordField('Confirm Password')
     old_password = PasswordField('Old Password')
-    bio = TextAreaField()
+    bio = TextAreaField(render_kw={"placeholder": 'bio'})
+    
+    def save_changes(self, user):
+        print(user.user_id)
+        
+        new_username = self.username.data
+        new_email = self.email.data
+        new_password = self.new_password.data
+        new_password_confirm = self.new_password_confirm.data
+        old_password = self.old_password.data
+        new_bio = self.bio.data
+        
+        # check if user is updating username email or password
+        if new_username or new_password or new_email:
+            
+            # user must input old password to update
+            if not old_password:
+                self.old_password.errors.append("Please enter password to update username/email/password")
+                return False
+            
+            # validate old password
+            if new_password:
+                if not check_password_hash(user.password_hash, old_password):
+                    self.old_password.errors.append("Incorrect passord")
+                    return False
+        
+        # New password validation
+        if new_password or new_password_confirm:
+            if new_password != new_password_confirm:
+                self.new_password.errors.append("Passwords do not match")
+                return False
+            
+        # update user information
+        if new_username:
+            user.username = new_username
+            crud.update_username(user.user_id, user.username)
+            
+        if new_password:
+            user.password_hash = generate_password_hash(new_password)
+            crud.update_password(user.user_id, user.password_hash)
+            
+        if new_email:
+            user.email = new_email
+            crud.update_email(user.user_id, user.email)
+    
+    
     
