@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 90vw;
 }
 
 .new-post-box {
@@ -10,6 +11,7 @@
     border: 3px solid #415a77;
     background-color: #1b263b;
     border-radius: 35px;
+    max-width: 90vw;
 }
 
 .post-input {
@@ -23,6 +25,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 90vw;
+    height: 40vh;
 }
 
 .custom-file-label {
@@ -126,4 +130,22 @@
     margin: 5px;
     color: white;
     background-color: #415a77;
+}
+
+/* Media query for mobile devices */
+@media screen and (max-width: 768px) {
+
+    main {
+        align-items: center;
+    }
+    .new-post-box {
+        flex-direction: column; /* Switch to column layout */
+        align-items: center;
+    }
+
+    .post-input,
+    .post-preview {
+        width: 100%; /* Set width to fill the container */
+        margin: 10px 0; /* Add some vertical margin */
+    }
 }

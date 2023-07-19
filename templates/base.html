@@ -15,30 +15,16 @@
             <a href="/"><i class="fa-sharp fa-solid fa-paint-roller"></i></a>
             <a href="/new_post">Post</a>
         </span>
-        <span>
-            {% for category, message in messages %}
-            <div class="alert {% if category=='success' %}alert-success{% elif category=='danger' %}alert-danger{% elif category=='info' %}alert-info{% endif %}">
-              {{ message }}
-            </div>
-          {% endfor %}
-        </span>
         <span class="right-span">
-            <input type="text" placeholder="search">
-
             {% if username %}
-
                 <div class="account-button">
                     <a href="/user/{{ session.get('username') }}"><i class="fa-solid fa-user"></i></a>
                     <a href="/user/{{ session.get('username') }}">{{ username }}</a>
                 </div>
                 <a href="/logout" style="font-size: 18px;">logout</a>
-
             {% else %}
-
                 <a href="/login" style="font-size: 18px;">login</a>
-
             {% endif %}
-            
         </span>
     </nav>
     <span class="messages">
