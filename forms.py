@@ -6,7 +6,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import flash, redirect, url_for, session, request
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField, FileField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, FileField, SelectField, BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo
 from markupsafe import Markup
 import crud
@@ -166,3 +166,8 @@ class UserSettingsPrivacy(FlaskForm):
     see_me = SelectField('Who can view my profile?', choices=[('anyone', 'Anyone'), ('followers', 'Followers'), ('only-me', 'Only Me')])
     message_me = SelectField('Who can message me?', choices=[('anyone', 'Anyone'), ('followers', 'Followers'), ('friends', 'Friends')])
     blocked_users_button = StringField('Blocked Users cannot view your profile or send you messages', render_kw={'type': 'button', 'value': 'Blocked Users'})
+    
+    
+class ReportPostForm(FlaskForm):
+    hateful = BooleanField('Hateful or Abusive Content')
+    spam = BooleanField('Spam or Misleading')

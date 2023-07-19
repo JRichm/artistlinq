@@ -77,6 +77,7 @@ def view_post(post_id):
     post_author = crud.get_user_by_id(post.user_id)
     post_tags = crud.get_tags_from_post_id(post_id)
     post_comments = crud.get_comments_from_post_id(post_id)
+    post_settings = forms.ReportPostForm()
     commentForm = forms.CommentForm()
     likeButtonsForm = forms.LikeButtonsForm()
     username = check_login()
@@ -94,11 +95,11 @@ def view_post(post_id):
                            post_author=post_author,
                            post_tags=post_tags,
                            post_comments=post_comments,
+                           post_settings=post_settings,
                            commentForm=commentForm,
                            likeButtonsForm=likeButtonsForm, 
                            userLikes=userLikes,
                            user=user)
-    
 
 ### " Edit Profile View " ###
 @app.route('/user/<username>/edit_user/<edit_endpoint>', methods=['GET', 'POST'])

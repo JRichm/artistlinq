@@ -2,7 +2,6 @@ const likeButton = document.querySelector('.like-button');
 const favoriteButton = document.querySelector('.favorite-button');
 const starButton = document.querySelector('.star-button');
 
-
 if (userLikes[0]) {
     likeButton.classList.remove('like-button');
     likeButton.classList.add('like-button-pressed');
@@ -22,4 +21,12 @@ function autoResize() {
     const textarea = document.getElementById("new-comment-input");
     textarea.style.height = "auto";
     textarea.style.height = textarea.scrollHeight + "px";
+}
+
+const postSettings = document.getElementById('post-settings');
+
+postSettings.addEventListener('click', openReportMenu)
+
+function openReportMenu() {
+    
 }
