@@ -80,6 +80,7 @@ def view_post(post_id):
     commentForm = forms.CommentForm()
     likeButtonsForm = forms.LikeButtonsForm()
     username = check_login()
+    user = crud.get_user_by_username(username)
     userLikes = [True, True, True]
     if (session.get('user_id')):
         userLikes = crud.get_user_like_data(post_id, get_current_user_id())
@@ -95,7 +96,8 @@ def view_post(post_id):
                            post_comments=post_comments,
                            commentForm=commentForm,
                            likeButtonsForm=likeButtonsForm, 
-                           userLikes=userLikes)
+                           userLikes=userLikes,
+                           user=user)
     
 
 ### " Edit Profile View " ###

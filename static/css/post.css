@@ -26,8 +26,22 @@ main {
     padding: 50px 50px 25px 50px;
 }
 
+#post-settings {
+    text-align: right;
+    font-size: 25px;
+    opacity: 50%;
+}
+
+#post-settings:hover {
+    opacity: 100%;
+    cursor: pointer;
+}
+
 .post-details h1 {
-    color: white
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .post-details h3 {

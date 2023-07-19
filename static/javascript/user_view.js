@@ -60,20 +60,22 @@ function changeViews(changeToName) {
 }
 
 changeViews('gallary')
-followButton.title = 'follow'
-
-followButton.addEventListener('click', e => {
-    if (followButton.value == 'true') {
-        followButton.innerHTML = 'Follow'
-        followButton.id = 'follow-button'
-        followButton.value = 'false'
-        followButton.title = 'follow'
-
-    }
-    else if (followButton.value == 'false') {
-        followButton.innerHTML = '<i class="fa-solid fa-check"></i>'
-        followButton.id = 'followed-button'
-        followButton.value = 'true'
-        followButton.title = 'already following user'
-    }
-})
+if (followButton) {
+    followButton.title = 'follow'
+    
+    followButton.addEventListener('click', e => {
+        if (followButton.value == 'true') {
+            followButton.innerHTML = 'Follow'
+            followButton.id = 'follow-button'
+            followButton.value = 'false'
+            followButton.title = 'follow'
+    
+        }
+        else if (followButton.value == 'false') {
+            followButton.innerHTML = '<i class="fa-solid fa-check"></i>'
+            followButton.id = 'followed-button'
+            followButton.value = 'true'
+            followButton.title = 'already following user'
+        }
+    })
+}
