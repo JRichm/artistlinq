@@ -98,21 +98,29 @@ def view_post(post_id):
                            userLikes=userLikes)
     
 
-    ### " Edit Profile View " ###
+### " Edit Profile View " ###
 @app.route('/user/<username>/edit_user/<edit_endpoint>', methods=['GET', 'POST'])
 def edit_user(username, edit_endpoint):
     user = crud.get_user_by_username(username)
     settings = {
         'general': forms.UserSettingsGeneral()
     }
-    
+
+    print(f"Edit User - Initial user object: {user}")
+
     if request.method == 'POST':
         if settings['general'].validate_on_submit():
-            settings['general'].save_changes(user)
-            user = crud.get_user_by_id(user.user_id)
-            flash('user profile updated successfully')
-            return redirect(url_for('edit_user', username=user.username, edit_endpoint='general'))
-    
+            updated_user = settings['general'].save_changes(user)
+
+            if updated_user is not None:
+                flash('User profile updated successfully')
+                # The `save_changes` method returns the updated user object, so we should use that object.
+                user = updated_user
+            else:
+                flash('Failed to update user profile')
+
+            return redirect(url_for('edit_user', username=user.username, edit_endpoint=edit_endpoint))
+
     return render_template('edit_user.html', user=user, endpoint=edit_endpoint, settings=settings)
 
 """"""""""""""""""""""""""""""""""""""""""

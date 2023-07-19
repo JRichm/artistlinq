@@ -10,9 +10,17 @@ body {
     background-color: #1b263b;
 } 
 
-main {
+/* Hide vertical scrollbar */
+body::-webkit-scrollbar {
+    width: 0;
+    background-color: transparent;
 }
 
+/* Hide horizontal scrollbar */
+body::-webkit-scrollbar-thumb {
+    height: 0;
+    background-color: transparent;
+}
 /* BASE HEADER */
 
 nav {
@@ -22,6 +30,7 @@ nav {
     border-bottom: 2px solid #24334a;
     margin: 0px;
     z-index: 100;
+    background-color: #1b263b;
 }
 
 nav a {
@@ -135,20 +144,22 @@ hr {
     background-color: #09472a;
     width: 100%;
     animation: slide-up 10s forwards;
-    transform: translateY(100%);
-    z-index: -1;
+    z-index: 1;
 }
 
 @keyframes slide-up {
     0% {
         opacity: 1;
+        transform: translateY(0);
     }
+
     80% {
-        opacity: 1; /* Stay visible for 10% of the animation duration */
+        opacity: 1;
+        transform: translateY(0);
     }
     100% {
         opacity: 0;
-        transform: translateY(-100%); /* End position, slide up */
+        transform: translateY(-100%);
     }
 }
 

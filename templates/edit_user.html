@@ -19,8 +19,7 @@
     <section class="settings-container">
         <aside class="settings-nav">
             <a id="general-button" href='/user/{{ user.username }}/edit_user/general'>General</a>
-            <a id="avatar-button" href='/user/{{ user.username }}/edit_user/avatar'>Avatar</a>
-            <a id="background-button" href='/user/{{ user.username }}/edit_user/background'>Profile Backgorund</a>
+            <a id="avatar-button" href='/user/{{ user.username }}/edit_user/appearance'>Appearance</a>
             <a id="showcase-button" href='/user/{{ user.username }}/edit_user/showcase'>Showcase</a>
             <a id="commission-button" href='/user/{{ user.username }}/edit_user/commission'>Commission</a>
             <a id="privacy-button" href='/user/{{ user.username }}/edit_user/privacy'>Privacy Settings</a>
@@ -42,11 +41,8 @@
 
                 <input type="submit" value="Save Changes" id="save-changes-button">
             </form>
-            {% elif endpoint == 'avatar' %}
-                <h1>Change Avatar</h1>
-                <hr>
-            {% elif endpoint == 'background' %}
-                <h1>Change Background Image</h1>
+            {% elif endpoint == 'appearance' %}
+                <h1>Appearance</h1>
                 <hr>
             {% elif endpoint == 'showcase' %}
                 <h1>Update Showcase</h1>
