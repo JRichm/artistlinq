@@ -7,6 +7,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, redirect, request, url_for, flash, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
+from flask_session import Session
 from model import connect_to_db, db
 import forms
 import crud
@@ -17,6 +18,8 @@ os.makedirs(image_foler, exist_ok=True)
 
 app = Flask(__name__, root_path=os.path.dirname(os.path.abspath(__file__)))
 app.config['SECRET_KEY'] = 'dev'
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 
 """"""""""""""""""""""""""""""""""""""""""
 """     ###    Flask Routes    ###     """
@@ -25,15 +28,20 @@ app.config['SECRET_KEY'] = 'dev'
     ### " View Homepage " ###
 @app.route('/')
 def index():
+    print('\n\tapp.route("/")')
+    flash('this is a test flash message')
     images=crud.get_50_images()
     featured = crud.get_featured_users()
     username = check_login()
+    print('\n\tapp.route("/")')
     return render_template('index.html', username=username, images=images, featured=featured)
   
   
     ### " View Login/New User " ###
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+        
+    print('\n\tapp.route("/login")')
     loginForm = forms.LoginForm()
     newUserForm = forms.RegistrationForm()
     
@@ -43,6 +51,7 @@ def login():
     elif request.form.get('new-user') == 'Create Account':
         return newUserForm.create_user()
         
+    print('\n\tapp.route("/login")')
     return render_template('login.html', loginForm=loginForm, newUserForm=newUserForm)
 
   
@@ -50,6 +59,8 @@ def login():
 @app.route('/logout')
 def logout():
     session.clear()
+        
+    print('\n\tapp.route("/logout")')
     return redirect(url_for('index'))
 
 
@@ -64,15 +75,17 @@ def user_view(username):
     ### " New Post " ###
 @app.route('/new_post')
 def new_post():
+    print('\n\tapp.route("/new_post")')
     if not check_login():
         return redirect(url_for('login'))
-    else: 
+    else:         
         return render_template('new_post.html', username=check_login())
 
 
     ### " View Post " ###
 @app.route('/post/<post_id>/', methods=['GET', 'POST'])
 def view_post(post_id):
+    print(f'\n\tapp.route("/post/{post_id}")')
     post = crud.get_post_from_id(post_id)
     post_author = crud.get_user_by_id(post.user_id)
     post_tags = crud.get_tags_from_post_id(post_id)
@@ -105,6 +118,7 @@ def view_post(post_id):
     ### " Edit Post " ###
 @app.route('/post/<post_id>/post_settings', methods=['GET', 'POST'])
 def post_settings(post_id):
+    print(f'\n\tapp.route("/post/{post_id}/post_settings")')
     post = crud.get_post_from_id(post_id)
     post_author = crud.get_user_by_id(post.user_id)
     post_settings_form = forms.ReportPostForm()
@@ -130,6 +144,7 @@ def post_settings(post_id):
     ### " Edit Profile View " ###
 @app.route('/user/<username>/edit_user/<edit_endpoint>', methods=['GET', 'POST'])
 def edit_user(username, edit_endpoint):
+    print(f'\n\tapp.route("/user/{username}/edit_user/{edit_endpoint}")')
     user = crud.get_user_by_username(username)
     settings = {
         'general': forms.UserSettingsGeneral(),
@@ -160,6 +175,7 @@ def edit_user(username, edit_endpoint):
     ### " Publish Post " ###
 @app.route('/publish_post', methods=['POST'])
 def publish_new_post():
+    print(f'\n\tapp.route("/publish_post")')
     post_title = request.form['title']
     post_tags = request.form.getlist('tags')
     post_file = request.files['file']
@@ -180,13 +196,17 @@ def publish_new_post():
 
     
     ### " Report Post " ###
-@app.route('/report_post', methods=['POST'])
-def report_post():
+@app.route('/post/<post_id>/report_post', methods=['POST'])
+def report_post(post_id):
+    print(f'\n\tapp.route("/post/{post_id}/report_post")')
+    flash('Report submitted successfully')
+    return redirect(f'/post/{post_id}')
     
     
     ### " Delete Post " ###
 @app.route('/post/<post_id>/delete_post')
 def delete_post(post_id):
+    print(f'\n\tapp.route("/post/{post_id}/delete_post")')
     username = check_login()
     post = crud.get_post_from_id(post_id)
     post_author = crud.get_user_by_id(post.user_id)
@@ -202,6 +222,7 @@ def delete_post(post_id):
     ### " Search Tags from Substring " ###
 @app.route('/search_tags', methods=['GET'])
 def search_tags():
+    print(f'\n\tapp.route("/search_tags")')
     search_key = request.args.get('key')
     tags = crud.get_tags_from_substring(search_key)
     return tags

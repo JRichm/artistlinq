@@ -1,10 +1,6 @@
 var post_id = document.querySelector('.main-post').id
 console.log(post_id)
 
-const likeButton = document.querySelector('.like-button');
-const favoriteButton = document.querySelector('.favorite-button');
-const starButton = document.querySelector('.star-button');
-
 function autoResize() {
     const textarea = document.getElementById("new-comment-input");
     textarea.style.height = "auto";
@@ -48,6 +44,14 @@ if (sendReportButton) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = `/post/${post_id}`;
+            } else {
+                alert('Error submitting report')
+            }
+        }).catch(error => {
+            console.log(error)
         })
     })
 }
