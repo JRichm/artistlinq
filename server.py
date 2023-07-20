@@ -100,6 +100,30 @@ def view_post(post_id):
                            likeButtonsForm=likeButtonsForm, 
                            userLikes=userLikes,
                            user=user)
+    
+
+    ### " Edit Post " ###
+@app.route('/post/<post_id>/post_settings', methods=['GET', 'POST'])
+def post_settings(post_id):
+    post = crud.get_post_from_id(post_id)
+    post_author = crud.get_user_by_id(post.user_id)
+    post_tags = crud.get_tags_from_post_id(post_id)
+    username = check_login()
+    user = crud.get_user_by_username(username)
+    
+    if post_author.username != username:
+        flash('No edit access!')
+        return redirect(url_for('view_post', post_id=post_id))
+    
+    return render_template('post.html',
+                           username=username,
+                           user=user,
+                           post=post,
+                           post_author=post_author,
+                           post_tags=post_tags,
+                           endpoint='post_settings')
+    
+    
 
 ### " Edit Profile View " ###
 @app.route('/user/<username>/edit_user/<edit_endpoint>', methods=['GET', 'POST'])

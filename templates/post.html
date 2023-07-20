@@ -16,13 +16,16 @@
         </article>
         <aside class="post-details">
             <div class="top-container">
-                {% if post_author.username == user.username %}
+                {% if post_author.username == user.username and post_settings %}
                     <h1>{{ post.caption }}<i id='post-settings' onclick="window.location.href='/post/{{ post.post_id }}/post_settings'" class="fa-solid fa-pen-to-square"></i></h1>
                 {% else %}
                     <h1>{{ post.caption }}<i id='report-post' class="fa-solid fa-flag"></i></h1>
                 {% endif %}
                 <a href="/user/{{ post_author.username }}">{{ post_author.username }}</a>
                 <hr>
+                {% if endpoint == 'post_settings' %}
+                    <input id="tag-search-input" type="text" placeholder="add tags">
+                {% endif %}
                 <div id="tag-list-box" class="tag-list-box">
                     {% for tag in post_tags %}
                         <p class="added-tag">{{ tag['tag_name'] }}</p>
@@ -30,13 +33,18 @@
                 </div>
             </div>
             <div class="bottom-container">
+                {% if userLikes %}
                 <form id="post-buttons" class="post-buttons" action="{{ url_for('handle_buttons', post_id=post.post_id) }}" method="POST">
                     <button type="submit" class="like-button" name="like-button" value="like"><i class="fa-solid fa-thumbs-up"></i></button>
                     <button type="submit" class="favorite-button" name="favorite-button" value="favorite"><i class="fa-solid fa-heart"></i></button>
                     <button type="submit" class="star-button" name="star-button" value="star"><i class="fa-solid fa-star"></i></button>
                 </form>
+                {% elif endpoint == 'post_settings' %}
+                    <button type="submit" class="delete-post-button">Delete Post</button>
+                {% endif %}
             </div>
         </aside>
+        {% if post_settings %}
         <span class="report-menu-screen hidden" id="report-menu-screen">
             <div class="report-menu">
                 <h3 class="dialog-header">Report Post</h3>
@@ -61,9 +69,11 @@
                 <footer class="dialog-footer"></footer>
             </div>
         </span>
+        {% endif %}
         <hr style="position: absolute; align-self: flex-end; width: 1555px; height: 2px; margin: -15px;">
     </section>
     <section class="secondary-section">
+        {% if post_comments != null %}
         <div class="comment-container">
             <div class="new-comment-container">
 
@@ -105,14 +115,17 @@
                 
             </div>
         </div>
+        {% endif %}
         <div class="related-posts">
 
         </div>
     </section>
 </main>
+{% if userLikes %}
 <script>
     var userLikes = {{ userLikes|tojson }}
 </script>
+{% endif %}
 <script src="/static/javascript/post.js"></script>
 {% endblock %}
 
