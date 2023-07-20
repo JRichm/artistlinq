@@ -9,7 +9,7 @@
 {% block body %}
 <main>
     <section class="post-section">
-        <article class="main-post">
+        <article id="{{ post.post_id }}" class="main-post">
             <div class="post-container">
                 <img class="post-image" src="../../{{ post.image_url }}">
             </div>
@@ -59,11 +59,11 @@
                         {% endif %}
                     {% endfor %}
 
-                    <textarea class="report-details" placeholder="report details"></textarea>
+                    <textarea id="report-details" class="report-details" placeholder="report details"></textarea>
 
                     <div class="report-buttons">
-                        <button type="submit" id="confirm-report">Report</button>
-                        <button type="submit" id="report-menu-close">Close</button>
+                        <button id="confirm-report">Report</button>
+                        <button id="report-menu-close">Close</button>
                     </div>
                 </form>
                 <footer class="dialog-footer"></footer>
@@ -141,6 +141,7 @@
     }
 </script>
 {% endif %}
-<script src="/static/javascript/post.js"></script>
+<script src="/static/javascript/post.js">
+</script>
 {% endblock %}
 

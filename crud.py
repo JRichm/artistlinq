@@ -215,10 +215,25 @@ def update_bio(user_id, new_bio):
 """     Delete      """
 
 def delete_post(post_id):
-    # Remove related entries from the "like_table" table
+    # remove related entries from the comment table
+    comments = Comment.query.filter_by(post_id=post_id).all()
+    for comment in comments:
+        db.session.delete(comment)
+    
+    # Remove related entries from the like_table
     likes = Like.query.filter_by(post_id=post_id).all()
     for like in likes:
         db.session.delete(like)
+    
+    # Remove related entries from the favorite_table
+    favorites = Favorite.query.filter_by(post_id=post_id).all()
+    for favorite in favorites:
+        db.session.delete(favorite)
+    
+    # Remove related entries from the star_table
+    stars = Star.query.filter_by(post_id=post_id).all()
+    for star in stars:
+        db.session.delete(star)
 
     # Remove related entries from the posted_tag table
     posted_tags = PostedTag.query.filter_by(post_id=post_id).all()

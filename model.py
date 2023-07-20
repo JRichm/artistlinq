@@ -24,7 +24,7 @@ class User(db.Model):
     updated_at = db.Column(db.TIMESTAMP)
 
 
-""" Image Table """
+""" Post Table """
 class Post(db.Model):
     __tablename__ = 'posts'
     
@@ -34,7 +34,6 @@ class Post(db.Model):
     caption = db.Column(db.VARCHAR)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
-
 
 """ Comment Table """
 class Comment(db.Model):

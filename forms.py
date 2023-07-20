@@ -172,5 +172,24 @@ class ReportPostForm(FlaskForm):
     hateful = BooleanField('Hateful or Abusive Content')
     spam = BooleanField('Spam or Misleading')
     violence = BooleanField('Violence')
-    prohibiten = BooleanField('Prohibited Content')
+    explicit = BooleanField('Explicit Content')
     other = BooleanField('Other')
+    
+    def send_report(self, other_data):
+        
+        isHateful = self.hateful.data
+        isSpan = self.spam.data
+        isViolent = self.violence.data
+        isExplicit = self.explicit.data
+        otherBool = self.other.data
+        
+        print({
+            "isHateful": isHateful,
+            "isSpan": isSpan,
+            "isViolent": isViolent,
+            "isExplicit": isExplicit,
+            "otherBool": otherBool,
+            "other_data": other_data,
+        })
+        
+        

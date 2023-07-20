@@ -93,9 +93,9 @@ def view_post(post_id):
                            username=username,
                            post=post,
                            post_author=post_author,
+                           post_settings=post_settings,
                            post_tags=post_tags,
                            post_comments=post_comments,
-                           post_settings=post_settings,
                            commentForm=commentForm,
                            likeButtonsForm=likeButtonsForm, 
                            userLikes=userLikes,
@@ -107,6 +107,7 @@ def view_post(post_id):
 def post_settings(post_id):
     post = crud.get_post_from_id(post_id)
     post_author = crud.get_user_by_id(post.user_id)
+    post_settings_form = forms.ReportPostForm()
     post_tags = crud.get_tags_from_post_id(post_id)
     username = check_login()
     user = crud.get_user_by_username(username)
@@ -120,24 +121,11 @@ def post_settings(post_id):
                            user=user,
                            post=post,
                            post_author=post_author,
+                           post_settings=post_settings_form,
                            post_tags=post_tags,
                            endpoint='post_settings')
     
-    
-    ### " Delete Post " ###
-@app.route('/post/<post_id>/delete_post')
-def delete_post(post_id):
-    username = check_login()
-    post = crud.get_post_from_id(post_id)
-    post_author = crud.get_user_by_id(post.user_id)
-    if post_author.username != username:
-        flash('Error deleting post("Not original author")') 
-        return redirect(url_for('view_post', post_id=post_id))
-    
-    else:
-        crud.delete_post(post_id)
-        return redirect(url_for('index'))
-    
+
 
     ### " Edit Profile View " ###
 @app.route('/user/<username>/edit_user/<edit_endpoint>', methods=['GET', 'POST'])
@@ -165,9 +153,6 @@ def edit_user(username, edit_endpoint):
     return render_template('edit_user.html', user=user, endpoint=edit_endpoint, settings=settings, username=user.username)
 
 
-#
-
-
 """"""""""""""""""""""""""""""""""""""""""
 """     ###     API Routes     ###     """
 """"""""""""""""""""""""""""""""""""""""""
@@ -193,7 +178,27 @@ def publish_new_post():
         
     return redirect(url_for('index'))
 
-
+    
+    ### " Report Post " ###
+@app.route('/report_post', methods=['POST'])
+def report_post():
+    
+    
+    ### " Delete Post " ###
+@app.route('/post/<post_id>/delete_post')
+def delete_post(post_id):
+    username = check_login()
+    post = crud.get_post_from_id(post_id)
+    post_author = crud.get_user_by_id(post.user_id)
+    if post_author.username != username:
+        flash('Error deleting post("Not original author")') 
+        return redirect(url_for('view_post', post_id=post_id))
+    
+    else:
+        crud.delete_post(post_id)
+        return redirect(url_for('index'))
+    
+    
     ### " Search Tags from Substring " ###
 @app.route('/search_tags', methods=['GET'])
 def search_tags():
