@@ -21,6 +21,9 @@
                     <a href="/user/{{ session.get('username') }}"><i class="fa-solid fa-user"></i></a>
                     <a href="/user/{{ session.get('username') }}">{{ username }}</a>
                 </div>
+                {% if user.isModerator %}
+                    <a href="/mod_dashboard" style="font-size: 18px;">admin panel</a>
+                {% endif %}
                 <a href="/logout" style="font-size: 18px;">logout</a>
             {% else %}
                 <a href="/login" style="font-size: 18px;">login</a>

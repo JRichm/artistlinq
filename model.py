@@ -20,6 +20,8 @@ class User(db.Model):
     email = db.Column(db.VARCHAR, unique=True, nullable=False)
     bio = db.Column(db.TEXT)
     password_hash = db.Column(db.VARCHAR, nullable=False)
+    isArtist = db.Column(db.Boolean, default=False)
+    isModerator = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
 
@@ -34,6 +36,7 @@ class Post(db.Model):
     caption = db.Column(db.VARCHAR)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
+
 
 """ Comment Table """
 class Comment(db.Model):
@@ -58,16 +61,7 @@ class CommissionRequest(db.Model):
     status = db.Column(db.VARCHAR)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
-
-""" Artist Table """
-class Artist(db.Model):
-    __tablename__ = 'artist_table'
     
-    artist_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    skills = db.Column(db.ARRAY(db.VARCHAR))
-    created_at = db.Column(db.TIMESTAMP)
-    updated_at = db.Column(db.TIMESTAMP)
 
 """ Tag Table """
 class Tag(db.Model):
@@ -76,12 +70,14 @@ class Tag(db.Model):
     tag_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     tag_name = db.Column(db.VARCHAR, unique=True, nullable=False)
 
+
 """ Posted Tag Table """
 class PostedTag(db.Model):
     __tablename__ = 'posted_tag'
     post_tag_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     tag_id = db.Column(db.Integer, db.ForeignKey('tag_table.tag_id'))
     post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'))
+
 
 """ Like Table """
 class Like(db.Model):
@@ -92,6 +88,7 @@ class Like(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), nullable=False)
     created_at = db.Column(db.TIMESTAMP)
 
+
 """ Favorite Table """
 class Favorite(db.Model):
     __tablename__ = 'favorite_table'
@@ -100,6 +97,7 @@ class Favorite(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), nullable=False)
     created_at = db.Column(db.TIMESTAMP)
+
 
 """ Like Table """
 class Star(db.Model):

@@ -22,9 +22,9 @@ def create_user(username, email, password):
         created_at = datetime.now(),
         updated_at = datetime.now()
     )
+        
     db.session.add(user)
     db.session.commit()
-
 
 # create tag
 def create_new_tag(tag_name):
@@ -211,6 +211,14 @@ def update_password(user_id, new_password_hash):
 def update_bio(user_id, new_bio):
     get_user_by_id(user_id).bio = new_bio
     db.session.commit()
+
+
+def setMod(user_id):
+    print('\n\n\n\n\n\n new mod')
+    user = get_user_by_id(user_id)
+    user.isModerator = True
+    db.session.commit()
+    
     
 """     Delete      """
 

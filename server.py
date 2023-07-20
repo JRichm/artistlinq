@@ -33,8 +33,9 @@ def index():
     images=crud.get_50_images()
     featured = crud.get_featured_users()
     username = check_login()
+    user = crud.get_user_by_username(username)
     print('\n\tapp.route("/")')
-    return render_template('index.html', username=username, images=images, featured=featured)
+    return render_template('index.html', username=username, images=images, featured=featured, user=user)
   
   
     ### " View Login/New User " ###
@@ -166,7 +167,13 @@ def edit_user(username, edit_endpoint):
             return redirect(url_for('edit_user', username=user.username, edit_endpoint=edit_endpoint))
 
     return render_template('edit_user.html', user=user, endpoint=edit_endpoint, settings=settings, username=user.username)
+    
 
+
+    ### " admin/moderator panel " ###
+@app.route('/admin')
+def admin_panel():
+    pass
 
 """"""""""""""""""""""""""""""""""""""""""
 """     ###     API Routes     ###     """
@@ -325,7 +332,6 @@ def flash_errors(form):
     for field, errors in form.errors.items():
         for error in errors:
             flash(f"Error in field '{getattr(form, field).label.text}': {error}", "error")
-
 
 if __name__ == "__main__":
     connect_to_db(app)
