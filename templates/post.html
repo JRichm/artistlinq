@@ -40,7 +40,7 @@
                     <button type="submit" class="star-button" name="star-button" value="star"><i class="fa-solid fa-star"></i></button>
                 </form>
                 {% elif endpoint == 'post_settings' %}
-                    <button type="submit" class="delete-post-button">Delete Post</button>
+                    <button type="submit" class="delete-post-button" onclick="window.location.href='/post/{{ post.post_id }}/delete_post'">Delete Post</button>
                 {% endif %}
             </div>
         </aside>
@@ -124,6 +124,21 @@
 {% if userLikes %}
 <script>
     var userLikes = {{ userLikes|tojson }}
+    
+    if (userLikes[0]) {
+        likeButton.classList.remove('like-button');
+        likeButton.classList.add('like-button-pressed');
+    }
+    
+    if (userLikes[1]) {
+        favoriteButton.classList.remove('favorite-button');
+        favoriteButton.classList.add('favorite-button-pressed');
+    }
+    
+    if (userLikes[2]) {
+        starButton.classList.remove('star-button');
+        starButton.classList.add('star-button-pressed');
+    }
 </script>
 {% endif %}
 <script src="/static/javascript/post.js"></script>

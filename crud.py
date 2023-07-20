@@ -151,6 +151,11 @@ def get_tags_from_post_id(post_id):
     tag_list = [{'tag_name': tag.tag_name} for tag in tag_query]
     return tag_list
 
+def get_posted_tags_from_post(post_id):
+    tag_query = db.session.query(PostedTag).filter(PostedTag.post_id == post_id).all()
+    tag_list = [{'post_tag_id': tag.post_tag_id, 'tag_id': tag.tag_id, 'post_id': tag.post_id} for tag in tag_query]
+    return tag_list
+
 def get_users_images(user_id):
     post_query = Post.query.filter(Post.user_id == user_id).all()
     image_list = [{'id': post.post_id, 'url': post.image_url, 'caption': post.caption} for post in post_query]
@@ -208,6 +213,23 @@ def update_bio(user_id, new_bio):
     db.session.commit()
     
 """     Delete      """
+
+def delete_post(post_id):
+    # Remove related entries from the "like_table" table
+    likes = Like.query.filter_by(post_id=post_id).all()
+    for like in likes:
+        db.session.delete(like)
+
+    # Remove related entries from the posted_tag table
+    posted_tags = PostedTag.query.filter_by(post_id=post_id).all()
+    for posted_tag in posted_tags:
+        db.session.delete(posted_tag)
+
+    # Now delete the post instance
+    post = get_post_from_id(post_id)
+    if post:
+        db.session.delete(post)
+        db.session.commit()
 
 def remove_like_from_post(post_id, user_id):
     like = db.session.query(Like).filter(Like.post_id == post_id, Like.user_id == user_id).first()

@@ -124,8 +124,22 @@ def post_settings(post_id):
                            endpoint='post_settings')
     
     
+    ### " Delete Post " ###
+@app.route('/post/<post_id>/delete_post')
+def delete_post(post_id):
+    username = check_login()
+    post = crud.get_post_from_id(post_id)
+    post_author = crud.get_user_by_id(post.user_id)
+    if post_author.username != username:
+        flash('Error deleting post("Not original author")') 
+        return redirect(url_for('view_post', post_id=post_id))
+    
+    else:
+        crud.delete_post(post_id)
+        return redirect(url_for('index'))
+    
 
-### " Edit Profile View " ###
+    ### " Edit Profile View " ###
 @app.route('/user/<username>/edit_user/<edit_endpoint>', methods=['GET', 'POST'])
 def edit_user(username, edit_endpoint):
     user = crud.get_user_by_username(username)
@@ -149,6 +163,10 @@ def edit_user(username, edit_endpoint):
             return redirect(url_for('edit_user', username=user.username, edit_endpoint=edit_endpoint))
 
     return render_template('edit_user.html', user=user, endpoint=edit_endpoint, settings=settings, username=user.username)
+
+
+#
+
 
 """"""""""""""""""""""""""""""""""""""""""
 """     ###     API Routes     ###     """
