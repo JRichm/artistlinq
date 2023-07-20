@@ -23,10 +23,18 @@ function autoResize() {
     textarea.style.height = textarea.scrollHeight + "px";
 }
 
-const postSettings = document.getElementById('post-settings');
+reportButton = document.getElementById('report-post')
+if (reportButton) {
+    reportButton.addEventListener('click', e => {
+        e.preventDefault()
+        document.getElementById('report-menu-screen').classList.remove('hidden')
+    })
+}
 
-postSettings.addEventListener('click', openReportMenu)
-
-function openReportMenu() {
-    
+closeReportButton = document.getElementById('report-menu-close')
+if (closeReportButton) {
+    closeReportButton.addEventListener('click', e => {
+        e.preventDefault()
+        document.getElementById('report-menu-screen').classList.add('hidden')
+    })
 }

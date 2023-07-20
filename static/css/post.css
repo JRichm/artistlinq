@@ -229,7 +229,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 600px;
+    width: 500px;
     margin: 75px;
     border-radius: 5px;
 }
@@ -263,7 +263,7 @@ main {
 }
 
 .dialog-footer {
-    height: 10px;
+    height: 20px;
     background-color: #415a77;
     width: 100%;
     border-radius: 0px 0px 7px 7px;
@@ -275,16 +275,36 @@ main {
     margin: 10px;
 }
 
+.report-buttons button {
+    border-radius: 50px;
+    margin: 10px 0px -10px 20px;
+    font-size: 18px;
+    padding: 5px 10px 5px 10px;
+}
+
+.report-details {
+    background-color: transparent;
+    border-radius: 10px;
+    border:#415a77 2px solid;
+    margin: 10px;
+    color: white;
+}
+
+.report-details:focus {
+    border:#415a77 2px solid;
+    outline: none;
+}
+
 #report-menu-close {
-    color: #dc3545;
-    border: 2px solid #dc3545;
+    color: #b4b4b4;
+    border: 2px solid #b4b4b4;
     background-color: transparent;
     transition: all 0.3s;
 }
 
 #report-menu-close:hover {
-    color: #701d25;
-    background-color: #dc3545;
+    color: #fff;
+    background-color: #9b9b9b;
     transition: all 0.3s;
 }
 

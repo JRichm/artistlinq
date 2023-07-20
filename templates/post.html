@@ -17,9 +17,9 @@
         <aside class="post-details">
             <div class="top-container">
                 {% if post_author.username == user.username %}
-                    <h1>{{ post.caption }}<i id='report-post' onclick="window.location.href='/post/{{ post.post_id }}/post_settings'" class="fa-solid fa-pen-to-square"></i></h1>
+                    <h1>{{ post.caption }}<i id='post-settings' onclick="window.location.href='/post/{{ post.post_id }}/post_settings'" class="fa-solid fa-pen-to-square"></i></h1>
                 {% else %}
-                    <h1>{{ post.caption }}<i id='post-settings' class="fa-solid fa-flag"></i></h1>
+                    <h1>{{ post.caption }}<i id='report-post' class="fa-solid fa-flag"></i></h1>
                 {% endif %}
                 <a href="/user/{{ post_author.username }}">{{ post_author.username }}</a>
                 <hr>
@@ -37,7 +37,7 @@
                 </form>
             </div>
         </aside>
-        <span class="report-menu-screen">
+        <span class="report-menu-screen hidden" id="report-menu-screen">
             <div class="report-menu">
                 <h3 class="dialog-header">Report Post</h3>
                 <form class="report-form">
@@ -51,7 +51,7 @@
                         {% endif %}
                     {% endfor %}
 
-                    <textarea placeholder="report details"></textarea>
+                    <textarea class="report-details" placeholder="report details"></textarea>
 
                     <div class="report-buttons">
                         <button type="submit" id="confirm-report">Report</button>
