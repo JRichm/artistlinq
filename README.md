@@ -16,19 +16,19 @@ View artwork or publish your own! Art-Station offers a clean and interactable pl
 
   • Comments
 
-        ArtStation encourages meaningful interactions through comments, enabling users to share their thoughts, constructive feedback, and encouragement.
+  ArtStation encourages meaningful interactions through comments, enabling users to share their thoughts, constructive feedback, and encouragement.
 
   • Likes
 
-        Users can express their appreciation for an artwork by liking it. This feature helps artists gauge the popularity and impact of their creations.
+  Users can express their appreciation for an artwork by liking it. This feature helps artists gauge the popularity and impact of their creations.
 
   • Favorites
 
-        By favoriting an artwork, users can create a personalized collection of their most beloved pieces from different artists.
+  By favoriting an artwork, users can create a personalized collection of their most beloved pieces from different artists.
 
   • Stars
 
-        The star system allows users to highlight exceptional artwork, helping exceptional pieces gain greater exposure within the community.
+  The star system allows users to highlight exceptional artwork, helping exceptional pieces gain greater exposure within the community.
 
 - Supporting Artists
 
@@ -36,11 +36,11 @@ View artwork or publish your own! Art-Station offers a clean and interactable pl
 
   • Fan Following
 
-        Fans can follow their favorite artists to stay updated with their latest creations and announcements.
+  Fans can follow their favorite artists to stay updated with their latest creations and announcements.
 
   • Commission Requests
 
-        Artists have the option to receive commission requests from users interested in personalized artwork.
+  Artists have the option to receive commission requests from users interested in personalized artwork.
 
 - Community Engagement
 
@@ -57,7 +57,6 @@ To join the ArtStation community, follow these simple steps:
 3. Interact: Show support to artists by liking, favoriting, starring, and commenting on their posts. Engage in thoughtful discussions with fellow art enthusiasts.
 
 4. Join as an Artist: If you're an artist looking to showcase your talent, simply create a portfolio and start sharing your art with the world.
-
 
 # Screenshots of website
 
