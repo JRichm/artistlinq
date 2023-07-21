@@ -1,14 +1,7 @@
-# art-station
+# Art-Station
 
-a website where arists can showcase and advertise art/commissions
+View artwork or publish your own! Art-Station offers a clean and interactable platform for artists to showcase their work, take commissions, and talk to fans.
 
-## website pages
+## View Post
 
-- Home Page
-- Artist Profiles
-- User Profiles
-- Commission Request
-- Browse Artists
-- Portfolio Gallery
-- About Us
-- Contact Us
+![alt View Post](/static/images/view_post.png)
