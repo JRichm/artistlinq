@@ -184,7 +184,9 @@ def admin_panel(endpoint):
         return redirect(url_for('index'))
     
     if user.isModerator:
-        return render_template('admin.html', user=user, username=username, endpoint=endpoint)
+        problem_posts = crud.get_posts_with_reports()
+        problem_comments = crud.get_comments_with_reports()
+        return render_template('admin.html', user=user, username=username, endpoint=endpoint, problem_comments=problem_comments, problem_posts=problem_posts)
 
 """"""""""""""""""""""""""""""""""""""""""
 """     ###     API Routes     ###     """

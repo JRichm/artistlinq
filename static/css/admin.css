@@ -67,3 +67,7 @@
 .card-header i {
     margin-right: 15px;
 }
+
+th, td {
+    color: white;
+}

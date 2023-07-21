@@ -20,10 +20,49 @@
                 <div class="general-cards-container">
                     <div id="post-reports" class="card reports">
                         <p class="card-header"><i class="fa-solid fa-triangle-exclamation"></i>problem posts</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Post</th>
+                                    <th>Post Author</th>
+                                    <th>Post date</th>
+                                    <th>Number of Reports</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for post, username, num_reports in problem_posts %}
+                                <tr>
+                                    <td>{{ post.caption }}</td>
+                                    <td>{{ username }}</td>
+                                    <td>{{ post.created_at.strftime('%m/%d/%Y') }}</td>
+                                    <td>{{ num_reports }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                     <div id="comment-reports" class="card reports">
                         <p class="card-header"><i class="fa-solid fa-triangle-exclamation"></i>problem comments</p>
-
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Comment ID</th>
+                                    <th>User ID</th>
+                                    <th>Comment Text</th>
+                                    <th>Number of Reports</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for comment, username, num_reports in problem_comments %}
+                                <tr>
+                                    <td>{{ comment.comment_id }}</td>
+                                    <td>{{ comment.user_id }}</td>
+                                    <td>{{ comment.comment_text }}</td>
+                                    <td>{{ num_reports }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             {% elif endpoint == 'user_settings' %}

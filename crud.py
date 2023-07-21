@@ -5,6 +5,7 @@ from model import db, User, Tag, Post, PostedTag, Comment, Like, Favorite, Star,
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from flask import jsonify, session
+from sqlalchemy import func
 
 """"""""""""""""""""""""""""""""""""""""""
 """       ### CRUD Funtions ###        """
@@ -213,6 +214,36 @@ def get_user_like_data(post_id, user_id):
         bool(fav_query),
         bool(star_query)
     ]
+    
+def get_comments_with_reports():
+    comments_with_reports = db.session.query(
+        Comment,
+        User.username,
+        func.count(ContentReport.report_id).label('num_reports')
+    ).outerjoin(ContentReport, Comment.comment_id == ContentReport.comment_id)\
+    .join(User, Comment.user_id == User.user_id)\
+    .group_by(Comment.comment_id, User.username)\
+    .order_by(func.count(ContentReport.report_id).desc())\
+    .all()
+
+    # comments_with_reports will be a list of tuples where each tuple contains the Comment object and the number of reports.
+    return comments_with_reports
+
+    
+def get_posts_with_reports():
+    posts_with_reports = db.session.query(
+        Post,
+        User.username,
+        func.count(ContentReport.report_id).label('num_reports')
+    ).outerjoin(ContentReport, Post.post_id == ContentReport.post_id)\
+    .join(User, Post.user_id == User.user_id)\
+    .group_by(Post.post_id, User.username)\
+    .order_by(func.count(ContentReport.report_id).desc())\
+    .all()
+
+    # posts_with_reports will be a list of tuples where each tuple contains the Post object, the username, and the number of reports.
+    return posts_with_reports
+
     
     
     
