@@ -67,5 +67,3 @@ Each post has a caption or title and a list of tags.
 ## Edit Profile
 
 ![alt Report Post](/screenshots/071823%20edit%20profile.png)
-
-Art-Station offers many s
