@@ -100,8 +100,16 @@ def view_post(post_id):
     username = check_login()
     user = crud.get_user_by_username(username)
     userLikes = [True, True, True]
+    
     if (session.get('user_id')):
         userLikes = crud.get_user_like_data(post_id, get_current_user_id())
+        
+    if user and user.isModerator:
+        post_reports = crud.get_reports_for_post(post_id)
+        if len(post_reports) > 1:
+            flash(f'this post has {len(post_reports)} reports')
+        elif len(post_reports) == 1:
+            flash(f'this post has {len(post_reports)} report')
 
     if request.method == 'POST':
         return commentForm.post_comment(crud.get_user_by_username(username).user_id, post_id)

@@ -56,3 +56,18 @@ if (sendReportButton) {
     })
 }
 
+modToolsButton = document.getElementById('mod-tools-open')
+
+if (modToolsButton) {
+    const modTools = document.getElementById('mod-tools')
+
+    modToolsButton.addEventListener('click', e => {
+        if (modToolsButton.id == 'mod-tools-open') { 
+            modToolsButton.id = 'mod-tools-close';
+            modTools.classList.remove('hidden');
+        } else if (modToolsButton.id == 'mod-tools-close') {
+            modToolsButton.id = 'mod-tools-open';
+            modTools.classList.add('hidden');
+        }
+    })
+}

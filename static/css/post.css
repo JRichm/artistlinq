@@ -350,3 +350,47 @@ main {
     background-color: #dc3545;
     transition: all 0.3s;
 }
+
+
+.mod-tools-container {
+    max-width: 80vw;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.mod-tools-header p {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    color: #9b9b9b;
+}
+
+.mod-tools {
+    color: white;
+}
+
+
+.mod-tools-container {
+    position: relative;
+  }
+
+  /* Initial state: hide the mod-tools article */
+  .mod-tools.hidden {
+    display: none;
+  }
+
+  /* Sliding animation */
+  .slide-in {
+    animation: slide-in 0.5s forwards;
+  }
+
+  @keyframes mod-slide-in {
+    from {
+      height: 0;
+      overflow: hidden;
+    }
+    to {
+      height: auto;
+      overflow: visible;
+    }
+  }

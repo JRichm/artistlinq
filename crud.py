@@ -244,7 +244,9 @@ def get_posts_with_reports():
     # posts_with_reports will be a list of tuples where each tuple contains the Post object, the username, and the number of reports.
     return posts_with_reports
 
-    
+def get_reports_for_post(post_id):
+    reports = db.session.query(ContentReport).filter_by(post_id=post_id).all()
+    return reports
     
     
 """     Update      """

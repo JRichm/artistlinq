@@ -68,6 +68,26 @@
     margin-right: 15px;
 }
 
+table {
+    border-spacing: 3px;
+    border-collapse: collapse;
+}
+
 th, td {
     color: white;
+    border-bottom: 1px solid black;
+}
+
+td {
+    padding: 5px;
+}
+
+.problem-post-row {
+    background-color: #223049;
+    margin-bottom: 10px;
+}
+
+.problem-post-row:hover {
+    cursor: pointer;
+    background-color: #415a77;
 }

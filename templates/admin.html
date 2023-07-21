@@ -26,16 +26,16 @@
                                     <th>Post</th>
                                     <th>Post Author</th>
                                     <th>Post date</th>
-                                    <th>Number of Reports</th>
+                                    <th>Times Reported</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for post, username, num_reports in problem_posts %}
-                                <tr>
+                                <tr class="problem-post-row" id="post-{{ post.post_id }}">
                                     <td>{{ post.caption }}</td>
                                     <td>{{ username }}</td>
                                     <td>{{ post.created_at.strftime('%m/%d/%Y') }}</td>
-                                    <td>{{ num_reports }}</td>
+                                    <td style="text-align: right;">{{ num_reports }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -71,4 +71,5 @@
         </article>
     </section>
 </main>
+<script src="/static/javascript/admin.js"></script>
 {% endblock %}
