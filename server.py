@@ -100,6 +100,7 @@ def view_post(post_id):
     username = check_login()
     user = crud.get_user_by_username(username)
     userLikes = [True, True, True]
+    post_reports = None
     
     if (session.get('user_id')):
         userLikes = crud.get_user_like_data(post_id, get_current_user_id())
@@ -124,7 +125,8 @@ def view_post(post_id):
                            commentForm=commentForm,
                            likeButtonsForm=likeButtonsForm, 
                            userLikes=userLikes,
-                           user=user)
+                           user=user,
+                           post_reports=post_reports)
     
 
     ### " Edit Post " ###
@@ -182,7 +184,7 @@ def edit_user(username, edit_endpoint):
 
 
     ### " admin/moderator panel " ###
-@app.route('/admin/<endpoint>')
+@app.route('/admin/<endpoint>/')
 def admin_panel(endpoint):
     username = check_login()
     user = crud.get_user_by_username(username)
@@ -194,7 +196,41 @@ def admin_panel(endpoint):
     if user.isModerator:
         problem_posts = crud.get_posts_with_reports()
         problem_comments = crud.get_comments_with_reports()
-        return render_template('admin.html', user=user, username=username, endpoint=endpoint, problem_comments=problem_comments, problem_posts=problem_posts)
+        
+        return render_template('admin.html',
+                               user=user,
+                               username=username,
+                               endpoint=endpoint,
+                               problem_comments=problem_comments,
+                               problem_posts=problem_posts)
+
+@app.route('/admin/user_settings/<search_username>')
+def admin_user_settings(search_username):
+    username = check_login()
+    user = crud.get_user_by_username(username)
+    
+    if not user or not user.isModerator:
+        flash('No Access!')
+        return redirect(url_for('index'))
+    
+    if user.isModerator:
+        admin_view_user = crud.get_user_by_username(search_username)
+        
+        if not admin_view_user:
+            flash('No User Found!')
+            return redirect('/admin/user_settings')
+            
+        return render_template('admin.html',
+                               user=user,
+                               username=username,
+                               endpoint='user_settings',
+                               admin_view_user=admin_view_user
+        )
+                               
+    
+    
+    
+
 
 """"""""""""""""""""""""""""""""""""""""""
 """     ###     API Routes     ###     """

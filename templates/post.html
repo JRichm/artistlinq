@@ -79,10 +79,36 @@
             </span>
             <article id="mod-tools" class="mod-tools hidden">
                 <div class="reports">
-                    <p>reports</p>
+                    <table>
+                        <thead>
+                            <th>Report ID</th>
+                            <th>Hateful</th>
+                            <th>Spam</th>
+                            <th>Violent</th>
+                            <th>Explicit</th>
+                            <th>Other</th>
+                            <th>Report Note</th>
+                            <th>Report Date</th>
+                        </thead>
+                        <tbody>
+                            {% for report in post_reports %}
+                            <tr>
+                                <td style="text-align:right;">{{ report.report_id }}</td>
+                                <td style="text-align:center;">{% if report.is_hateful %}✓{% endif %}</td>
+                                <td style="text-align:center;">{% if report.is_spam %}✓{% endif %}</td>
+                                <td style="text-align:center;">{% if report.is_violent %}✓{% endif %}</td>
+                                <td style="text-align:center;">{% if report.is_explicit %}✓{% endif %}</td>
+                                <td style="text-align:center;">{% if report.is_other_report %}✓{% endif %}</td>
+                                <td style="text-align:right;">{{ report.original_report_note }}</td>
+                                <td style="text-align:center;">{{ report.created_at.strftime('%m/%d/%Y') }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
-                <div class="options">
-                    <p>options</p>
+                <div class="options-container">
+                    <div class="options">
+                    </div>
                 </div>
             </article>
             <hr style="margin: -10px;">

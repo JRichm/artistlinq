@@ -369,28 +369,44 @@ main {
     color: white;
 }
 
-
 .mod-tools-container {
     position: relative;
-  }
+}
 
-  /* Initial state: hide the mod-tools article */
-  .mod-tools.hidden {
+.mod-tools.hidden {
     display: none;
-  }
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #1b263b;
+}
 
-  /* Sliding animation */
-  .slide-in {
-    animation: slide-in 0.5s forwards;
-  }
+thead {
+    background-color: #203349;
+}
 
-  @keyframes mod-slide-in {
-    from {
-      height: 0;
-      overflow: hidden;
-    }
-    to {
-      height: auto;
-      overflow: visible;
-    }
-  }
+
+th, td {
+    padding: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #1b263b;
+}
+
+tr:nth-child(odd) {
+    background-color: #203349;
+}
+
+tbody tr:hover {
+    background-color: #0d1b2a;
+    color: #e0e1dd;
+}
+
+th {
+    background-color: #283e57;
+    text-align: center;
+}
