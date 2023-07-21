@@ -108,6 +108,24 @@ class Star(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), nullable=False)
     created_at = db.Column(db.TIMESTAMP)
     
+    
+class ContentReport(db.Model):
+    __tablename__ = 'content_reports'
+    
+    report_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    report_user = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), nullable=True)
+    comment_id = db.Column(db.Integer, db.ForeignKey('comments.comment_id'), nullable=True)
+    is_hatefull = db.Column(db.Boolean, nullable=True)
+    is_spam = db.Column(db.Boolean, nullable=True)
+    is_violent = db.Column(db.Boolean, nullable=True)
+    is_explicit = db.Column(db.Boolean, nullable=True)
+    is_other_report = db.Column(db.Boolean, nullable=True)
+    original_report_note = db.Column(db.String, nullable=True)
+    created_at = db.Column(db.TIMESTAMP)
+    updated_at = db.Column(db.TIMESTAMP)
+    
+
 
 """"""""""""""""""""""""""""""""""""""""""
 """ ###       Database Config      ### """

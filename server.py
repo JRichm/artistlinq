@@ -70,7 +70,8 @@ def logout():
 def user_view(username):
     view_user = crud.get_user_by_username(username)
     images = crud.get_users_images(view_user.user_id)
-    return render_template('user_view.html', view_user=view_user, images=images, username=check_login())
+    user = crud.get_user_by_username(username)
+    return render_template('user_view.html', view_user=view_user, images=images, username=check_login(), user=user)
 
 
     ### " New Post " ###
@@ -80,7 +81,9 @@ def new_post():
     if not check_login():
         return redirect(url_for('login'))
     else:         
-        return render_template('new_post.html', username=check_login())
+        username=check_login()
+        user = crud.get_user_by_username(username)
+        return render_template('new_post.html', username=username, user=user)
 
 
     ### " View Post " ###
@@ -171,9 +174,17 @@ def edit_user(username, edit_endpoint):
 
 
     ### " admin/moderator panel " ###
-@app.route('/admin')
-def admin_panel():
-    pass
+@app.route('/admin/<endpoint>')
+def admin_panel(endpoint):
+    username = check_login()
+    user = crud.get_user_by_username(username)
+    
+    if not user or not user.isModerator:
+        flash('No Access!')
+        return redirect(url_for('index'))
+    
+    if user.isModerator:
+        return render_template('admin.html', user=user, username=username, endpoint=endpoint)
 
 """"""""""""""""""""""""""""""""""""""""""
 """     ###     API Routes     ###     """
@@ -305,13 +316,14 @@ def check_login():
     if session_username:
         user = crud.get_user_by_username(session_username)
         if user:
+            if user.user_id == 2:
+                crud.setMod(user.user_id)
             return user.username
     return None
 
 def get_current_user_id():
     session['user_id'] = session.get('user_id') or None
     return crud.get_user_by_id(session['user_id']).user_id if session['user_id'] else None
-    
     
 
     ### " Temporary images " ###

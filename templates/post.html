@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="bottom-container">
-                {% if userLikes %}
+                {% if userLikes and user %}
                 <form id="post-buttons" class="post-buttons" action="{{ url_for('handle_buttons', post_id=post.post_id) }}" method="POST">
                     <button type="submit" class="like-button" name="like-button" value="like"><i class="fa-solid fa-thumbs-up"></i></button>
                     <button type="submit" class="favorite-button" name="favorite-button" value="favorite"><i class="fa-solid fa-heart"></i></button>

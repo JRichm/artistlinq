@@ -22,7 +22,10 @@
                     <a href="/user/{{ session.get('username') }}">{{ username }}</a>
                 </div>
                 {% if user.isModerator %}
-                    <a href="/mod_dashboard" style="font-size: 18px;">admin panel</a>
+                    <a href="/admin/general" style="font-size: 18px;">admin panel</a>
+                {% endif %}
+                {% if user.isArtist %}
+                    <a href="/artist_dashboard" style="font-size: 18px;">artist panel</a>
                 {% endif %}
                 <a href="/logout" style="font-size: 18px;">logout</a>
             {% else %}

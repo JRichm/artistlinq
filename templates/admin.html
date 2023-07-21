@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Art-Station [ADMIN]{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/admin.css">
+{% endblock %}
+{% block body %}
+<main>
+    <section class="dashboard-head">
+        <h4>admin »</h4>
+        <h1>{{ endpoint|replace('_', ' ') }}</h1>
+    </section>
+    <section class="dashboard-container">
+        <aside class="dashboard-nav">
+            <a id="general-button" href='/admin/general'>General</a>
+            <a id="user-settings-button" href='/admin/user_settings'>User Settings</a>
+        </aside>
+        </aside>    
+        <article class="dashboard-box">
+            {% if endpoint == 'general' %}
+                <div class="general-cards-container">
+                    <div id="post-reports" class="card reports">
+
+                    </div>
+                    <div id="comment-reports" class="card reports">
+
+                    </div>
+                </div>
+            {% elif endpoint == 'user_settings' %}
+                <h1>User Settings Dashboard</h1>
+            {% endif %}
+        </article>
+    </section>
+</main>
+{% endblock %}
