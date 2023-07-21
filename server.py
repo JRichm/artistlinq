@@ -217,7 +217,33 @@ def publish_new_post():
 @app.route('/post/<post_id>/report_post', methods=['POST'])
 def report_post(post_id):
     print(f'\n\tapp.route("/post/{post_id}/report_post")')
-    flash('Report submitted successfully')
+    try:
+        data = request.json        
+        
+        crud.new_report(
+            report_user=crud.get_user_by_username(check_login()).user_id,
+            post_id=post_id,
+            comment_id=None,
+            is_hateful=data.get('hateful', False),
+            is_spam=data.get('spam', False),
+            is_violent=data.get('violence', False),
+            is_explicit=data.get('explicit', False),
+            is_other_report=data.get('other', False),
+            original_report_note=data.get('other_data', '')
+        )
+        
+        print('\n\n report made\n\n')
+
+        # Do something with the data, e.g., save it to a database or perform some action based on the report details
+
+        flash('Report submitted successfully')
+        return redirect(f'/post/{post_id}')
+    except Exception as e:
+        
+        print('\n\n report failed\n\n')
+        print(f"Error processing report: {str(e)}")
+        flash('Error submitting report')
+        return redirect(f'/post/{post_id}')
     return redirect(f'/post/{post_id}')
     
     

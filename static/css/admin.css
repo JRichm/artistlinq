@@ -52,8 +52,18 @@
 }
 
 .card {
-    background-color: #415a77;
+    background-color: #1b263b;
     min-height: 200px;
     min-width: 300px;
     margin: 20px;
+    border: none;
+}
+
+.card-header {
+    background-color: #415a77;
+    color: white;
+}
+
+.card-header i {
+    margin-right: 15px;
 }

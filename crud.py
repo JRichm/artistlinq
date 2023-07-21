@@ -1,7 +1,7 @@
 
 
 
-from model import db, User, Tag, Post, PostedTag, Comment, Like, Favorite, Star
+from model import db, User, Tag, Post, PostedTag, Comment, Like, Favorite, Star, ContentReport
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from flask import jsonify, session
@@ -109,6 +109,27 @@ def add_star_to_post(post_id, user_id):
     db.session.add(star)
     db.session.commit()
     
+    
+def new_report(report_user, post_id, comment_id,
+               is_hateful, is_spam, is_violent, is_explicit, is_other_report,
+               original_report_note):
+    print('\n\nmaking new report\n\n')
+    report = ContentReport(
+                   report_user=report_user,
+                   post_id=post_id,
+                   comment_id=comment_id,
+                   is_hateful=is_hateful,
+                   is_spam=is_spam,
+                   is_violent=is_violent,
+                   is_explicit=is_explicit,
+                   is_other_report=is_other_report,
+                   original_report_note=original_report_note,
+                   created_at=datetime.now(),
+                   updated_at=datetime.now()
+               )
+    
+    db.session.add(report)
+    db.session.commit()
 
 
 """      Read       """

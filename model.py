@@ -116,7 +116,7 @@ class ContentReport(db.Model):
     report_user = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), nullable=True)
     comment_id = db.Column(db.Integer, db.ForeignKey('comments.comment_id'), nullable=True)
-    is_hatefull = db.Column(db.Boolean, nullable=True)
+    is_hateful = db.Column(db.Boolean, nullable=True)
     is_spam = db.Column(db.Boolean, nullable=True)
     is_violent = db.Column(db.Boolean, nullable=True)
     is_explicit = db.Column(db.Boolean, nullable=True)
