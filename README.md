@@ -6,6 +6,8 @@ View artwork or publish your own! Art-Station offers a clean and interactable pl
 
 ## View Post
 
-![alt View Post](/screenshots/070723%20post%20page.png)
+![alt View Post](/screenshots/view_post.png)
 
-![alt View Post](/static/images/view_post.png)
+## Report post
+
+![alt Report Post](/screenshots/072023%20report%20post.png)
