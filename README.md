@@ -11,3 +11,7 @@ View artwork or publish your own! Art-Station offers a clean and interactable pl
 ## Report post
 
 ![alt Report Post](/screenshots/072023%20report%20post.png)
+
+## Edit Profile
+
+![alt Report Post](/screenshots/071823%20edit%20profile.png)
