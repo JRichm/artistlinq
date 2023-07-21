@@ -91,3 +91,40 @@ td {
     cursor: pointer;
     background-color: #415a77;
 }
+
+.user-settings-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 25px;
+    color: white;
+}
+
+.user-settings-box input {
+    width: 400px;
+}
+
+.user-settings-box button {
+    width: 100px;
+}
+
+.user-settings-box input, button {
+    background-color: transparent;
+    border-radius: 3px;
+    border: #415a77 1px solid;
+    color: white;
+}
+
+.user-settings-box input:focus {
+    border-radius: 3px;
+    border: #415a77 1px solid;
+    outline: none;
+}
+
+.view-user-card {
+    margin-left: 25px;
+    padding: 25px;
+    background-color: #415a77;
+    width: 1000px;
+    color: white;
+}

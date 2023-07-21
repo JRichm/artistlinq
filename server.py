@@ -29,7 +29,6 @@ Session(app)
 @app.route('/')
 def index():
     print('\n\tapp.route("/")')
-    flash('this is a test flash message')
     images=crud.get_50_images()
     featured = crud.get_featured_users()
     username = check_login()

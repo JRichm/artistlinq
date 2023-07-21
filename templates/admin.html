@@ -8,6 +8,7 @@
     <section class="dashboard-head">
         <h4>admin »</h4>
         <h1>{{ endpoint|replace('_', ' ') }}</h1>
+        {% if admin_view_user %}<h1> » {{ admin_view_user.username }}</h1>{% endif %}
     </section>
     <section class="dashboard-container">
         <aside class="dashboard-nav">
@@ -66,13 +67,21 @@
                     </div>
                 </div>
             {% elif endpoint == 'user_settings' %}
-                <span class="username-input-span">
+                <div class="user-settings-box">
                     <label>Search User</label>
-                    <input type="text" id="search-user-input">
-                    <button id="search-user-button">Search</button>
-                </span>
+                    <span class="username-input-span">
+                        <input type="text" id="search-user-input">
+                        <button id="search-user-button">Search</button>
+                    </span>
+                </div>
                 {% if admin_view_user %}
-
+                    <span class="view-user-container">
+                        <div class="view-user-card">
+                            <span class="view-user-header">
+                                <h3>{{ admin_view_user.username }}</h3>
+                            </span>
+                        </div>
+                    </span>
                 {% endif %}
             {% endif %}
         </article>
