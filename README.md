@@ -6,7 +6,7 @@ View artwork or publish your own! Art-Station offers a clean and interactable pl
 
 ### Artwork Showcase
 
-- Art-Station allows artists to effortlessly display their artwork in a visually appealing manner.
+- Art-Station allows artists to effortlessly display their artwork.
 
 ### Tagging System
 
