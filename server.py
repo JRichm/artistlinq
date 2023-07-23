@@ -18,8 +18,6 @@ os.makedirs(image_foler, exist_ok=True)
 
 Session(app)
 
-db = SQLAlchemy(app)
-
 """"""""""""""""""""""""""""""""""""""""""
 """     ###    Flask Routes    ###     """
 """"""""""""""""""""""""""""""""""""""""""
