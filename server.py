@@ -8,7 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, redirect, request, url_for, flash, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
-from model import connect_to_db, db
+from model import connect_to_db
 import forms
 import crud
 import os
@@ -20,6 +20,8 @@ app = Flask(__name__, root_path=os.path.dirname(os.path.abspath(__file__)))
 app.config['SECRET_KEY'] = 'dev'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
+
+db = SQLAlchemy(app)
 
 """"""""""""""""""""""""""""""""""""""""""
 """     ###    Flask Routes    ###     """

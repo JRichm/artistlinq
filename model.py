@@ -2,9 +2,8 @@
 """  ###  PostgreSQL  Model  File ###  """
 """"""""""""""""""""""""""""""""""""""""""
 from flask_sqlalchemy import SQLAlchemy
+from server import db
 import os
-
-db = SQLAlchemy()
 
 
 """"""""""""""""""""""""""""""""""""""""""
