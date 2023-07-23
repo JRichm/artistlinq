@@ -2,3 +2,5 @@ env
 config.sh
 posts
 images
+app.py
+.env
