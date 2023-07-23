@@ -16,9 +16,6 @@ import os
 image_foler = './static/posts/images'
 os.makedirs(image_foler, exist_ok=True)
 
-app = Flask(__name__, root_path=os.path.dirname(os.path.abspath(__file__)))
-app.config['SECRET_KEY'] = 'dev'
-app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
 db = SQLAlchemy(app)
