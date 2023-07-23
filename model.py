@@ -139,5 +139,3 @@ def connect_to_db(flask_app, db_uri="postgresql:///art_station", echo=True):
     db.init_app(flask_app)
 
     print("Connected to the db!")
-
-connect_to_db(app)
