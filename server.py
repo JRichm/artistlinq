@@ -8,7 +8,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, redirect, request, url_for, flash, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
-from model import connect_to_db
 import forms
 import crud
 import os
@@ -419,5 +418,4 @@ def flash_errors(form):
             flash(f"Error in field '{getattr(form, field).label.text}': {error}", "error")
 
 if __name__ == "__main__":
-    connect_to_db(app)
     app.run(host="0.0.0.0", port=8080, debug=True)
