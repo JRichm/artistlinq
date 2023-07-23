@@ -8,6 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, redirect, request, url_for, flash, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
+from app import app
 import forms
 import crud
 import os
