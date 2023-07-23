@@ -31,13 +31,13 @@
   <section class="main-section">
     <nav id="user-nav" class="user-nav">
       <p id="showcaseNav">Showcase</p>
-      <p id="gallaryNav">Gallary</p>
+      <p id="galleryNav">Gallery</p>
       <p id="commissionNav">Commission</p>
     </nav>
     <article id="showcase" class="hidden">
       <h1> showcase test </h1>
     </article>
-    <article id="gallary" class="image-board hidden">
+    <article id="gallery" class="image-board hidden">
       {% for image in images %}
       <article class="image-container">
           <a href="/post/{{ image.id }}"><img class="image-board-img" src="../{{ image.url }}" width="400"></a>

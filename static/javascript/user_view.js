@@ -1,18 +1,18 @@
 const mainSection = document.querySelector('.main-section')
 const userNav = document.getElementById('user-nav');
 const showcaseDiv = document.getElementById('showcase');
-const gallaryDiv = document.getElementById('gallary');
+const galleryDiv = document.getElementById('gallery');
 const commissionDiv = document.getElementById('commission');
 
 const showcaseNav = document.getElementById('showcaseNav')
-const gallaryNav = document.getElementById('gallaryNav')
+const galleryNav = document.getElementById('galleryNav')
 const commissionNav = document.getElementById('commissionNav')
 
 const followButton = document.getElementById('follow-button')
 
 const userViews = [
     showcaseDiv,
-    gallaryDiv,
+    galleryDiv,
     commissionDiv
 ]
 
@@ -46,10 +46,10 @@ function changeViews(changeToName) {
             showcaseDiv.classList.remove('hidden')
             showcaseNav.classList.add('nav-button-highlighted')
             break;
-        case changeToName == 'gallary':
-            currentPage = 'gallary'
-            gallaryDiv.classList.remove('hidden')
-            gallaryNav.classList.add('nav-button-highlighted')
+        case changeToName == 'gallery':
+            currentPage = 'gallery'
+            galleryDiv.classList.remove('hidden')
+            galleryNav.classList.add('nav-button-highlighted')
             break;
         case changeToName == 'commission':
             currentPage = 'commission'
@@ -59,7 +59,7 @@ function changeViews(changeToName) {
     }
 }
 
-changeViews('gallary')
+changeViews('gallery')
 if (followButton) {
     followButton.title = 'follow'
     
