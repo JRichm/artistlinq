@@ -411,4 +411,4 @@ def flash_errors(form):
             flash(f"Error in field '{getattr(form, field).label.text}': {error}", "error")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080, debug=True)
+    app.run(host="0.0.0.0", debug=True)
