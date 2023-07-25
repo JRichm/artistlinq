@@ -12,7 +12,6 @@ import forms
 import crud
 import os
 
-
 load_dotenv()
 
 app = Flask(__name__)
