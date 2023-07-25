@@ -74,7 +74,7 @@
         {% endif %}
         <hr style="position: absolute; align-self: flex-end; width: 1555px; height: 2px; margin: -15px;">
     </section>
-    {% if user.isModerator %}
+    {% if user and user.isModerator %}
         <section class="mod-tools-container">
             <span class="mod-tools-header" id="mod-tools-open">
                 <p>admin tools</p>
@@ -117,7 +117,7 @@
         </section>
     {% endif %}
     <section class="secondary-section">
-        {% if post_comments != null %}
+        {% if post_comments != None %}
         <div class="comment-container">
             <div class="new-comment-container">
 

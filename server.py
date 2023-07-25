@@ -131,7 +131,8 @@ def view_post(post_id):
                            likeButtonsForm=likeButtonsForm, 
                            userLikes=userLikes,
                            user=user,
-                           post_reports=post_reports)
+                           post_reports=post_reports,
+                           endpoint='')
     
 
     ### " Edit Post " ###
