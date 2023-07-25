@@ -1,10 +1,12 @@
+
+
 """"""""""""""""""""""""""""""""""""""""""
 """  ###  PostgreSQL  Model  File ###  """
 """"""""""""""""""""""""""""""""""""""""""
 from flask_sqlalchemy import SQLAlchemy
 import os
 
-# db = SQLAlchemy()
+db = SQLAlchemy()
 
 """"""""""""""""""""""""""""""""""""""""""
 """ ###      PostgreSQL Tables     ### """
