@@ -2,14 +2,30 @@
 
 
 """"""""""""""""""""""""""""""""""""""""""
-"""      ### Server Imports ###        """
+"""      ### Server Setup ###        """
 """"""""""""""""""""""""""""""""""""""""""
 from flask import Flask, render_template, redirect, request, url_for, flash, jsonify, session
+from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
-from app import app
+from dotenv import load_dotenv
 import forms
 import crud
 import os
+
+
+load_dotenv()
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('POSTGRES_URI')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+print(os.getenv('POSTGRES_URI'))
+
+db = SQLAlchemy(app)
+Session(app)
 
 image_foler = './static/posts/images'
 os.makedirs(image_foler, exist_ok=True)
