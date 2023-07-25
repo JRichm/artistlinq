@@ -1,7 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""
 """  ###  PostgreSQL  Model  File ###  """
 """"""""""""""""""""""""""""""""""""""""""
-from app import db
+from server import db
 
 import os
 
