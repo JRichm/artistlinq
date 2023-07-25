@@ -7,25 +7,24 @@
 from flask import Flask, render_template, redirect, request, url_for, flash, jsonify, session
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
+from jinja2 import StrictUndefined
 from dotenv import load_dotenv
-import forms
+from model import connect_to_db, db
 import os
+import crud
+import forms
 
 load_dotenv()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('POSTGRES_URI')
+
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+app.jinja_env.undefined = StrictUndefined
 
 print(os.getenv('POSTGRES_URI'))
-
-db = SQLAlchemy(app)
-Session(app)
-
-import crud
 
 image_foler = './static/posts/images'
 os.makedirs(image_foler, exist_ok=True)
@@ -424,6 +423,8 @@ def flash_errors(form):
     for field, errors in form.errors.items():
         for error in errors:
             flash(f"Error in field '{getattr(form, field).label.text}': {error}", "error")
-            
+    
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080)
+    connect_to_db(app)
+    app.run(host='0.0.0.0', port=8080, debug=True)

@@ -1,10 +1,10 @@
 """"""""""""""""""""""""""""""""""""""""""
 """  ###  PostgreSQL  Model  File ###  """
 """"""""""""""""""""""""""""""""""""""""""
-from server import db
-
+from flask_sqlalchemy import SQLAlchemy
 import os
 
+db = SQLAlchemy()
 
 """"""""""""""""""""""""""""""""""""""""""
 """ ###      PostgreSQL Tables     ### """
@@ -130,8 +130,8 @@ class ContentReport(db.Model):
 """ ###       Database Config      ### """
 """"""""""""""""""""""""""""""""""""""""""
 
-def connect_to_db(flask_app, db_uri="postgresql:///art_station", echo=True):
-    flask_app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["POSTGRES_URI"]
+def connect_to_db(flask_app, db_uri="postgresql:///art-station", echo=True):
+    flask_app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("POSTGRES_URI")
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -139,3 +139,9 @@ def connect_to_db(flask_app, db_uri="postgresql:///art_station", echo=True):
     db.init_app(flask_app)
 
     print("Connected to the db!")
+    
+    
+
+if __name__ == "__main__":
+    from server import app
+    connect_to_db(app)

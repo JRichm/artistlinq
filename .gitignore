@@ -5,3 +5,4 @@ posts
 images
 app.py
 .env
+*.save

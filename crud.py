@@ -1,7 +1,6 @@
 
-
-
-from model import db, User, Tag, Post, PostedTag, Comment, Like, Favorite, Star, ContentReport
+from server import db
+from model import User, Tag, Post, PostedTag, Comment, Like, Favorite, Star, ContentReport
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from flask import jsonify, session
