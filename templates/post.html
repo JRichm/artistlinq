@@ -16,10 +16,12 @@
         </article>
         <aside class="post-details">
             <div class="top-container">
-                {% if post_author.username == user.username and post_settings %}
-                    <h1>{{ post.caption }}<i id='post-settings' onclick="window.location.href='/post/{{ post.post_id }}/post_settings'" class="fa-solid fa-pen-to-square"></i></h1>
-                {% else %}
-                    <h1>{{ post.caption }}<i id='report-post' class="fa-solid fa-flag"></i></h1>
+                {% if user %}
+                    {% if post_author.username == user.username and post_settings %}
+                        <h1>{{ post.caption }}<i id='post-settings' onclick="window.location.href='/post/{{ post.post_id }}/post_settings'" class="fa-solid fa-pen-to-square"></i></h1>
+                    {% else %}
+                        <h1>{{ post.caption }}<i id='report-post' class="fa-solid fa-flag"></i></h1>
+                    {% endif %}
                 {% endif %}
                 <a href="/user/{{ post_author.username }}">{{ post_author.username }}</a>
                 <hr>
