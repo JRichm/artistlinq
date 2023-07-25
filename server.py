@@ -11,8 +11,6 @@ from jinja2 import StrictUndefined
 from dotenv import load_dotenv
 from model import connect_to_db, db
 import os
-import crud
-import forms
 
 load_dotenv()
 
@@ -24,7 +22,8 @@ app.config["SESSION_TYPE"] = "filesystem"
 
 app.jinja_env.undefined = StrictUndefined
 
-print(os.getenv('POSTGRES_URI'))
+import crud
+import forms
 
 image_foler = './static/posts/images'
 os.makedirs(image_foler, exist_ok=True)
@@ -59,7 +58,6 @@ def login():
     elif request.form.get('new-user') == 'Create Account':
         return newUserForm.create_user()
         
-    print('\n\tapp.route("/login")')
     return render_template('login.html', loginForm=loginForm, newUserForm=newUserForm)
 
   
