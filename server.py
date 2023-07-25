@@ -409,7 +409,3 @@ def flash_errors(form):
         for error in errors:
             flash(f"Error in field '{getattr(form, field).label.text}': {error}", "error")
             
-            
-
-if __name__ == "__main__":
-	app.run()
