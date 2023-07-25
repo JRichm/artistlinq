@@ -9,7 +9,6 @@ from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import forms
-import crud
 import os
 
 load_dotenv()
@@ -25,6 +24,8 @@ print(os.getenv('POSTGRES_URI'))
 
 db = SQLAlchemy(app)
 Session(app)
+
+import crud
 
 image_foler = './static/posts/images'
 os.makedirs(image_foler, exist_ok=True)
