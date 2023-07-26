@@ -1,4 +1,6 @@
-# Art-Station
+# ArtistLinq
+
+http://artistlinq.com/
 
 View artwork or publish your own! Art-Station offers a clean and interactable platform for artists to showcase their work, take commissions, and talk to fans.
 
