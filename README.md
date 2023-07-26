@@ -61,10 +61,8 @@ To join the ArtistLinq community, follow these simple steps:
 
 # Technologies Used
 
-**Backend** Flask
+**Backend** Flask / PostgreSQL
 
 **Frontend** Jinja2 / JavaScript
-
-**Database** PostgreSQL (database)
 
 **Deployment** Azure / Gunicorn
