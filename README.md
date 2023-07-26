@@ -58,3 +58,13 @@ To join the ArtistLinq community, follow these simple steps:
 ## Edit Profile
 
 ![alt Report Post](/screenshots/071823%20edit%20profile.png)
+
+# Technologies Used
+
+**Backend** Flask
+
+**Frontend** Jinja2 / JavaScript
+
+**Database** PostgreSQL (database)
+
+**Deployment** Azure / Gunicorn
