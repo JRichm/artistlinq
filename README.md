@@ -2,21 +2,21 @@
 
 http://artistlinq.com/
 
-View artwork or publish your own! Art-Station offers a clean and interactable platform for artists to showcase their work, take commissions, and talk to fans.
+View artwork or publish your own! ArtistLinq offers a clean and interactable platform for artists to showcase their work, take commissions, and talk to fans.
 
 # Key Features
 
 ### Artwork Showcase
 
-- Art-Station allows artists to effortlessly display their artwork.
+- ArtistLinq allows artists to effortlessly display their artwork.
 
 ### Tagging System
 
-- To enhance discoverability, ArtStation employs a comprehensive tagging system. Artists can add relevant tags to their posts, making it easy for users to explore specific themes, styles, or genres.
+- To enhance discoverability, ArtistLinq employs a comprehensive tagging system. Artists can add relevant tags to their posts, making it easy for users to explore specific themes, styles, or genres.
 
 ### Engagement Options
 
-- ArtStation encourages meaningful interactions through comments, enabling users to share their thoughts, constructive feedback, and encouragement.
+- ArtistLinq encourages meaningful interactions through comments, enabling users to share their thoughts, constructive feedback, and encouragement.
 
 - Users can express their appreciation for an artwork by liking it. This feature helps artists gauge the popularity and impact of their creations.
 
@@ -31,11 +31,11 @@ View artwork or publish your own! Art-Station offers a clean and interactable pl
 - Commission Requests - Artists have the option to receive commission requests from users interested in personalized artwork.
 
 - Community Engagement -
-  Beyond showcasing artwork, ArtStation fosters a thriving community of artists and art enthusiasts. Users can interact through comments, engage in discussions, and collaborate on creative projects.
+  Beyond showcasing artwork, ArtistLinq fosters a thriving community of artists and art enthusiasts. Users can interact through comments, engage in discussions, and collaborate on creative projects.
 
 # Getting Started:
 
-To join the Art-Station community, follow these simple steps:
+To join the ArtistLinq community, follow these simple steps:
 
 1. Sign Up: Create a user account to get started. You can choose to join as an artist or an art enthusiast.
 
