@@ -426,5 +426,4 @@ def flash_errors(form):
     
 
 if __name__ == "__main__":
-    connect_to_db(app)
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=8080)
