@@ -15,7 +15,7 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-connect_do_db(app)
+connect_to_db(app)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config["SESSION_PERMANENT"] = False
