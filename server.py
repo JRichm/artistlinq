@@ -15,7 +15,6 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-connect_to_db(app)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config["SESSION_PERMANENT"] = False
@@ -426,4 +425,5 @@ def flash_errors(form):
     
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    connect_to_db(app)
+    app.run(host='0.0.0.0', port=5000, debug=True)
