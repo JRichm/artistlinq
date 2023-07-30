@@ -2,31 +2,57 @@ main {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    padding-top: 200px;
 }
 
-form {
-    margin: 25px;
-    padding: 25px 45px 25px 45px;
-    background-color: rgba(255,255,255,0.11);
-    border-radius: 10px;
-}
-
-div {
+.container {
     display: flex;
     flex-direction: column;
+    background-color: white;
+    width: 350px;
+    padding: 25px;
+    border-radius: 4px;
 }
 
-h2 {
-    color: white;
+.login-box div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-input {
+.login-box h1 {
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+}
+
+span {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: 10px;
+}
+
+span > * {
+    margin: 0px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: -1px;
+}
+
+input,button {
     background-color: transparent;
-    border: solid 1px white;
-    border-radius: 10px;
-    width: 300px;
+    border: solid 1px black;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 350px !important;
+    padding: 0px;
     height: 30px;
-    padding: 5px;
-    margin: 10px;
-    color: white;
+    color: black;
+    margin-bottom: 20px;
+}
+
+p {
+    margin-right: 6px;
+}
+
+.button-text {
+    cursor: pointer;
 }

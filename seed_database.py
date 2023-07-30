@@ -6,7 +6,8 @@ import os
 ## do not create two databases on one system
 ## dev build uses art_station
 os.system('dropdb -U postgres art_station')
-os.system('createdb -U postgres art_station')
+os.system('dropdb -U postgres artistlinqdb')
+os.system('createdb -U postgres artistlinqdb')
 
 # Connect to the database
 connect_to_db(app)

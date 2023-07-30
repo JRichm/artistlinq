@@ -9,45 +9,63 @@
 </head>
 <body>
     <main>
-        <form class="login-box" method="POST" action="{{ url_for('login') }}">
-            {{ loginForm.csrf_token }}
-            <h2>Login</h4>
-            <div>
-                {{ loginForm.username() }}
-                {{ loginForm.password() }}
-                <input type="submit" name="login" value="Login" class="submit-button">
+        <div id="login-container" class="container ">
+            <form class="login-box" method="POST" action="{{ url_for('login') }}">
+                {{ loginForm.csrf_token }}
+                <h1>Login</h1>
+                <div>
+                    {{ loginForm.username() }}
+                    {% for error in loginForm.username.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                    {{ loginForm.password() }}
+                    {% for error in loginForm.password.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                    <input type="submit" name="login" value="Login" class="submit-button">
+                </div>
+            </form>
+            <div class="other-logins">
+                <button><i class="fa-brands fa-google"></i></button>
             </div>
-                {% for error in loginForm.username.errors %}
-                    <span style="color: red;">{{ error }}</span>
-                {% endfor %}
-                
-                {% for error in loginForm.password.errors %}
-                    <span style="color: red;">{{ error }}</span>
-                {% endfor %}
-        </form>
+            <span>
+                <a href="">Forgot Password</a>
+            </span>
+            <span>
+                <p>Don't have an account?</p><p id="sign-up-button" class="button-text">Sign Up</p>
+            </span>
+        </div>
 
-        <form class="new-user-box" method="POST" action="{{ url_for('login') }}">
-            {{ newUserForm.csrf_token }}
-            <h2>Create Account</h4>
-            <div>
-                {{ newUserForm.username() }}
-                {{ newUserForm.email() }}
-                {{ newUserForm.password() }}
-                {{ newUserForm.confirm_password() }}
-                <input type="submit" name="new-user" value="Create Account" class="submit-button">
-            </div>
-                {% for error in newUserForm.email.errors %}
-                    <span style="color: red;">{{ error }}</span>
-                {% endfor %}
 
-                {% for error in newUserForm.password.errors %}
-                    <span style="color: red;">{{ error }}</span>
-                {% endfor %}
 
-                {% for error in newUserForm.confirm_password.errors %}
-                    <span style="color: red;">{{ error }}</span>
-                {% endfor %}
-        </form>
+        <div id="create-account-container" class="container hidden">
+            <form class="new-user-box" method="POST" action="{{ url_for('login') }}">
+                {{ newUserForm.csrf_token }}
+                <h2>Create Account</h4>
+                <div>
+                    {{ newUserForm.username() }}
+                    {{ newUserForm.email() }}
+                    {{ newUserForm.password() }}
+                    {{ newUserForm.confirm_password() }}
+                    <input type="submit" name="new-user" value="Create Account" class="submit-button">
+                </div>
+                    {% for error in newUserForm.email.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+
+                    {% for error in newUserForm.password.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+
+                    {% for error in newUserForm.confirm_password.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+            </form>
+            <span>
+                <p id="back-to-login" class="button-text">Back to login</p>
+            </span>
+        </div>  
     </main>
 </body>
+<script src="/static/javascript/login.js"></script>
 </html>
