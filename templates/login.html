@@ -41,7 +41,7 @@
         <div id="create-account-container" class="container hidden">
             <form class="new-user-box" method="POST" action="{{ url_for('login') }}">
                 {{ newUserForm.csrf_token }}
-                <h2>Create Account</h4>
+                <h1>Create Account</h1>
                 <div>
                     {{ newUserForm.username() }}
                     {{ newUserForm.email() }}
