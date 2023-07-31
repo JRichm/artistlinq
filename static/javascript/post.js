@@ -1,11 +1,16 @@
+
+
 var post_id = document.querySelector('.main-post').id
 console.log(post_id)
 
-function autoResize() {
-    const textarea = document.getElementById("new-comment-input");
+const textarea = document.getElementById("new-comment-input");
+
+textarea.addEventListener('keyboard', e => {
+    console.log('fart')
+    
     textarea.style.height = "auto";
     textarea.style.height = textarea.scrollHeight + "px";
-}
+})
 
 reportButton = document.getElementById('report-post')
 if (reportButton) {

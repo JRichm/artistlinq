@@ -128,7 +128,7 @@
                     <p>{{ username }}</p>
                 </div>
                 <form class="new-comment-box" method="POST" action="{{ url_for('view_post', post_id=post.post_id) }}">
-                    {{ commentForm.comment(id="new-comment-input") }}
+                    {{ commentForm.comment(id="new-comment-input", rows="2", cols="20", wrap="hard") }}
                     {{ commentForm.submit(id="new-comment-post-button", type="submit") }}
                     {{ commentForm.csrf_token }}
                 </form>
