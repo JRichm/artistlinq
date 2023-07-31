@@ -158,7 +158,7 @@ class UserSettingsGeneral(FlaskForm):
     
     
 class UserSettingsAppearance(FlaskForm):
-    new_icon = FileField('User Icon')
+    new_icon = FileField('User Icon', render_kw={'id': 'new-icon-input'})
     new_background = FileField('Profile Background')
     
 

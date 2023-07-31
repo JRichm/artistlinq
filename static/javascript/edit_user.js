@@ -1,0 +1,1 @@
+uploadedIMG = document.getElementById('uploaded-icon');

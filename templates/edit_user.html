@@ -46,35 +46,19 @@
                 <hr>
                 <form class="appearance-settings settings" method="post">
                     {{ settings['appearance'].csrf_token }}
+                    <span class="new-icon-container">
+                        <div class="new-icon-box">
+                            <img id="uploaded-icon" class="uploaded-icon" oncontextmenu="return false;" src="/static/posts/images/360_F_536039281_KrHW7Gm9F7GNjRVJLtzs3lmiJsMJGtFX.jpg">
+                        </div>
+                    </span>
                     <span>
                         {{ settings['appearance'].new_icon.label }}
                         {{ settings['appearance'].new_icon }}
                     </span>
-                    <span class="user-icons-span">
-                        <p class="user-icons-header">Your Icons</p>
-                        <div id="user-icons">
-                            {% for square in range(4) %}
-                            <div class="user-icon">
-
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </span>
                     <span>
                         {{ settings['appearance'].new_background.label }}
                         {{ settings['appearance'].new_background }}
-                    </span>
-                    <span class="user-backgrounds-span">
-                        <p class="user-backgrounds-header">Your Icons</p>
-                        <div id="user-backgrounds">
-                            {% for square in range(3) %}
-                            <div class="user-background">
-
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </span>
-    
+                    </span>    
                     <input type="submit" value="Save Changes" id="save-changes-button">
                 </form>
             {% elif endpoint == 'showcase' %}
