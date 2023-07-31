@@ -5,7 +5,7 @@ console.log(post_id)
 
 const textarea = document.getElementById("new-comment-input");
 
-textarea.addEventListener('keyboard', e => {
+textarea.addEventListener('input', e => {
     console.log('fart')
     
     textarea.style.height = "auto";

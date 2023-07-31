@@ -10,7 +10,7 @@ main {
     flex-direction: column;
     background-color: white;
     width: 300px;
-    padding: 25px;
+    padding: 20px 40px 30px;
     border-radius: 4px;
 }
 

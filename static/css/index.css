@@ -1,149 +1,39 @@
-* {box-sizing:border-box}
-
-.hero {
-  max-height: 600px;
-}
-
-/* Slideshow container */
-.slideshow-container {
-    justify-content: center;
-    align-items: center;
-    max-height: 444px;
-    margin: auto;
-}
-.slideshow-container img {
-  max-height: 444px;
-  object-fit:contain; /* Preserve aspect ratio and fit the image within the container */
-}
-
-
-/* Hide the images by default */
-.mySlides {
-    display: none;
-}
-
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-
-/* featured area */
-
-.section-title {
-  margin: 25px 0px 25px 100px;
-  color: white;
-}
-
-.featured-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-/* featured item */
-.feature-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 5px;
-  padding: 20px;
-  transition: all 0.1s;
-}
-
-.feature-item:hover {
-  cursor: pointer;
-  background-color: #243149;
-  border-radius: 10px;
-  transition: all 0.3s;
-}
-
-.feature-item > * {
-  color: white;
-}
-
-.feature-item img {
-  height: 100px; width: 100px;
-}
-
-.feature-item p {
-  max-width: 250px;
-  text-align: center;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+/* Colors from templates
+#0d1b2a
+#1b263b
+#415a77
+#778da9
+#e0e1dd
+*/
 
 .image-board {
+  width: 100vw;
   display: flex;
   justify-content: center;
 }
 
-.image-column {
-  display: flex;
-  flex-direction: column;
+.post-container {
+  margin: 50px;
 }
 
-.image-column img {
-  margin: 0px 7px 0px 7px;
+.img-container {
+  max-width: 90vw;
+  width: 777px;
+}
+
+.img-container img {
+  width: 100%;
+}
+
+.post-title {
+  background-color: #415a77 !important;
+  border-radius: 3px 3px 0px 0px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+}
+
+.post-author-name {
+  color: white;
+  margin: 0px;
 }
