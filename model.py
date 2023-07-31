@@ -25,7 +25,7 @@ class User(db.Model):
     isModerator = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
-
+    user_image_url = db.Column(db.VARCHAR)
 
 """ Post Table """
 class Post(db.Model):
