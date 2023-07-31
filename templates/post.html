@@ -72,7 +72,6 @@
             </div>
         </span>
         {% endif %}
-        <hr style="position: absolute; align-self: flex-end; width: 1555px; height: 2px; margin: -15px;">
     </section>
     {% if user and user.isModerator %}
         <section class="mod-tools-container">
@@ -113,7 +112,6 @@
                     </div>
                 </div>
             </article>
-            <hr style="margin: -10px;">
         </section>
     {% endif %}
     <section class="secondary-section">
@@ -151,7 +149,7 @@
                         <p>{{ comment.username }}</p>
                     </div>
                     <div class="comment-area">
-                        <textarea class="comment-text" readonly>{{ comment.comment_text }}</textarea>
+                        <p class="comment-text" readonly>{{ comment.comment_text }}</p>
                         <div class="comment-buttons"></div>
                     </div>
                 </div>
