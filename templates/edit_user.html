@@ -48,9 +48,12 @@
                     {{ settings['appearance'].csrf_token }}
                     <span class="new-icon-container">
                         <div id="new-icon-box" class="new-icon-box">
-                            <img id="uploaded-icon" class="uploaded-icon" oncontextmenu="return false;" src="/static/posts/images/360_F_536039281_KrHW7Gm9F7GNjRVJLtzs3lmiJsMJGtFX.jpg">
+                            <img id="uploaded-icon" class="uploaded-icon" oncontextmenu="return false;" src="">
                         </div>
+                        <button id="fake-save">save</button>
+                        <div id="captured-image-container"></div>
                     </span>
+                    <canvas id="canvas" style="height:400px; width:400px;"></canvas>
                     <span>
                         {{ settings['appearance'].new_icon.label }}
                         {{ settings['appearance'].new_icon }}
