@@ -22,8 +22,8 @@
                         <div class="post-details">
                             <h1 class="post-caption">{{ image.caption }}</h1>
                             <div>
-                                {% for tag in url_for('get_tags_on_post', post_id=image.id) %}
-                                    <p class="post-tag">{{ tag }}</p>
+                                {% for tag in image.tags %}
+                                    <p class="post-tag">{{ tag['tag_name'] }}</p>
                                 {% endfor %}
                             </div>
                         </div>

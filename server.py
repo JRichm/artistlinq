@@ -37,6 +37,9 @@ os.makedirs(image_foler, exist_ok=True)
 def index():
     print('\n\tapp.route("/")')
     images=crud.get_50_images()
+    for image in images:
+        image['tags'] = crud.get_tags_from_post_id(image['id'])
+    
     featured = crud.get_featured_users()
     username = check_login()
     user = crud.get_user_by_username(username)
@@ -346,14 +349,6 @@ def get_users_images():
     request_data = request.get_json()
     view_user = crud.get_user_by_username(request_data.get('username'))
     return crud.get_users_images(view_user.user_id)
-
-@app.route('/get_tags_on_post/<post_id>', methods=['GET'])
-def get_tags_on_post(post_id):
-    print(post_id)
-    print('\n\n\n\n')
-    post_tags = crud.get_tags_from_post_id(post_id)
-    return post_tags
-    
 
 
 @app.route('/handle_buttons/<post_id>', methods=['POST'])
