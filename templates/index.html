@@ -6,7 +6,18 @@
 
 {% block body %}
 <main>
-    <section>
+    <section class="main-section">
+        <aside class="left-nav">
+            <a href="/"><i class="fa-solid fa-house"></i>Home</a>
+            <a href="/new_post"><i class="fa-solid fa-camera"></i>Post</a>
+            <a href="/"><i class="fa-solid fa-message"></i>Messages</a>
+            {% if username %}
+            <a href="/user/{{ username }}"><i class="fa-solid fa-user"></i>Profile</a>
+            <a href="/user/{{ username }}/edit_user/general"><i class="fa-solid fa-gear"></i>Settings</a>
+            {% else %}
+            <a href="/login"><i class="fa-solid fa-user"></i>Login</a>
+            {% endif %}
+        </aside>
         <article class="posts">
             <div class="image-board">
                 <div class="image-column">
@@ -20,10 +31,10 @@
                             <a href="{{ url_for('view_post', post_id=image.id) }}"><img src="{{ image.url }}"></a>
                         </div>
                         <div class="post-details">
-                            <h1 class="post-caption">{{ image.caption }}</h1>
-                            <div>
+                            <h2 class="post-caption">{{ image.caption }}</h2>
+                            <div class="post-tags">
                                 {% for tag in image.tags %}
-                                    <p class="post-tag">{{ tag['tag_name'] }}</p>
+                                    <p class="post-tag">#{{ tag['tag_name'] }}</p>
                                 {% endfor %}
                             </div>
                         </div>
@@ -32,6 +43,9 @@
                 </div>
             </div>  
         </article>
+        <aside class="right-nav">
+
+        </aside>
     </section>
     <footer>
 
