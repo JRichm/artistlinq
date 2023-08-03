@@ -22,3 +22,18 @@ function searchTags(searchValue) {
   .then(data => console.log(data))
   .catch(err => console.log(err))
 }
+
+homeButton = document.getElementById('home-button');
+homeButton.addEventListener('click', e => {
+  window.location.href = '/'
+})
+
+postButton = document.getElementById('post-button');
+postButton.addEventListener('click', e => {
+  window.location.href = '/new_post'
+})
+
+messagesButton = document.getElementById('messages-button');
+
+
+loginButton = document.getElementById('login-button');

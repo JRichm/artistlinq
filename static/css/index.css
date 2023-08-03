@@ -26,6 +26,10 @@
   align-self: flex-start;
 }
 
+.nav-span i {
+  cursor: pointer;
+}
+
 .search-span {
   display: flex;
   flex-direction: row;
