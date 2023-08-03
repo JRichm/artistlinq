@@ -13,13 +13,19 @@
                     {% for image in images %}
                     <div class="post-container">
                         <div class="post-title">
+                            <img src="/static/images/user_icon.png" class="post-user-icon">
                             <a class="post-author-name" href="{{ url_for('user_view', username=image.author.username) }}">{{ image.author.username }}</a>
                         </div>
                         <div class="img-container">
-                            <a href="{{ url_for('view_post', post_id=image.id) }}"><img src="{{ image.url }}"></a>   
-                            <span>
-                                <p> </p>
-                            </span>
+                            <a href="{{ url_for('view_post', post_id=image.id) }}"><img src="{{ image.url }}"></a>
+                        </div>
+                        <div class="post-details">
+                            <h1 class="post-caption">{{ image.caption }}</h1>
+                            <div>
+                                {% for tag in url_for('get_tags_on_post', post_id=image.id) %}
+                                    <p class="post-tag">{{ tag }}</p>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                     {% endfor %}

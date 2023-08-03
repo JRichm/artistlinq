@@ -37,3 +37,17 @@
   color: white;
   margin: 0px;
 }
+
+.post-user-icon {
+  height: 65%;
+  margin: 20px;
+}
+
+.post-details {
+  background-color: #415a77;
+}
+
+.post-caption {
+  color: #102030;
+  padding: 15px;
+}
