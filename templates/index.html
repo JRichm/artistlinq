@@ -8,6 +8,10 @@
 <main>
     <section class="main-section">
         <aside class="left-nav">
+            <span class="search-span">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search">
+            </span>
             <a href="/"><i class="fa-solid fa-house"></i>Home</a>
             <a href="/new_post"><i class="fa-solid fa-camera"></i>Post</a>
             <a href="/"><i class="fa-solid fa-message"></i>Messages</a>
@@ -44,8 +48,13 @@
             </div>  
         </article>
         <aside class="right-nav">
-
-        </aside>
+            <div class="user-card">
+                <img src="/static/images/user_icon.png">
+                <div class="user-info">
+                    <a href="/user/{{ username }}">{{ username }}</a>
+                </div>
+            </div>
+        </aside> 
     </section>
     <footer>
 
