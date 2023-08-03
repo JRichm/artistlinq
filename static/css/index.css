@@ -44,8 +44,8 @@
 
 .left-nav i, a {
   margin: 10px 20px 25px 0px;
-  color: honeydew;
   text-decoration: none;
+  color: aliceblue;
 }
 
 .right-nav {
@@ -82,8 +82,11 @@
 }
 
 .img-container {
-  max-width: 90vw;
+  max-width: 80vw;
   width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .img-container img {
@@ -125,6 +128,7 @@
 .post-tags {
   display: flex;
   padding: 0px 15px 0px 15px;
+  flex-wrap: wrap;
 }
 
 .post-tag {

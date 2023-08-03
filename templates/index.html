@@ -2,6 +2,20 @@
 {% block title %}Art-Station [INDEX]{% endblock %}
 {% block head %}
     <link rel="stylesheet" href="../static/css/index.css">
+    <style>
+        
+        @media (max-width: 1600px) {
+            .hidden-sixteen {
+                display:none;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .hidden-thousand {
+                display:none;
+            }
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
@@ -10,16 +24,34 @@
         <aside class="left-nav">
             <span class="search-span">
                 <i id="search-button" class="fa-solid fa-magnifying-glass"></i>
-                <input id="search-bar" type="text" placeholder="Search">
+                <input class="hidden-thousand" id="search-bar" type="text" placeholder="Search">
             </span>
-            <a href="/"><i class="fa-solid fa-house"></i>Home</a>
-            <a href="/new_post"><i class="fa-solid fa-camera"></i>Post</a>
-            <a href="/"><i class="fa-solid fa-message"></i>Messages</a>
+            <span class="nav-span">
+                <i class="fa-solid fa-house"></i>
+                <a class="hidden-thousand" href="/">Home</a>
+            </span>
+            <span class="nav-span">
+                <i class="fa-solid fa-camera"></i>
+                <a class="hidden-thousand" href="/new_post">Post</a>
+            </span>
+            <span class="nav-span">
+                <i class="fa-solid fa-message"></i>
+                <a class="hidden-thousand" href="/">Messages</a>
+            </span>
             {% if username %}
-            <a href="/user/{{ username }}"><i class="fa-solid fa-user"></i>Profile</a>
-            <a href="/user/{{ username }}/edit_user/general"><i class="fa-solid fa-gear"></i>Settings</a>
+            <span class="nav-span">
+                <i class="fa-solid fa-user"></i>
+                <a class="hidden-thousand" href="/user/{{ username }}">Profile</a>
+            </span>
+            <span class="nav-span">
+                <i class="fa-solid fa-gear"></i>
+                <a class="hidden-thousand" href="/user/{{ username }}/edit_user/general">Settings</a>
+            </span>
             {% else %}
-            <a href="/login"><i class="fa-solid fa-user"></i>Login</a>
+            <span class="nav-span">
+                <i class="fa-solid fa-user"></i>
+                <a class="hidden-thousand" href="/login">Login</a>
+            </span>
             {% endif %}
         </aside>
         <article class="posts">
@@ -47,7 +79,7 @@
                 </div>
             </div>  
         </article>
-        <aside class="right-nav">
+        <aside class="right-nav hidden-sixteen">
             <div class="user-card">
                 <img src="/static/images/user_icon.png">
                 <div class="user-info">
