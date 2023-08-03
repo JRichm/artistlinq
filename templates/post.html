@@ -4,6 +4,21 @@
 {% block title %}Art-Station [POST - {{post.post_id}}]{% endblock %}
 {% block head %}
     <link rel="stylesheet" href="../../static/css/post.css">
+    <style>
+        @media (max-width: 1000px) {
+            .post-section {
+                flex-direction: column;
+            }
+
+            .post-details {
+                width: 100%;
+            }
+
+            .secondary-section {
+                flex-direction: column;
+            }
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
