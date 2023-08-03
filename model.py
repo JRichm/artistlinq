@@ -37,6 +37,16 @@ class Post(db.Model):
     caption = db.Column(db.VARCHAR)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
+    
+    def serialize(self):
+        return {
+            'post_id': self.post_id,
+            'user_id': self.user_id,
+            'image_url': self.image_url,
+            'caption': self.caption,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
 
 
 """ Comment Table """

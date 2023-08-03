@@ -38,6 +38,10 @@
   margin-bottom: 30px;
 }
 
+#search-button {
+  cursor: pointer;
+}
+
 .left-nav i, a {
   margin: 10px 20px 25px 0px;
   color: honeydew;

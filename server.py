@@ -351,6 +351,17 @@ def get_users_images():
     return crud.get_users_images(view_user.user_id)
 
 
+    ### " Get list of posts with specific substring " ###
+@app.route('/search/<search_value>', methods=['GET'])
+def search(search_value):
+    if search_value:
+        search_results = crud.search_posts(search_value)
+        serialized_results = [post.serialize() for post in search_results]
+        return jsonify(serialized_results)
+    else:
+        return jsonify({'error': 'No search string provided'}), 400
+    
+
 @app.route('/handle_buttons/<post_id>', methods=['POST'])
 def handle_buttons(post_id):
     

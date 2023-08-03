@@ -155,7 +155,7 @@ def get_tags_from_substring(substring):
     tags_data = [{'id': tag.tag_id, 'name': tag.tag_name} for tag in tags]
     return jsonify(tags_data)
 
-def get_tag_from_name(tag_name):
+def get_tag_from_tag_name(tag_name):
     tag_name = tag_name.lower()
     tag = Tag.query.filter(Tag.tag_name == tag_name).first()
     if tag is None:
@@ -171,6 +171,12 @@ def get_tags_from_post_id(post_id):
     tag_query = db.session.query(Tag.tag_name).join(PostedTag).filter(PostedTag.post_id == post_id).all()
     tag_list = [{'tag_name': tag.tag_name} for tag in tag_query]
     return tag_list
+
+def search_posts(search_string):
+    caption_matches = Post.query.filter(Post.caption.ilike(f'%{search_string}%')).all()
+    tag_matches = Post.query.join(PostedTag).join(Tag).filter(Tag.tag_name.ilike(f'%{search_string}%')).all()
+    search_results = caption_matches + tag_matches
+    return search_results
 
 def get_posted_tags_from_post(post_id):
     tag_query = db.session.query(PostedTag).filter(PostedTag.post_id == post_id).all()
