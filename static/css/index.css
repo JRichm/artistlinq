@@ -19,12 +19,17 @@
   height: fit-content;
   font-size: 24px;
   width: 300px;
-  margin: 20px;
+}
+
+.nav-span {
+  margin-top: 20px;
+  align-self: flex-start;
 }
 
 .search-span {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .search-span input {
@@ -35,7 +40,7 @@
   border: none;
   outline: none;
   border-bottom: #415a77 1px solid;
-  margin-bottom: 30px;
+  margin-left: 5px;
 }
 
 #search-button {
@@ -43,7 +48,6 @@
 }
 
 .left-nav i, a {
-  margin: 10px 20px 25px 0px;
   text-decoration: none;
   color: aliceblue;
 }
@@ -96,7 +100,7 @@
 
 .post-container {
   border-bottom: 2px #415a77 solid;
-  padding: 20px;
+  padding: 10px 0px 20px 0px;
 }
 
 .post-title {
@@ -122,12 +126,11 @@
 }
 
 .post-caption {
-  padding: 15px 15px 0px 15px;
+  padding: 6px 0px 0px 6px;
 }
 
 .post-tags {
   display: flex;
-  padding: 0px 15px 0px 15px;
   flex-wrap: wrap;
 }
 
