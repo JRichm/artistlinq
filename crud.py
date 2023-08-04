@@ -155,7 +155,7 @@ def get_tags_from_substring(substring):
     tags_data = [{'id': tag.tag_id, 'name': tag.tag_name} for tag in tags]
     return jsonify(tags_data)
 
-def get_tag_from_tag_name(tag_name):
+def get_tag_from_name(tag_name):
     tag_name = tag_name.lower()
     tag = Tag.query.filter(Tag.tag_name == tag_name).first()
     if tag is None:

@@ -162,6 +162,8 @@ def post_settings(post_id):
                            post_author=post_author,
                            post_settings=post_settings_form,
                            post_tags=post_tags,
+                           userLikes=None,
+                           post_comments=None,
                            endpoint='post_settings')
     
 
