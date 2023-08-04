@@ -90,8 +90,8 @@
 }
 
 .img-container {
-  max-width: 80vw;
-  width: 700px;
+  max-width: 85vw;
+  width: 777px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,6 +105,7 @@
 .post-container {
   border-bottom: 2px #415a77 solid;
   padding: 10px 0px 20px 0px;
+  margin-bottom: 5px;
 }
 
 .post-title {
@@ -117,6 +118,7 @@
 .post-author-name {
   color: white;
   margin: 0px;
+  font-size: 18px;
 }
 
 .post-user-icon {
@@ -141,4 +143,12 @@
 .post-tag {
   width: fit-content;
   margin: 5px;
+}
+
+.post-caption {
+  font-size: 24px;
+}
+
+.post-tags {
+  font-size: 12px
 }

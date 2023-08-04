@@ -34,9 +34,11 @@ os.makedirs(image_foler, exist_ok=True)
 
     ### " View Homepage " ###
 @app.route('/')
-def index():
+def index(images=None):
     print('\n\tapp.route("/")')
-    images=crud.get_50_images()
+    if not images:
+        images=crud.get_50_images()
+        
     for image in images:
         image['tags'] = crud.get_tags_from_post_id(image['id'])
     
@@ -236,10 +238,6 @@ def admin_user_settings(search_username):
                                admin_view_user=admin_view_user
         )
                                
-    
-    
-    
-
 
 """"""""""""""""""""""""""""""""""""""""""
 """     ###     API Routes     ###     """
@@ -357,7 +355,11 @@ def search(search_value):
     if search_value:
         search_results = crud.search_posts(search_value)
         serialized_results = [post.serialize() for post in search_results]
-        return jsonify(serialized_results)
+
+        print('\n\n\n')
+        app.logger.info(serialized_results)
+
+        return redirect(url_for('index', images=search_results)) 
     else:
         return jsonify({'error': 'No search string provided'}), 400
     

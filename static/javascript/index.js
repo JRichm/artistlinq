@@ -18,9 +18,10 @@ function searchTags(searchValue) {
   console.log(searchValue)
 
   fetch(`/search/${searchValue}`)
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(err => console.log(err))
+  .then(response => {
+    console.log(response)
+    window.location.reload()
+  })
 }
 
 homeButton = document.getElementById('home-button');
@@ -36,4 +37,5 @@ postButton.addEventListener('click', e => {
 messagesButton = document.getElementById('messages-button');
 
 
+settingsButton = document.getElementById('settings-button');
 loginButton = document.getElementById('login-button');
