@@ -24,6 +24,7 @@
 .nav-span {
   margin-top: 20px;
   align-self: flex-start;
+  font-family: 'Roboto' monospace;
 }
 
 .nav-span i {

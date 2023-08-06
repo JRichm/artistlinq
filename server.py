@@ -367,17 +367,16 @@ def search(search_value):
     
 
 @app.route('/handle_buttons/<post_id>', methods=['POST'])
-def handle_buttons(post_id):
+def handle_buttons(post_id):    
+    user_id = get_current_user_id()
     
-    print('\n\n\n\n\ntime to handle buttons:')
+    if not user_id:
+        return redirect(url_for('view_post', post_id=post_id))
     
     like_button = request.form.get('like-button')
     favorite_button = request.form.get('favorite-button')
     star_button = request.form.get('star-button')
     
-    print(session.get('username'))
-    
-    user_id = get_current_user_id()
     likeData = crud.get_user_like_data(post_id, user_id)
         
     if like_button == 'like':
