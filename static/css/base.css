@@ -80,6 +80,10 @@ hr {
     display: none !important;
 }
 
+.like-color {
+    color: #198754;
+}
+
 .like-button {
     color: #198754;
     border: 2px solid #198754;
@@ -99,6 +103,10 @@ hr {
     background-color: #198754;
 }
 
+.favorite-color {
+    color: #dc3545;
+}
+
 .favorite-button {
     color: #dc3545;
     border: 2px solid #dc3545;
@@ -116,6 +124,10 @@ hr {
     border: none;
     color: #701d25;
     background-color: #dc3545;
+}
+
+.star-color {
+    color: #ffc412;
 }
 
 .star-button {

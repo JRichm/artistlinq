@@ -6,11 +6,20 @@
 }
 
 .post-figure {
-    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: auto;
     max-width: 400px;
     width: auto;
     margin: calc(5vw / 10);
     margin-top: 25px;
+}
+
+.post-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .post-img {
