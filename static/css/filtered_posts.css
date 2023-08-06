@@ -1,0 +1,40 @@
+.filtered-posts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 70%;
+}
+
+.post-figure {
+    height: fit-content;
+    max-width: 400px;
+    width: auto;
+    margin: calc(5vw / 10);
+    margin-top: 25px;
+}
+
+.post-img {
+    width: 100%;
+    height: 100%;
+}
+
+.post-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-details p, i {
+    margin: 5px;
+    padding: 0;
+}
+
+.post-caption {
+    color: white;
+}
+
+.post-stats {
+    display: flex;
+    flex-direction: row;
+}

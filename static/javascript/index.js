@@ -16,12 +16,8 @@ searchBar.addEventListener('keypress', e => {
 
 function searchTags(searchValue) {
   console.log(searchValue)
-
-  fetch(`/search/${searchValue}`)
-  .then(response => {
-    console.log(response)
-    window.location.reload()
-  })
+  
+  window.location.href = `/search/${searchValue}`
 }
 
 homeButton = document.getElementById('home-button');

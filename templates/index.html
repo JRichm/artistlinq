@@ -2,62 +2,6 @@
 {% block title %}Art-Station [INDEX]{% endblock %}
 {% block head %}
     <link rel="stylesheet" href="../static/css/index.css">
-    <style>
-        
-        @media (max-width: 1600px) {
-            .hidden-sixteen {
-                display:none;
-            }
-        }
-
-        @media (max-width: 1100px) {
-            .hidden-thousand {
-                display:none;
-            }
-
-            .nav-span {
-                align-self: center;
-            }
-
-            .left-nav {
-                width: 75px;
-                font-size: 16px;
-            }
-            
-            .main-section {
-                justify-content: flex-start;
-                width: 100vw;
-            }
-
-            .posts {
-                width: 75%;
-            }
-
-            .image-board {
-                justify-content: flex-start;
-            }
-
-            .image-column {
-                width: 95%;
-            }
-
-            .img-container {
-                width: 100%;
-            }
-
-            .post-title {
-                height: 30px;
-            }
-
-            .post-caption {
-                font-size: 18px
-            }
-
-            .post-tags, .post-author-name {
-                font-size: 10px;
-            }
-        }
-    </style>
 {% endblock %}
 
 {% block body %}
@@ -122,12 +66,14 @@
             </div>  
         </article>
         <aside class="right-nav hidden-sixteen">
+            {% if username %}
             <div class="user-card">
                 <img src="/static/images/user_icon.png">
                 <div class="user-info">
                     <a href="/user/{{ username }}">{{ username }}</a>
                 </div>
             </div>
+            {% endif %}
         </aside> 
     </section>
     <footer>
