@@ -381,7 +381,7 @@ def handle_buttons(post_id):
     user_id = get_current_user_id()
     
     if not user_id:
-        return redirect(url_for('view_post', post_id=post_id))
+        return redirect(url_for('login'))
     
     like_button = request.form.get('like-button')
     favorite_button = request.form.get('favorite-button')
