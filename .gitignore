@@ -6,3 +6,5 @@ images
 app.py
 .env
 *.save
+
+__pycache__
