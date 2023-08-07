@@ -141,7 +141,7 @@
                             <th>Report Date</th>
                         </thead>
                         <tbody>
-                            {% if post_reports != None %}
+                            {% if post_reports is defined %}
                                 {% for report in post_reports %}
                                 <tr>
                                     <td style="text-align:right;">{{ report.report_id }}</td>
