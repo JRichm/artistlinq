@@ -24,11 +24,16 @@
 .nav-span {
   margin-top: 20px;
   align-self: flex-start;
-  font-family: 'Roboto' monospace;
+  font-family: 'Comfortaa' ;
 }
 
 .nav-span i {
   cursor: pointer;
+  font-size: 20px;
+}
+
+.nav-span a {
+  margin-left:15px;
 }
 
 .search-span {
@@ -45,7 +50,7 @@
   border: none;
   outline: none;
   border-bottom: #415a77 1px solid;
-  margin-left: 5px;
+  margin-left: 25px;
 }
 
 #search-button {

@@ -53,7 +53,7 @@
                             <a href="{{ url_for('view_post', post_id=image.post_id) }}"><img src="{{ image.image_url }}"></a>
                         </div>
                         <div class="post-details">
-                            <span style="display: flex; flex-direction:row; justify-content: space-between; align-items: center;">
+                            <span style="display: flex; flex-direction:row; justify-content: space-between; align-items: center; margin-top:10px;">
                                 <h2 class="post-caption">{{ image.caption }}</h2>
                                 <div class="post-stats"  style="display: flex; flex-direction:row; justify-content: space-between; align-items: center;">
                                     <div class="stat-item">
@@ -70,11 +70,11 @@
                                     </div>
                                 </div>
                             </span>
-                            <div class="post-tags">
+                            <!-- <div class="post-tags">
                                 {% for tag in image.tags %}
                                     <p class="post-tag">#{{ tag['tag_name'] }}</p>
                                 {% endfor %}
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     {% endfor %}
