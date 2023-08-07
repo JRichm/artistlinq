@@ -162,6 +162,9 @@ def post_settings(post_id):
     if user and user.isModerator:
         post_reports = crud.get_reports_for_post(post_id)
     
+    print('\n\n\n')
+    print(post_reports)
+    
     return render_template('post.html',
                            username=username,
                            user=user,
