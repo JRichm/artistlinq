@@ -172,7 +172,7 @@ def post_settings(post_id):
                            userLikes=None,
                            post_comments=None,
                            endpoint='post_settings',
-                           post_reporsts=post_reports)
+                           post_reports=post_reports)
     
 
 
