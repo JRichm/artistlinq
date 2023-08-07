@@ -62,7 +62,6 @@ if (sendReportButton) {
 }
 
 modToolsButton = document.getElementById('mod-tools-open')
-
 if (modToolsButton) {
     const modTools = document.getElementById('mod-tools')
 
@@ -76,3 +75,10 @@ if (modToolsButton) {
         }
     })
 }
+
+allTags = document.querySelectorAll('.added-tag')
+allTags.forEach(tag => {
+    tag.addEventListener('click', e => {
+        window.location.href = `/search/${e.target.innerHTML}`
+    })
+})
