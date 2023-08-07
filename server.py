@@ -152,10 +152,15 @@ def post_settings(post_id):
     post_tags = crud.get_tags_from_post_id(post_id)
     username = check_login()
     user = crud.get_user_by_username(username)
+    post_reporsts = None
     
     if post_author.username != username:
         flash('No edit access!')
         return redirect(url_for('view_post', post_id=post_id))
+    
+            
+    if user and user.isModerator:
+        post_reports = crud.get_reports_for_post(post_id)
     
     return render_template('post.html',
                            username=username,
@@ -166,7 +171,8 @@ def post_settings(post_id):
                            post_tags=post_tags,
                            userLikes=None,
                            post_comments=None,
-                           endpoint='post_settings')
+                           endpoint='post_settings',
+                           post_reporsts=post_reporsts)
     
 
 
