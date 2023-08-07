@@ -42,10 +42,14 @@ class Post(db.Model):
         return {
             'post_id': self.post_id,
             'user_id': self.user_id,
+            'author': db.session.query(User).filter(User.user_id == self.user_id).first(),
             'image_url': self.image_url,
             'caption': self.caption,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'likes': db.session.query(Like).filter(Like.post_id == self.post_id).count(),
+            'favorites': db.session.query(Favorite).filter(Favorite.post_id == self.post_id).count(),
+            'stars': db.session.query(Star).filter(Star.post_id == self.post_id).count()
         }
 
 

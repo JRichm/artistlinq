@@ -39,14 +39,16 @@ def index(images=None):
     if not images:
         images=crud.get_50_images()
         
-    for image in images:
-        image['tags'] = crud.get_tags_from_post_id(image['id'])
+    if images:
+        serialized_results = [post.serialize() for post in images]
+        
+    for image in serialized_results:
+        image['tags'] = crud.get_tags_from_post_id(image['post_id'])
     
-    featured = crud.get_featured_users()
     username = check_login()
     user = crud.get_user_by_username(username)
-    print('\n\tapp.route("/")')
-    return render_template('index.html', username=username, images=images, featured=featured, user=user)
+    
+    return render_template('index.html', username=username, images=serialized_results, user=user)
   
   
     ### " View Login/New User " ###
@@ -361,7 +363,6 @@ def search(search_value):
         serialized_results = [post.serialize() for post in search_results]
 
         print('\n\n\n')
-        app.logger.info(serialized_results)
         print(serialized_results)
         
         user = None

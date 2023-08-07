@@ -83,7 +83,7 @@ hr {
 .like-color {
     color: #198754;
 }
-
+ 
 .like-button {
     color: #198754;
     border: 2px solid #198754;
@@ -263,4 +263,25 @@ hr {
     .post-figure {
         width: 320px!important;
     }
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.stat-item i {
+    margin-bottom: 0px;
+}
+
+.stat-item p {
+    margin: 0px 5px 0px 5px !important;
+} 
+
+.small-num {
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: -2px;
+    font-size: 12px;
 }

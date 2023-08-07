@@ -190,8 +190,8 @@ def get_users_images(user_id):
 
 def get_50_images():
     post_query = db.session.query(Post).order_by(Post.post_id.desc()).limit(50).all()
-    image_list = [{'id': post.post_id, 'author': get_user_by_id(post.user_id), 'url': post.image_url, 'caption': post.caption} for post in post_query]
-    return image_list
+    
+    return post_query
 
 def get_featured_users():
     user_query = db.session.query(User).order_by(User.user_id.desc()).limit(5).all()

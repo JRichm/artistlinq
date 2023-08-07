@@ -50,10 +50,26 @@
                             <a class="post-author-name" href="{{ url_for('user_view', username=image.author.username) }}">{{ image.author.username }}</a>
                         </div>
                         <div class="img-container">
-                            <a href="{{ url_for('view_post', post_id=image.id) }}"><img src="{{ image.url }}"></a>
+                            <a href="{{ url_for('view_post', post_id=image.post_id) }}"><img src="{{ image.image_url }}"></a>
                         </div>
                         <div class="post-details">
-                            <h2 class="post-caption">{{ image.caption }}</h2>
+                            <span style="display: flex; flex-direction:row; justify-content: space-between; align-items: center;">
+                                <h2 class="post-caption">{{ image.caption }}</h2>
+                                <div class="post-stats">
+                                    <div class="stat-item">
+                                        <i class="fa-solid fa-thumbs-up like-color"></i>
+                                        <p class="like-color small-num">{{ image.likes }}</p>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fa-solid fa-heart favorite-color"></i>
+                                        <p class="favorite-color small-num">{{ image.favorites }}</p>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fa-solid fa-star star-color"></i>
+                                        <p class="star-color small-num">{{ image.stars }}</p>
+                                    </div>
+                                </div>
+                            </span>
                             <div class="post-tags">
                                 {% for tag in image.tags %}
                                     <p class="post-tag">#{{ tag['tag_name'] }}</p>

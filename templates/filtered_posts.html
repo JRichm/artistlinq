@@ -49,9 +49,18 @@
                     <span class="post-details">
                         <p class="post-caption">{{ image.caption }}</p>
                         <div class="post-stats">
-                            <i class="fa-solid fa-thumbs-up like-color"></i>
-                            <i class="fa-solid fa-heart favorite-color"></i>
-                            <i class="fa-solid fa-star star-color"></i>
+                            <div class="stat-item">
+                                <i class="fa-solid fa-thumbs-up like-color"></i>
+                                <p class="like-color small-num">{{ image.likes }}</p>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fa-solid fa-heart favorite-color"></i>
+                                <p class="favorite-color small-num">{{ image.favorites }}</p>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fa-solid fa-star star-color"></i>
+                                <p class="star-color small-num">{{ image.stars }}</p>
+                            </div>
                         </div>
                     </span>
                 </figure>
