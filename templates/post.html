@@ -141,18 +141,20 @@
                             <th>Report Date</th>
                         </thead>
                         <tbody>
-                            {% for report in post_reports %}
-                            <tr>
-                                <td style="text-align:right;">{{ report.report_id }}</td>
-                                <td style="text-align:center;">{% if report.is_hateful %}✓{% endif %}</td>
-                                <td style="text-align:center;">{% if report.is_spam %}✓{% endif %}</td>
-                                <td style="text-align:center;">{% if report.is_violent %}✓{% endif %}</td>
-                                <td style="text-align:center;">{% if report.is_explicit %}✓{% endif %}</td>
-                                <td style="text-align:center;">{% if report.is_other_report %}✓{% endif %}</td>
-                                <td style="text-align:right;">{{ report.original_report_note }}</td>
-                                <td style="text-align:center;">{{ report.created_at.strftime('%m/%d/%Y') }}</td>
-                            </tr>
-                            {% endfor %}
+                            {% if post_reports %}
+                                {% for report in post_reports %}
+                                <tr>
+                                    <td style="text-align:right;">{{ report.report_id }}</td>
+                                    <td style="text-align:center;">{% if report.is_hateful %}✓{% endif %}</td>
+                                    <td style="text-align:center;">{% if report.is_spam %}✓{% endif %}</td>
+                                    <td style="text-align:center;">{% if report.is_violent %}✓{% endif %}</td>
+                                    <td style="text-align:center;">{% if report.is_explicit %}✓{% endif %}</td>
+                                    <td style="text-align:center;">{% if report.is_other_report %}✓{% endif %}</td>
+                                    <td style="text-align:right;">{{ report.original_report_note }}</td>
+                                    <td style="text-align:center;">{{ report.created_at.strftime('%m/%d/%Y') }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
