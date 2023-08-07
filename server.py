@@ -152,7 +152,7 @@ def post_settings(post_id):
     post_tags = crud.get_tags_from_post_id(post_id)
     username = check_login()
     user = crud.get_user_by_username(username)
-    post_reporsts = None
+    post_reports = None
     
     if post_author.username != username:
         flash('No edit access!')
@@ -172,7 +172,7 @@ def post_settings(post_id):
                            userLikes=None,
                            post_comments=None,
                            endpoint='post_settings',
-                           post_reporsts=post_reporsts)
+                           post_reporsts=post_reports)
     
 
 
