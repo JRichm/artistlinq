@@ -47,6 +47,10 @@ To join the ArtistLinq community, follow these simple steps:
 
 # Screenshots of website
 
+## Home Page
+
+![alt View Post](/screenshots/080723%20home%20page.png)
+
 ## View Post
 
 ![alt View Post](/screenshots/view_post.png)
