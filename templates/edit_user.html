@@ -47,8 +47,8 @@
                 <hr>
                 <form class="appearance-settings settings" method="post">
                     {{ settings['appearance'].csrf_token }}
-                    <div class="new-icon-container">
-                        <div>
+                    <div id="new-icon-container" class="hidden">
+                        <div style="width: 400px; height: 400px;">
                             <img src="" id="image">
                             <button id="cropImageBtn">Crop Image</button>
                         </div>

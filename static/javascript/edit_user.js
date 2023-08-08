@@ -1,3 +1,6 @@
+
+let cropper
+
 const newIconIMGElement = document.getElementById('image')
 
 const iconInput = document.getElementById('new-icon-input');
@@ -8,25 +11,25 @@ iconInput.addEventListener('change', e => {
         reader.onload = (e) => {
             newIconIMGElement.src = e.target.result;
             newIconIMGElement.onload = initCropper;
+            document.getElementById('new-icon-container').classList.remove('hidden')
+            document.getElementById('cropImageBtn').addEventListener('click', cropImage)
         }
         reader.readAsDataURL(file);
     }
 })
 
-let cropper
-
 function initCropper() {
     cropper = new Cropper(image, {
-        aspectRatio: 0,
+        aspectRatio: 1,
         viewMode: 0,
     })
 }
 
-document.getElementById('cropImageBtn').addEventListener('click', e => {
+function cropImage(e) {
     e.preventDefault() 
     var croppedImage = cropper.getCroppedCanvas().toDataURL("image/png");
 
     document.getElementById('output').src = croppedImage
 
     alert(document.getElementById('output').src)
-})
+}
