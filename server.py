@@ -419,6 +419,17 @@ def handle_buttons(post_id):
     return redirect(url_for('view_post', post_id=post_id))
 
 
+    ### " Save User Appearance Settings " ###
+@app.route('/update_user_appearance', methods=['POST'])
+def update_appearance():    
+    print('\n\n\n')
+    print(request.files['newIcon'])
+    return 'true'
+
+
+
+
+
 """"""""""""""""""""""""""""""""""""""""""
 """  ###     Server Methods     ###    """
 """"""""""""""""""""""""""""""""""""""""""
