@@ -9,3 +9,4 @@
 6) order search and posts by amount of views
 7) change pages right after user posts
 8) disable post button after user posts
+9) 'Forgot Password' doesnt work

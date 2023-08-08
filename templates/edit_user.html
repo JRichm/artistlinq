@@ -2,6 +2,7 @@
 {% block title %}Art-Station [EDIT - {{ session.get('username') }}]{% endblock %}
 {% block head %}
     <link rel="stylesheet" href="/static/css/edit_user.css">
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -46,14 +47,21 @@
                 <hr>
                 <form class="appearance-settings settings" method="post">
                     {{ settings['appearance'].csrf_token }}
+                    <!-- <input type="file" id="upload-input" accept="image/*" />
                     <span class="new-icon-container">
                         <div id="new-icon-box" class="new-icon-box">
-                            <img id="uploaded-icon" class="uploaded-icon" oncontextmenu="return false;" src="">
+                            <img id="uploaded-icon" class="uploaded-icon" oncontextmenu="return false;">
                         </div>
                         <button id="fake-save">save</button>
-                        <div id="captured-image-container"></div>
-                    </span>
-                    <canvas id="canvas" style="height:400px; width:400px;"></canvas>
+                    </span> -->
+                    <div class="new-image-container">
+                        <div>
+                            <img src="../../../static/posts/images/california_sunset_at_beach__4088x2725____v1222x580__.jpg" id="image">
+                            <button id="cropImageBtn">Crop Image</button>
+                        </div>
+
+                        <img src="" id="output">
+                    </div>
                     <span>
                         {{ settings['appearance'].new_icon.label }}
                         {{ settings['appearance'].new_icon }}
