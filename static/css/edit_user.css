@@ -112,6 +112,13 @@ main {
     color: white;
 }
 
+.setting-span {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    margin-bottom: 20px;
+}
+
 
 .user-icons-header, .user-backgrounds-header {
     background-color: #415a77;

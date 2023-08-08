@@ -34,7 +34,7 @@
 
                 {% for field in settings['general'] %}
                     {% if field.type != 'CSRFTokenField' %}
-                    <span>
+                    <span class="setting-span">
                         {{ field.label }} {{ field }}
                     </span>
                     {% endif %}
@@ -55,11 +55,11 @@
 
                         <img src="" id="output">
                     </div>
-                    <span>
+                    <span class="setting-span">
                         {{ settings['appearance'].new_icon.label }}
                         {{ settings['appearance'].new_icon }}
                     </span>
-                    <span>
+                    <span class="setting-span">
                         {{ settings['appearance'].new_background.label }}
                         {{ settings['appearance'].new_background }}
                     </span>    
