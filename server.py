@@ -7,6 +7,7 @@
 from flask import Flask, render_template, redirect, request, url_for, flash, jsonify, session
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.utils import secure_filename
 from jinja2 import StrictUndefined
 from dotenv import load_dotenv
 from model import connect_to_db, db
@@ -26,6 +27,7 @@ import crud
 import forms
 
 image_foler = './static/posts/images'
+thumbnail_folder = './static/posts/thumbnails'
 os.makedirs(image_foler, exist_ok=True)
 
 """"""""""""""""""""""""""""""""""""""""""
@@ -422,8 +424,26 @@ def handle_buttons(post_id):
     ### " Save User Appearance Settings " ###
 @app.route('/update_user_appearance', methods=['POST'])
 def update_appearance():    
-    print('\n\n\n')
+    
+    print(f'\n\tapp.route("/update_user_appearance")')
     print(request.files['newIcon'])
+    
+    newIconFile = request.files['newIcon']
+    username = session.get('username')
+    image_url = ''
+    
+    if request.method == 'POST':
+        original_filename = newIconFile.filename
+        file_extension = os.path.splittext(original_filename)
+        
+        new_filename = secure_filename(username) + file_extension
+        
+        image_url = os.path.join(thumbnail_folder, newIconFile.filename)
+        newIconFile.save(image_url)
+        
+        return redirect(url_for('edit_user', username=username, edit_endpoint='general'))
+        
+        
     return 'true'
 
 
