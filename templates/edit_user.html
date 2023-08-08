@@ -2,7 +2,7 @@
 {% block title %}Art-Station [EDIT - {{ session.get('username') }}]{% endblock %}
 {% block head %}
     <link rel="stylesheet" href="/static/css/edit_user.css">
-    <script src="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.1.0/cropper.min.css" integrity="sha512-vmXqikRa5kmI3gOQygzml5nV+5NGxG8rt8KWHKj8JYYK12JUl2L8RBfWinFGTzvpwwsIRcINy9mhLyodnmzjig==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
 {% block body %}
@@ -47,16 +47,9 @@
                 <hr>
                 <form class="appearance-settings settings" method="post">
                     {{ settings['appearance'].csrf_token }}
-                    <!-- <input type="file" id="upload-input" accept="image/*" />
-                    <span class="new-icon-container">
-                        <div id="new-icon-box" class="new-icon-box">
-                            <img id="uploaded-icon" class="uploaded-icon" oncontextmenu="return false;">
-                        </div>
-                        <button id="fake-save">save</button>
-                    </span> -->
-                    <div class="new-image-container">
+                    <div class="new-icon-container">
                         <div>
-                            <img src="../../../static/posts/images/california_sunset_at_beach__4088x2725____v1222x580__.jpg" id="image">
+                            <img src="" id="image">
                             <button id="cropImageBtn">Crop Image</button>
                         </div>
 
@@ -100,6 +93,7 @@
         </article>  
     </section>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.js"></script>
 <script src="/static/javascript/edit_user.js/"></script>
 <script>
     selectedButton = document.getElementById('{{ endpoint }}' + '-button')

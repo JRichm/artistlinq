@@ -76,12 +76,6 @@ main {
     flex-direction: column;
 }
 
-.settings span {
-    display: flex;
-    flex-direction: column;
-    margin: 15px 30px 10px 30px;
-}
-
 .settings label {
     color: white;
     width: fit-content;
@@ -89,7 +83,7 @@ main {
 }
 
 .settings input, select {
-    max-width: 500px;
+    max-widrgb(119, 22, 22)00px;
 }
 
 .settings input:focus {
@@ -199,14 +193,8 @@ main {
     box-shadow: inset 0 0 20px 20px #223049;
 }
 
-#image {
+img {
     display: block;
-}
-
-.new-image-container {
-    display: flex;
-    justify-content: center;
-    justify-items: center;
 }
 
 #output {
