@@ -430,16 +430,19 @@ def update_appearance():
     
     newIconFile = request.files['newIcon']
     username = session.get('username')
+    user = crud.get_user_by_username(username)
     image_url = ''
     
     if request.method == 'POST':
         original_filename = newIconFile.filename
-        file_extension = os.path.splittext(original_filename)
+        _, file_extension = os.path.splitext(original_filename)
         
-        new_filename = secure_filename(username) + file_extension
+        new_filename = username + file_extension
         
-        image_url = os.path.join(thumbnail_folder, newIconFile.filename)
+        image_url = os.path.join(thumbnail_folder, new_filename)
         newIconFile.save(image_url)
+        
+        crud.update_user_image_url(user.user_id, image_url)
         
         return redirect(url_for('edit_user', username=username, edit_endpoint='general'))
         

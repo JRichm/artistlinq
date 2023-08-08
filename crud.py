@@ -271,6 +271,9 @@ def update_bio(user_id, new_bio):
     get_user_by_id(user_id).bio = new_bio
     db.session.commit()
 
+def update_user_image_url(user_id, image_url):
+    get_user_by_id(user_id).user_image_url = image_url
+    db.session.commit()
 
 def setMod(user_id):
     print('\n\n\n\n\n\n new mod')
