@@ -446,7 +446,6 @@ def update_appearance():
         
         return redirect(url_for('edit_user', username=username, edit_endpoint='general'))
         
-        
     return 'true'
 
 

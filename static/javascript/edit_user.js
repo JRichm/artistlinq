@@ -1,6 +1,9 @@
 
 let iconCropper
 let newIcon
+let sendImage
+let croppedImage
+
 const newIconIMGElement = document.getElementById('image')
 
 const iconInput = document.getElementById('new-icon-input');
@@ -29,39 +32,56 @@ function initCropper() {
         viewMode: 0,
     })
 }
-
+    
 function cropImage(cropButtonEvent) {
-    cropButtonEvent.preventDefault() 
-    var croppedImage = iconCropper.getCroppedCanvas().toDataURL("image/png");
+    if (cropButtonEvent) {
+        cropButtonEvent.preventDefault() 
+    }
+    const croppedCanvas = iconCropper.getCroppedCanvas();
+    croppedImage = croppedCanvas.toDataURL("image/png");
 
-    document.getElementById('output').src = croppedImage
+    document.getElementById('output').src = croppedImage;
+
+    // Convert the cropped canvas data to a Blob object
+    croppedCanvas.toBlob(function (blob) {
+        sendImage = new File([blob], 'cropped_icon.png');
+    }, 'image/png');
 }
 
 function handleSave(saveEvent) {
-    cropImage(saveEvent)
-
-    saveEvent.preventDefault()
-    let formData = new FormData();
-
-    if (iconCropper) {
-        formData.append('newIcon', newIcon)
+    if (saveEvent) {
+        saveEvent.preventDefault()
     }
 
-    fetch('/update_user_appearance', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (response.redirected) {
-            window.location.href = response.url
-        } else {
-            return response.json();
+    if (croppedImage) {
+        let formData = new FormData();
+
+        if (iconCropper) {
+            formData.append('newIcon', sendImage)
         }
-    })
-    .then(data => {
-        console.log(data);
-    })
-    .catch(err => {
-        console.log(err)
-    })
+
+        fetch('/update_user_appearance', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.redirected) {
+                window.location.href = response.url
+            } else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    } else {
+        cropImage()
+        setTimeout(() => {
+            handleSave()
+        }, 20)
+    }
+    
 }
