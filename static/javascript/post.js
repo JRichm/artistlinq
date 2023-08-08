@@ -5,12 +5,14 @@ console.log(post_id)
 
 const textarea = document.getElementById("new-comment-input");
 
-textarea.addEventListener('input', e => {
-    console.log('fart')
-    
-    textarea.style.height = "auto";
-    textarea.style.height = textarea.scrollHeight + "px";
-})
+if (textarea) {
+    textarea.addEventListener('input', e => {
+        console.log('fart')
+        
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + "px";
+    })
+}
 
 reportButton = document.getElementById('report-post')
 if (reportButton) {

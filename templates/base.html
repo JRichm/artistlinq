@@ -53,12 +53,13 @@
     </span>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const messageContainer = document.querySelector("flash-messages");
-    
             // Remove messages after the animation is complete
-            messageContainer.addEventListener("animationend", function () {
-                this.innerHTML = "";
-            });
+            const messageContainer = document.querySelector("flash-messages");
+            if (messageContainer) {
+                messageContainer.addEventListener("animationend", function () {
+                    this.innerHTML = "";
+                });
+            }
         });</script>
 </header>
 {% block body %}{% endblock %}
