@@ -134,7 +134,7 @@ class UserSettingsGeneral(FlaskForm):
             
             # updating username
             if new_username_data:
-                if crud.get_user_by_username(new_username_data) is not None:
+                if crud.get_user_by_username(new_username_data):
                     flash('Username already in use!')
                     self.username.errors.append("Username in use")
                     print('\nreturn: username in use\n')
@@ -147,7 +147,7 @@ class UserSettingsGeneral(FlaskForm):
                     
             # updating email
             if new_email_data:
-                if crud.get_user_by_email(new_email_data) is not None:
+                if crud.get_user_by_email(new_email_data):
                     flash('Email already in use!')
                     self.email.errors.append("Email in use")
                     print('\nreturn: email in use\n')
