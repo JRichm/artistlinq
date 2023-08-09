@@ -442,8 +442,6 @@ def update_appearance():
         image_url = os.path.join(thumbnail_folder, new_filename)
         newIconFile.save(image_url)
         
-        crud.update_user_image_url(user.user_id, image_url)
-        
         return redirect(url_for('edit_user', username=username, edit_endpoint='general'))
         
     return 'true'
