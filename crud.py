@@ -156,9 +156,12 @@ def get_user_by_email(email):
 
 # get user by username
 def get_user_by_username(username):
+    print('\ngetting user')
     user = User.query.filter(User.username == username).first()
     if not user:
+        print('\tno user')
         return None
+    print('\tuser: ', user.username)
     return user
 
 def get_tags_from_substring(substring):
