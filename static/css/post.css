@@ -22,7 +22,8 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 50vw;
+    width: 100%;
+    max-width: 500px;
     padding: 25px 25px 25px 25px;
 }
 
