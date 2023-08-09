@@ -24,7 +24,7 @@
                 <i id="messages-button" class="fa-solid fa-message"></i>
                 <a class="hidden-thousand" href="/">Messages</a>
             </span>
-            {% if username %}
+            {% if username != None %}
             <span class="nav-span">
                 <i id="profile-button" class="fa-solid fa-user"></i>
                 <a class="hidden-thousand" href="/user/{{ username }}">Profile</a>
@@ -70,11 +70,6 @@
                                     </div>
                                 </div>
                             </span>
-                            <!-- <div class="post-tags">
-                                {% for tag in image.tags %}
-                                    <p class="post-tag">#{{ tag['tag_name'] }}</p>
-                                {% endfor %}
-                            </div> -->
                         </div>
                     </div>
                     {% endfor %}
@@ -82,7 +77,7 @@
             </div>  
         </article>
         <aside class="right-nav hidden-sixteen">
-            {% if username %}
+            {% if username != None %}
             <div class="user-card">
                 <img src="/static/images/user_icon.png">
                 <div class="user-info">

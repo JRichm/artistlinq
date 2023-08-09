@@ -159,7 +159,7 @@ def get_user_by_username(username):
     user = User.query.filter(User.username == username).first()
     if not user:
         return None
-    return 
+    return user
 
 def get_tags_from_substring(substring):
     substring = substring.lower()
@@ -181,7 +181,7 @@ def get_post_from_id(post_id):
     post = Post.query.get(post_id)
     if not post:
         return None
-    return 
+    return post
 
 def get_tags_from_post_id(post_id):
     tag_query = db.session.query(Tag.tag_name).join(PostedTag).filter(PostedTag.post_id == post_id).all()

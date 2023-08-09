@@ -65,7 +65,7 @@
         </article>
         <aside class="post-details">
             <div class="top-container">
-                {% if user %}
+                {% if user != None %}
                     {% if post_author.username == user.username and post_settings %}
                         <h1>{{ post.caption }}<i id='post-settings' onclick="window.location.href='/post/{{ post.post_id }}/post_settings'" class="fa-solid fa-pen-to-square"></i></h1>
                     {% else %}
