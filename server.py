@@ -105,6 +105,10 @@ def new_post():
 def view_post(post_id):
     print(f'\n\tapp.route("/post/{post_id}")')
     post = crud.get_post_from_id(post_id)
+    
+    if not post:
+        return redirect(url_for('index'))
+    
     post_author = crud.get_user_by_id(post.user_id)
     post_tags = crud.get_tags_from_post_id(post_id)
     post_comments = crud.get_comments_from_post_id(post_id)
@@ -318,15 +322,19 @@ def report_post(post_id):
 def delete_post(post_id):
     print(f'\n\tapp.route("/post/{post_id}/delete_post")')
     username = check_login()
+    isAdmin = crud.get_user_by_username(username).isModerator
+    print('\n deleting post')
+    print(isAdmin)
     post = crud.get_post_from_id(post_id)
     post_author = crud.get_user_by_id(post.user_id)
-    if post_author.username != username:
-        flash('Error deleting post("Not original author")') 
-        return redirect(url_for('view_post', post_id=post_id))
     
-    else:
+    if post_author.username == username or isAdmin == True:
         crud.delete_post(post_id)
         return redirect(url_for('index'))
+    
+    else:
+        flash('Error deleting post("Not original author")') 
+        return redirect(url_for('view_post', post_id=post_id))
     
     
     ### " Search Tags from Substring " ###

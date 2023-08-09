@@ -319,6 +319,11 @@ def setMod(user_id):
     
 """     Delete      """
 def delete_post(post_id):
+    # remove related entries from the content_reports table
+    reports = ContentReport.query.filter_by(post_id=post_id).all()
+    for report in reports:
+        db.session.delete(report)
+    
     # remove related entries from the comment table
     comments = Comment.query.filter_by(post_id=post_id).all()
     for comment in comments:

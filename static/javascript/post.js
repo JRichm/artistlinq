@@ -84,3 +84,18 @@ allTags.forEach(tag => {
         window.location.href = `/search/${e.target.innerHTML}`
     })
 })
+
+adminDeletePostButton = document.getElementById('admin-delete-post-button')
+if (adminDeletePostButton) {
+    adminDeletePostButton.addEventListener('click', e => {
+        fetch(`/post/${post_id}/delete_post`)
+        .then(response => {
+            if (response.status = 200) {
+                window.location.href = '/'
+            }
+        })
+        .catch(error => {
+            console.log(err)
+        })
+    })
+}

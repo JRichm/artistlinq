@@ -99,7 +99,7 @@ class UserSettingsGeneral(FlaskForm):
     email = StringField('Email')
     new_password = PasswordField('Update Password')
     new_password_confirm = PasswordField('Confirm Password')
-    old_password = PasswordField('Old Password')
+    old_password = PasswordField('Current Password')
     bio = TextAreaField(render_kw={"placeholder": 'bio'})
     
     def save_changes(self, user):
