@@ -164,16 +164,19 @@ hr {
     0% {
         opacity: 1;
         transform: translateY(-100%);
+        background-color: white;
     }
 
     10% {
         opacity: 1;
         transform: translateY(0);
+        background-color: #96a9c2;
     }
     
     85% {
         opacity: 1;
         transform: translateY(0);
+        background-color: #778da9;
     }
     
     100% {

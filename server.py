@@ -200,8 +200,6 @@ def edit_user(username, edit_endpoint):
 
             if updated_user is not None:
                 user = updated_user
-            else:
-                flash('Failed to update user profile')
 
             return redirect(url_for('edit_user', username=user.username, edit_endpoint=edit_endpoint))
 
