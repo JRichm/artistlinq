@@ -111,29 +111,41 @@ class UserSettingsGeneral(FlaskForm):
         new_password_confirm = self.new_password_confirm.data
         old_password = self.old_password.data
         new_bio = self.bio.data
+            
+        # Return if no input
+        if not (new_username or new_password or new_email or new_bio):
+            return None
         
-        # check if user is updating username, email, or password
+        # Require password if user updating username, password or email
         if new_username or new_password or new_email:
-            # user must input old password to update
             if not old_password:
                 self.old_password.errors.append("Please enter password to update username/email/password")
+                flash("Please enter password to update username/email/password")
                 return None
 
             # validate old password
             if not check_password_hash(user.password_hash, old_password):
+                flash("Incorrect password! Try again")
                 self.old_password.errors.append("Incorrect password")
                 return None
+            
+        # Check if new username is in use
+        if crud.get_user_by_username(new_username):
+            flash('Username already in use!')
+            self.new_username.errors.append("Username in use")
+            return None
+
+        # Check if new email is in use
+        if crud.get_user_by_email(new_email):
+            flash('Only one account per email allowed!')
+            self.new_email.errors.append("Email already registered")
 
         # New password validation
         if new_password or new_password_confirm:
             if new_password != new_password_confirm:
+                flash("Passwords do not match")
                 self.new_password.errors.append("Passwords do not match")
                 return None
-            
-        # Check if any changes were made to user information
-        if not (new_username or new_password or new_email or new_bio):
-            flash("No changes were made.")
-            return None
 
         # Update user information
         if new_username:
