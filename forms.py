@@ -130,13 +130,13 @@ class UserSettingsGeneral(FlaskForm):
                 return None
             
         # Check if new username is in use
-        if crud.get_user_by_username(new_username_data):
+        if crud.get_user_by_username(new_username_data) is not None:
             flash('Username already in use!')
             self.username.errors.append("Username in use")
             return None
 
         # Check if new email is in use
-        if crud.get_user_by_email(new_email_data):
+        if crud.get_user_by_email(new_email_data) is not None:
             flash('Only one account per email allowed!')
             self.new_email.errors.append("Email already registered")
             return None

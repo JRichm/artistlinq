@@ -135,51 +135,73 @@ def new_report(report_user, post_id, comment_id,
 """      Read       """
 # get all users
 def get_users():
-    return User.query.all()
+    users = User.query.all()
+    if not users:
+        return None
+    return users
 
 # get user by id
 def get_user_by_id(user_id):
-    return User.query.get(user_id)
+    user = User.query.get(user_id)
+    if not user:
+        return None
+    return user
 
 # get user by email
 def get_user_by_email(email):
-    return User.query.filter(User.email == email).first()
+    user = User.query.filter(User.email == email).first()
+    if not user:
+        return None
+    return user
 
 # get user by username
 def get_user_by_username(username):
-    return User.query.filter(User.username == username).first()
+    user = User.query.filter(User.username == username).first()
+    if not user:
+        return None
+    return 
 
 def get_tags_from_substring(substring):
     substring = substring.lower()
     tags = Tag.query.filter(Tag.tag_name.ilike(f'{substring}%')).all()
+    if not tags:
+        return None
     tags_data = [{'id': tag.tag_id, 'name': tag.tag_name} for tag in tags]
     return jsonify(tags_data)
 
 def get_tag_from_name(tag_name):
     tag_name = tag_name.lower()
     tag = Tag.query.filter(Tag.tag_name == tag_name).first()
-    if tag is None:
-        return jsonify({'error': 'Tag not found'})
-
+    if not tag:
+        return None
     tag_data = {'id': tag.tag_id, 'name': tag.tag_name}
     return tag_data
 
 def get_post_from_id(post_id):
-    return Post.query.get(post_id)
+    post = Post.query.get(post_id)
+    if not post:
+        return None
+    return 
 
 def get_tags_from_post_id(post_id):
     tag_query = db.session.query(Tag.tag_name).join(PostedTag).filter(PostedTag.post_id == post_id).all()
+    if not tag_query:
+        return None
     tag_list = [{'tag_name': tag.tag_name} for tag in tag_query]
     return tag_list
 
 def search_posts(search_string):
     caption_matches = Post.query.filter(Post.caption.ilike(f'%{search_string}%')).all()
     tag_matches = Post.query.join(PostedTag).join(Tag).filter(Tag.tag_name.ilike(f'%{search_string}%')).all()
+    if not caption_matches and not tag_matches:
+        return None
     search_results = caption_matches + tag_matches
     return search_results
 
 def get_posted_tags_from_post(post_id):
     tag_query = db.session.query(PostedTag).filter(PostedTag.post_id == post_id).all()
+    if not tag_query:
+        return None
     tag_list = [{'post_tag_id': tag.post_tag_id, 'tag_id': tag.tag_id, 'post_id': tag.post_id} for tag in tag_query]
     return tag_list
 
@@ -291,7 +313,6 @@ def setMod(user_id):
     
     
 """     Delete      """
-
 def delete_post(post_id):
     # remove related entries from the comment table
     comments = Comment.query.filter_by(post_id=post_id).all()
