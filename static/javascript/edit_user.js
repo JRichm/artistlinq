@@ -81,7 +81,7 @@ function handleSave(saveEvent) {
         cropImage()
         setTimeout(() => {
             handleSave()
-        }, 20)
+        }, 75)
     }
     
 }
