@@ -131,10 +131,10 @@ class UserSettingsGeneral(FlaskForm):
                 print('\nreturn: wrong password\n')
                 return None
             
-            
             # updating username
             if new_username_data:
-                if crud.get_user_by_username(new_username_data):
+                existing_user = crud.get_user_by_username(new_username_data)
+                if existing_user and existing_user.user_id != user.user_id:
                     flash('Username already in use!')
                     self.username.errors.append("Username in use")
                     print('\nreturn: username in use\n')
