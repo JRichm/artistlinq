@@ -121,47 +121,53 @@ class UserSettingsGeneral(FlaskForm):
             if not old_password_data:
                 self.old_password.errors.append("Please enter password to update username/email/password")
                 flash("Please enter password to update username/email/password")
+                print('\nreturn: no password')
                 return None
 
             # validate old password
-            if not check_password_hash(user.password_hash, old_password_data):
+            elif not check_password_hash(user.password_hash, old_password_data):
                 flash("Incorrect password! Try again")
                 self.old_password.errors.append("Incorrect password")
+                print('\nreturn: wrong password\n')
                 return None
             
-        # Check if new username is in use
-        if crud.get_user_by_username(new_username_data) is not None:
-            flash('Username already in use!')
-            self.username.errors.append("Username in use")
-            return None
-
-        # Check if new email is in use
-        if crud.get_user_by_email(new_email_data) is not None:
-            flash('Only one account per email allowed!')
-            self.new_email.errors.append("Email already registered")
-            return None
-
-        # New password validation
-        if new_password_data or new_password_confirm_data:
-            if new_password_data != new_password_confirm_data:
-                flash("Passwords do not match")
-                self.new_password.errors.append("Passwords do not match")
-                return None
-
-        # Update user information
-        if new_username_data:
-            user.username = new_username_data
-            crud.update_username(user.user_id, user.username)
-            session['username'] = user.username
             
-        if new_username_data:
-            user.password_hash = generate_password_hash(new_username_data)
-            crud.update_password(user.user_id, user.password_hash)
+            # updating username
+            if new_username_data:
+                if crud.get_user_by_username(new_username_data) is not None:
+                    flash('Username already in use!')
+                    self.username.errors.append("Username in use")
+                    print('\nreturn: username in use\n')
+                    return None
+                else:
+                    user.username = new_username_data
+                    crud.update_username(user.user_id, user.username)
+                    session['username'] = user.username
+                    print('\n**\n\tupdated username!\n**\n')
+                    
+            # updating email
+            if new_email_data:
+                if crud.get_user_by_email(new_email_data) is not None:
+                    flash('Email already in use!')
+                    self.email.errors.append("Email in use")
+                    print('\nreturn: email in use\n')
+                    return None
+                else:
+                    user.email = new_email_data
+                    crud.update_email(user.user_id, user.email)
+                    print('\n**\n\tupdated email!\n**\n')
             
-        if new_email_data:
-            user.email = new_email_data
-            crud.update_email(user.user_id, user.email)
-            
+            # updating password
+            if new_password_data or new_password_confirm_data:
+                if new_password_data != new_password_confirm_data:
+                    flash("Passwords do not match")
+                    self.new_password.errors.append("Passwords do not match")
+                    return None
+                else:
+                    user.password_hash = generate_password_hash(new_password_data)
+                    crud.update_password(user.user_id, user.password_hash)
+                    print('\n**\n\tupdated password!\n**\n')
+                    
         if new_bio_data:
             user.bio = new_bio_data
             crud.update_bio(user.user_id, user.bio)

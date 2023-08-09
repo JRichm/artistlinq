@@ -207,6 +207,8 @@ def get_posted_tags_from_post(post_id):
 
 def get_users_images(user_id):
     post_query = Post.query.filter(Post.user_id == user_id).all()
+    if not post_query:
+        return None
     image_list = [{'id': post.post_id, 'url': post.image_url, 'caption': post.caption} for post in post_query]
     return image_list
 

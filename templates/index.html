@@ -46,7 +46,11 @@
                     {% for image in images %}
                     <div class="post-container">
                         <div class="post-title">
-                            <img src="../.{{ image.author.user_image_url }}" class="post-user-icon">
+                            {% if image.author.user_image_url %}
+                                <img src="../.{{ image.author.user_image_url }}" class="post-user-icon">
+                            {% else %}
+                                <img src="../static/images/user_icon.png" class="post-user-icon">
+                            {% endif %}
                             <a class="post-author-name" href="{{ url_for('user_view', username=image.author.username) }}">{{ image.author.username }}</a>
                         </div>
                         <div class="img-container">
