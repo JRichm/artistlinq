@@ -139,6 +139,7 @@ class UserSettingsGeneral(FlaskForm):
         if crud.get_user_by_email(new_email_data):
             flash('Only one account per email allowed!')
             self.new_email.errors.append("Email already registered")
+            return None
 
         # New password validation
         if new_password_data or new_password_confirm_data:

@@ -256,12 +256,20 @@ def get_reports_for_post(post_id):
     
 """     Update      """
 def update_username(user_id, new_username):
-    get_user_by_id(user_id).username = new_username
-    db.session.commit()
+    if get_user_by_username(new_username):
+        print('\n\n\tduplicate usernames not allowed')
+        return None
+    else:
+        get_user_by_id(user_id).username = new_username
+        db.session.commit()
 
 def update_email(user_id, new_email):
-    get_user_by_id(user_id).email = new_email
-    db.session.commit()
+    if get_user_by_email(new_email):
+        print('\n\n\tduplicate emails not allowed')
+        return None
+    else:
+        get_user_by_id(user_id).email = new_email
+        db.session.commit()
 
 def update_password(user_id, new_password_hash):
     get_user_by_id(user_id).password_hash = new_password_hash
