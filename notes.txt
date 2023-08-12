@@ -11,3 +11,4 @@
 • change pages right after user posts
 • disable post button after user posts
 • 'Forgot Password' doesnt work
+• update delete post button
