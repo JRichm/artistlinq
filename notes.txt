@@ -12,3 +12,4 @@
 • disable post button after user posts
 • 'Forgot Password' doesnt work
 • update delete post button
+• just add something
