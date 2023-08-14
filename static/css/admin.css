@@ -127,4 +127,20 @@ td {
     background-color: #415a77;
     width: 1000px;
     color: white;
+    border-radius: 2px;
+}
+
+.view-user-header {
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    align-items: center;
+}
+
+.view-user-card-icon {
+    height: 100%;
+}
+
+.view-user-card-username {
+    margin: 25px;
 }

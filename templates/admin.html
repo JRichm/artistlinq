@@ -8,7 +8,6 @@
     <section class="dashboard-head">
         <h4>admin »</h4>
         <h1>{{ endpoint|replace('_', ' ') }}</h1>
-        {% if admin_view_user %}<h1> » {{ admin_view_user.username }}</h1>{% endif %}
     </section>
     <section class="dashboard-container">
         <aside class="dashboard-nav">
@@ -74,12 +73,24 @@
                         <button id="search-user-button">Search</button>
                     </span>
                 </div>
-                {% if admin_view_user %}
+                {% if admin_view_user is defined %}
                     <span class="view-user-container">
                         <div class="view-user-card">
                             <span class="view-user-header">
-                                <h3>{{ admin_view_user.username }}</h3>
+                                <img class="view-user-card-icon" src="../.{{admin_view_user.user_image_url}}">
+                                <h3 class="view-user-card-username">{{ admin_view_user.username }}</h3>
                             </span>
+                            <div class="view-user-form-container">
+                                <form class="view-user-form">
+                                    {% for field in edit_user_form %}
+                                        {% if field.type != 'CSRFTokenField' %}
+                                            <span>
+                                                {{ field.label }} {{ field }}
+                                            </span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </form>
+                            </div>
                         </div>
                     </span>
                 {% endif %}
