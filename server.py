@@ -247,12 +247,15 @@ def admin_user_settings(search_username):
         if not admin_view_user:
             flash('No User Found!')
             return redirect('/admin/user_settings')
+        
+        edit_user_form = forms.AdminUserSettings()
             
         return render_template('admin.html',
                                user=user,
                                username=username,
                                endpoint='user_settings',
-                               admin_view_user=admin_view_user
+                               admin_view_user=admin_view_user,
+                               edit_user_form=edit_user_form
         )
                                
 

@@ -212,4 +212,15 @@ class ReportPostForm(FlaskForm):
             "other_data": other_data,
         })
         
-        
+    
+class AdminUserSettings(FlaskForm):
+    # user access
+    canPost = BooleanField('Post Content')
+    
+    # user type
+    isModerator = BooleanField('Has Administrator Access')
+    isArtist = BooleanField('Artist Account')
+    
+    # user operations (ban/delete account)
+    deleteUser = SubmitField('Delete User')
+    
