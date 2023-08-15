@@ -144,3 +144,8 @@ td {
 .view-user-card-username {
     margin: 25px;
 }
+
+.view-user-form {
+    display: flex;
+    flex-direction: column;
+}

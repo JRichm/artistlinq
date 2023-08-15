@@ -82,13 +82,21 @@
                             </span>
                             <div class="view-user-form-container">
                                 <form class="view-user-form">
-                                    {% for field in edit_user_form %}
+                                    <span clas="account-type">
+                                        <span>
+                                            {{ edit_user_form.isArtist.label }} {{ edit_user_form.isArtist }}
+                                        </span>
+                                        <span>
+                                            {{ edit_user_form.isModerator.label }} {{ edit_user_form.isModerator }}
+                                        </span>
+                                    </span>
+                                    <!-- {% for field in edit_user_form %}
                                         {% if field.type != 'CSRFTokenField' %}
                                             <span>
                                                 {{ field.label }} {{ field }}
                                             </span>
                                         {% endif %}
-                                    {% endfor %}
+                                    {% endfor %} -->
                                 </form>
                             </div>
                         </div>

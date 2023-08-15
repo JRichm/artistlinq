@@ -218,7 +218,7 @@ class AdminUserSettings(FlaskForm):
     canPost = BooleanField('Post Content')
     
     # user type
-    isModerator = BooleanField('Has Administrator Access')
+    isModerator = BooleanField('Admin Account')
     isArtist = BooleanField('Artist Account')
     
     # user operations (ban/delete account)
