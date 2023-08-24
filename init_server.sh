@@ -2,5 +2,7 @@ sudo apt update
 sudo apt update
 
 pip install -r requirements.txt
+pip uninstall gunicorn
+pip install gunicorn
 
-sudo cat requirements.txt
+cat requirements.txt
