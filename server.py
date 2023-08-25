@@ -12,6 +12,7 @@ from jinja2 import StrictUndefined
 from dotenv import load_dotenv
 from model import connect_to_db, db
 import os
+from datetime import datetime
 
 load_dotenv()
 
@@ -20,6 +21,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
+
+create_db()
 
 app.jinja_env.undefined = StrictUndefined
 
@@ -503,3 +506,32 @@ def flash_errors(form):
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host='0.0.0.0', port=5000, debug=True)
+    
+    
+def create_db():
+    ## do not create two databases on one system
+    ## dev build uses art_station
+    os.system('dropdb -U postgres artistlinqdb')
+    os.system('createdb -U postgres artistlinqdb')
+
+    # Connect to the database
+    connect_to_db(app)
+
+    # Create the database tables
+    with app.app_context():
+        db.create_all()
+
+        # Create sample data
+        user1 = User(
+            username='user1',
+            email='user1@example.com',
+            password_hash='password1',
+            created_at=datetime.now(),
+            updated_at=datetime.now()
+        )
+
+        # Add data to the session and commit the changes
+        with app.app_context():
+            db.session.add(user1)
+            db.session.commit()
+        

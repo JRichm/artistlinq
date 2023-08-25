@@ -5,7 +5,6 @@ import os
 
 ## do not create two databases on one system
 ## dev build uses art_station
-os.system('dropdb -U postgres art_station')
 os.system('dropdb -U postgres artistlinqdb')
 os.system('createdb -U postgres artistlinqdb')
 
@@ -29,3 +28,4 @@ with app.app_context():
     with app.app_context():
         db.session.add(user1)
         db.session.commit()
+        
