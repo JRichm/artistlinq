@@ -5,8 +5,8 @@ import os
 def create_db(app):
     ## do not create two databases on one system
     ## dev build uses art_station
-    os.system('dropdb -U postgres artistlinqdb')
-    os.system('createdb -U postgres artistlinqdb')
+    os.system('dropdb -U artistlinq_postgres_db_user artistlinqdb')
+    os.system('createdb -U artistlinq_postgres_db_user artistlinqdb')
 
     # Connect to the database
     connect_to_db(app)
