@@ -1,0 +1,1 @@
+sudo gunicorn server:app
