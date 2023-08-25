@@ -146,8 +146,8 @@ class ContentReport(db.Model):
 """ ###       Database Config      ### """
 """"""""""""""""""""""""""""""""""""""""""
 
-def connect_to_db(flask_app, db_uri="postgresql:///art-station", echo=True):
-    flask_app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("POSTGRES_URI")
+def connect_to_db(flask_app, echo=True):
+    flask_app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
