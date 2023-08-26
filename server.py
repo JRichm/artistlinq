@@ -15,7 +15,8 @@ from seed_database import create_db
 import os
 from datetime import datetime
 
-load_dotenv()
+dotenv_path = '../../../etc/secrets/.env'
+load_dotenv(dotenv_path)
 
 app = Flask(__name__)
 
