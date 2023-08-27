@@ -27,6 +27,7 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
         
 # create_db(app)    
+connect_to_db(app)
 
 app.jinja_env.undefined = StrictUndefined
 
@@ -463,13 +464,9 @@ def update_appearance():
     return 'true'
 
 
-
-
-
 """"""""""""""""""""""""""""""""""""""""""
 """  ###     Server Methods     ###    """
 """"""""""""""""""""""""""""""""""""""""""
-
 
     ### " Check Login " ###
 def check_login():
@@ -508,6 +505,5 @@ def flash_errors(form):
     
 
 if __name__ == "__main__":
-    connect_to_db(app)
     app.run(host='0.0.0.0', port=5000, debug=True)
     
