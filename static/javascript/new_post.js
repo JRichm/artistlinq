@@ -38,6 +38,7 @@ postButton.addEventListener('click', (e) => {
       window.location.href = response.url;
     } else {
       // Handle other responses (e.g., JSON)
+      window.location.href = "/"
       return response.json();
     }
   })
