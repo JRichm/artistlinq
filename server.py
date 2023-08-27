@@ -11,7 +11,6 @@ from werkzeug.utils import secure_filename
 from jinja2 import StrictUndefined
 from dotenv import load_dotenv
 from model import connect_to_db, db
-from seed_database import create_db
 import os
 from datetime import datetime
 
@@ -27,7 +26,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
         
-create_db(app)    
+# create_db(app)    
 
 app.jinja_env.undefined = StrictUndefined
 
