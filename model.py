@@ -48,6 +48,7 @@ class Post(db.Model):
             'user_id': self.user_id,
             'author': db.session.query(User).filter(User.user_id == self.user_id).first(),
             'image_url': self.image_url,
+            'image_blob': self.image_blob,
             'caption': self.caption,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
