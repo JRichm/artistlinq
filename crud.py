@@ -218,6 +218,7 @@ def get_users_images(user_id):
 
 def get_50_images():
     post_query = db.session.query(Post).order_by(Post.post_id.desc()).limit(50).all()
+    print(str(post_query))
     
     return post_query
 
