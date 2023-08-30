@@ -167,8 +167,10 @@ def get_user_by_username(username):
 
 def get_tags_from_substring(substring):
     substring = substring.lower()
+    print('searching for tags beginning with: ', substring)
     tags = Tag.query.filter(Tag.tag_name.ilike(f'{substring}%')).all()
     if not tags:
+        print('no tags found')
         return None
     tags_data = [{'id': tag.tag_id, 'name': tag.tag_name} for tag in tags]
     return jsonify(tags_data)
@@ -218,7 +220,6 @@ def get_users_images(user_id):
 
 def get_50_images():
     post_query = db.session.query(Post).order_by(Post.post_id.desc()).limit(50).all()
-    print(str(post_query))
     
     return post_query
 

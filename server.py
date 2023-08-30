@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 from model import connect_to_db, db
 # from seed_database import create_db
 import os
+import base64
 from datetime import datetime
 
 dotenv_path = '../../../etc/secrets/.env'
@@ -360,7 +361,9 @@ def search_tags():
     print(f'\n\tapp.route("/search_tags")')
     search_key = request.args.get('key')
     tags = crud.get_tags_from_substring(search_key)
-    return tags
+    if tags:
+        return tags
+    return []
 
 
     ### " Search Tags by name " ###
@@ -368,14 +371,16 @@ def search_tags():
 def get_tag_name():
     tag_name = request.args.get('tag')
     tag = crud.get_tag_from_name(tag_name)
-    return tag
+    if tag:
+        return tag
+    return []
 
 
     ### " Search Tags by name " ###
 @app.route('/create_new_tag', methods=['POST'])
 def create_new_tag():
     tag_data = request.get_json()
-    tag_name = tag_data.get('tag')
+    tag_name = tag_data.get('tag_name')
     return crud.create_new_tag(tag_name)
 
 

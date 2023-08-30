@@ -5,6 +5,7 @@
 """"""""""""""""""""""""""""""""""""""""""
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
+import base64
 import os
 
 load_dotenv()
@@ -42,21 +43,27 @@ class Post(db.Model):
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
     
+    def image_base64(self):
+        if self.image_blob:
+            return base64.b64encode(self.image_blob).decode('utf-8')
+        
+        return None
+
+    
     def serialize(self):
         return {
             'post_id': self.post_id,
             'user_id': self.user_id,
             'author': db.session.query(User).filter(User.user_id == self.user_id).first(),
             'image_url': self.image_url,
-            'image_blob': self.image_blob,
+            'image_base64': self.image_base64(),
             'caption': self.caption,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'likes': db.session.query(Like).filter(Like.post_id == self.post_id).count(),
             'favorites': db.session.query(Favorite).filter(Favorite.post_id == self.post_id).count(),
             'stars': db.session.query(Star).filter(Star.post_id == self.post_id).count()
-        }
-
+        } 
 
 """ Comment Table """
 class Comment(db.Model):

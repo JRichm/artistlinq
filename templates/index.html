@@ -54,7 +54,7 @@
                             <a class="post-author-name" href="{{ url_for('user_view', username=image.author.username) }}">{{ image.author.username }}</a>
                         </div>
                         <div class="img-container">
-                            <a href="{{ url_for('view_post', post_id=image.post_id) }}"><img src="{{ image.image_url }}"></a>
+                            <a href="{{ url_for('view_post', post_id=image.post_id) }}"><img src="data:image/jpeg;base64,{{ image.image_base64 }}"></a>
                         </div>
                         <div class="post-details">
                             <span style="display: flex; flex-direction:row; justify-content: space-between; align-items: center; margin-top:10px;">

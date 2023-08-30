@@ -83,8 +83,7 @@ tagSearch.addEventListener('input', (e) => {
   if (tagSearch.value.length <= 2) return;
   clearTags()
 
-  // create tag element for users input
-  createTagElement(userInput, 'searched-tag')
+  searchedTags = []
 
   clearTimeout(timerId);
   timerId = setTimeout(() => {
@@ -92,18 +91,41 @@ tagSearch.addEventListener('input', (e) => {
     fetch(`/search_tags?key=${encodeURIComponent(userInput)}`)
     .then(response => response.json())
     .then(data => {
-
-      const filteredData = data.filter(item => item.name !== userInput);
-
-        filteredData.forEach(item => {
+        data.forEach(item => {
           createTagElement(item.name, 'searched-tag');
+          console.log('tagname: ', item.name)
+          searchedTags.push('' + item.name)
       });
+    })
+    .then(data => {
+      if (!searchedTags.includes(userInput)) {
+        // create tag element for users input
+        searchTag = createTagElement(userInput, 'searched-tag')
+        searchTag.addEventListener('click', e => {
+          fetch('/create_new_tag', {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            }, body: JSON.stringify({ tag_name: userInput})
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data)
+          })
+        })
+      }
     })
     .catch(error => {
       console.error(error);
       // handle any errors
     });
-  }, 250); // Delay of 1000 milliseconds (1 second)
+
+    
+
+    console.log('thesea are the searched tags')
+    console.log(searchedTags)
+
+  }, 250); // Delay of 250 milliseconds (.25 second)
 });
 
 
@@ -142,6 +164,7 @@ function createTagElement(tagName, className) {
   tag.classList.add(className);
   tag.addEventListener('click', e => clickTag(e))
   tagContainer.appendChild(tag);
+  return tag
 }
 
 function clickTag(e) {
