@@ -13,6 +13,9 @@ def create_db(app):
 
     # Create the database tables
     with app.app_context():
+        # drop existing tables
+        db.drop_all()
+
         db.create_all()
 
         # Create sample data

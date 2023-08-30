@@ -37,6 +37,7 @@ class Post(db.Model):
     post_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     image_url = db.Column(db.VARCHAR, unique=True, nullable=False)
+    image_blob = db.Column(db.LargeBinary)
     caption = db.Column(db.VARCHAR)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)

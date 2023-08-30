@@ -11,6 +11,7 @@ from werkzeug.utils import secure_filename
 from jinja2 import StrictUndefined
 from dotenv import load_dotenv
 from model import connect_to_db, db
+from seed_database import create_db
 import os
 from datetime import datetime
 
@@ -26,7 +27,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
         
-# create_db(app)    
+create_db(app)    
 connect_to_db(app)
 
 app.jinja_env.undefined = StrictUndefined
@@ -283,10 +284,10 @@ def publish_new_post():
     
         
     if request.method == 'POST':
-        image_url = os.path.join(image_foler, post_file.filename)
-        post_file.save(image_url)
+        image_data = post_file.read() 
+
+        post = crud.add_new_post(username, image_url, post_title, image_data)
         
-        post = crud.add_new_post(username, image_url, post_title)
         for tag_name in post_tags:
             tag = crud.get_tag_from_name(tag_name)
             crud.add_tag_to_post(tag['id'], post.post_id)

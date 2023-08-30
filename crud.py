@@ -39,11 +39,12 @@ def create_new_tag(tag_name):
 
 
 # new post
-def add_new_post(username, image_url, post_title):
+def add_new_post(username, image_url, post_title, image_data):
     user_id = get_user_by_username(username).user_id
     post = Post(
         user_id = user_id,
         image_url = image_url,
+        image_blobl = image_data,
         caption = post_title,
         created_at = datetime.now(),
         updated_at = datetime.now()
