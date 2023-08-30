@@ -52,9 +52,9 @@ def index(images=None):
         
     if images:
         serialized_results = [post.serialize() for post in images]
-        
-    for image in serialized_results:
-        image['tags'] = crud.get_tags_from_post_id(image['post_id'])
+    
+        for image in serialized_results:
+            image['tags'] = crud.get_tags_from_post_id(image['post_id'])
     
     username = check_login()
     user = crud.get_user_by_username(username)
