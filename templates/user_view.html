@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Art-Station [USER - {{ session.get('username') }}]{% endblock %}
+{% block title %}ArtistLinq - {{ session.get('username') }}]{% endblock %}
 {% block head %}
     <link rel="stylesheet" href="../static/css/user_view.css">
 {% endblock %}
@@ -9,7 +9,11 @@
   <section class="user-info-head">
     <article class="user-info-container">
       <div class="user-image-container">
-        <img class="user-image" src="/static/images/user_icon.png">
+        {% if user.user_image_url %}
+          <img class="user-image" src="../.{{ user.user_image_url }}">
+        {% else %}
+          <img class="user-image" src="../static/images/user_icon.png">
+        {% endif %}
       </div>
       <div class="user-info">
         <h4>{{ view_user.username }}</h4>

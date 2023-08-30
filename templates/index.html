@@ -1,72 +1,116 @@
 {% extends 'base.html' %}
-{% block title %}Art-Station [INDEX]{% endblock %}
+{% block title %}ArtistLinq{% endblock %}
 {% block head %}
     <link rel="stylesheet" href="../static/css/index.css">
 {% endblock %}
 
 {% block body %}
 <main>
-    <section>
-        <article class='hero'>
-            <div class="slideshow-container">
-
-                {% for slide in range(3) %}
-                <div class="mySlides">
-                    <div class="numbertext">1 / 3</div>
-                    <a href="{{ url_for('view_post', post_id=images[slide].id) }}"><img src=" {{ images[slide].url }} " style="width:100%"></a>
-                    <div class="text">Caption Text</div>
-                </div>
-                {% endfor %}
-
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            </div>
-            <br>
-            <div style="text-align:center">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-            </div>
-        </article>
-        <!-- <hr>
-        <article class="featured">
-            <span class="featured-container">
-
-                {% for user in featured %}
-                <div class="feature-item">
-                    <img src="/static/images/user_icon.png">
-                    <h5 class="featured-title">{{ user.username }}</h5>
-                    <p class="featured-note">{{ user.updated_at }}</p>
-                </div>
-                {% endfor %}
-
-            </span>  
-        </article> -->
-        <hr>
+    <section class="main-section">
+        <aside class="left-nav">
+            <span class="search-span nav-span">
+                <i id="search-button" class="fa-solid fa-magnifying-glass"></i>
+                <input class="hidden-thousand" id="search-bar" type="text" placeholder="Search">
+            </span>
+            <span class="nav-span">
+                <i id="home-button" class="fa-solid fa-house"></i>
+                <a class="hidden-thousand" href="/">Home</a>
+            </span>
+            <span class="nav-span">
+                <i id="post-button" class="fa-solid fa-camera"></i>
+                <a class="hidden-thousand" href="/new_post">Post</a>
+            </span>
+            <span class="nav-span">
+                <i id="messages-button" class="fa-solid fa-message"></i>
+                <a class="hidden-thousand" href="/">Messages</a>
+            </span>
+            {% if username != None %}
+            <span class="nav-span">
+                <i id="profile-button" class="fa-solid fa-user"></i>
+                <a class="hidden-thousand" href="/user/{{ username }}">Profile</a>
+            </span>
+            <span class="nav-span">
+                <i id="settings-button" class="fa-solid fa-gear"></i>
+                <a class="hidden-thousand" href="/user/{{ username }}/edit_user/general">Settings</a>
+            </span>
+            {% else %}
+            <span class="nav-span">
+                <i id="login-button" class="fa-solid fa-user"></i>
+                <a class="hidden-thousand" href="/login">Login</a>
+            </span>
+            {% endif %}
+        </aside>
         <article class="posts">
             <div class="image-board">
-
-                {% for column in range(4) %}
-                  <div class="image-column">
+                <div class="image-column">
                     {% for image in images %}
-                      {% if loop.index0 % 4 == column %}
+                    <div class="post-container">
+                        <div class="post-title">
+                            {% if image.author.user_image_url %}
+                                <img src="../.{{ image.author.user_image_url }}" class="post-user-icon">
+                            {% else %}
+                                <img src="../static/images/user_icon.png" class="post-user-icon">
+                            {% endif %}
+                            <a class="post-author-name" href="{{ url_for('user_view', username=image.author.username) }}">{{ image.author.username }}</a>
+                        </div>
                         <div class="img-container">
-                            <a href="{{ url_for('view_post', post_id=image.id) }}"><img src="{{ image.url }}" width="400"></a>   
-                            <span>
-                                <p> </p>
+                            <a href="{{ url_for('view_post', post_id=image.post_id) }}"><img src="data:image/jpeg;base64,{{ image.image_base64 }}"></a>
+                        </div>
+                        <div class="post-details">
+                            <span style="display: flex; flex-direction:row; justify-content: space-between; align-items: center; margin-top:10px;">
+                                <h2 class="post-caption">{{ image.caption }}</h2>
+                                <div class="post-stats"  style="display: flex; flex-direction:row; justify-content: space-between; align-items: center;">
+                                    <div class="stat-item">
+                                        <i class="fa-solid fa-thumbs-up like-color"></i>
+                                        <p class="like-color small-num">{{ image.likes }}</p>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fa-solid fa-heart favorite-color"></i>
+                                        <p class="favorite-color small-num">{{ image.favorites }}</p>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fa-solid fa-star star-color"></i>
+                                        <p class="star-color small-num">{{ image.stars }}</p>
+                                    </div>
+                                </div>
                             </span>
                         </div>
-                      {% endif %}
+                    </div>
                     {% endfor %}
-                  </div>
-                {% endfor %}
-
-            </div>
+                </div>
+            </div>  
         </article>
+        <aside class="right-nav hidden-sixteen">
+            {% if username != None %}
+            <div class="user-card">
+                <img src="/static/images/user_icon.png">
+                <div class="user-info">
+                    <a href="/user/{{ username }}">{{ username }}</a>
+                </div>
+            </div>
+            {% endif %}
+        </aside> 
     </section>
     <footer>
 
     </footer>
+    <script>
+        profileButton = document.getElementById('profile-button');
+
+        if (profileButton) {
+            profileButton.addEventListener('click', e => {
+                window.location.href = '/user/{{ username }}'
+            })
+        }
+        
+        settingsButton = document.getElementById('settings-button');  
+
+        if (settingsButton) {
+            settingsButton.addEventListener('click', e => {
+                window.location.href = '/user/{{ username }}/edit_user/general'
+            }) 
+        }
+    </script>
     <script src="/static/javascript/index.js"></script>
 </main>
 {% endblock %}

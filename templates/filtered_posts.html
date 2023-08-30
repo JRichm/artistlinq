@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}ArtistLinq - search{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="../static/css/filtered_posts.css">
+{% endblock %}
+{% block body %}
+<main>
+    <section class="main-section">
+        <aside class="left-nav">
+            <span class="search-span nav-span">
+                <i id="search-button" class="fa-solid fa-magnifying-glass" style="font-size: 20px !important;"></i>
+                <input class="hidden-thousand" id="search-bar" type="text" placeholder="Search">
+            </span>
+            <span class="nav-span">
+                <i id="home-button" class="fa-solid fa-house"></i>
+                <a class="hidden-thousand" href="/">Home</a>
+            </span>
+            <span class="nav-span">
+                <i id="post-button" class="fa-solid fa-camera"></i>
+                <a class="hidden-thousand" href="/new_post">Post</a>
+            </span>
+            <span class="nav-span">
+                <i id="messages-button" class="fa-solid fa-message"></i>
+                <a class="hidden-thousand" href="/">Messages</a>
+            </span>
+            {% if username %}
+            <span class="nav-span">
+                <i id="profile-button" class="fa-solid fa-user"></i>
+                <a class="hidden-thousand" href="/user/{{ username }}">Profile</a>
+            </span>
+            <span class="nav-span">
+                <i id="settings-button" class="fa-solid fa-gear"></i>
+                <a class="hidden-thousand" href="/user/{{ username }}/edit_user/general">Settings</a>
+            </span>
+            {% else %}
+            <span class="nav-span">
+                <i id="login-button" class="fa-solid fa-user"></i>
+                <a class="hidden-thousand" href="/login">Login</a>
+            </span>
+            {% endif %}
+        </aside>
+        <article class="filtered-posts">
+            {% for image in images %}
+                <figure class="post-figure">
+                    <div class="post-img-container">
+                        <a href="{{ url_for('view_post', post_id=image.post_id )}}"><img class="post-img" src="../.{{ image.image_url }}"></a>
+                    </div>
+                    <span class="post-details">
+                        <p class="post-caption">{{ image.caption }}</p>
+                        <div class="post-stats">
+                            <div class="stat-item">
+                                <i class="fa-solid fa-thumbs-up like-color"></i>
+                                <p class="like-color small-num">{{ image.likes }}</p>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fa-solid fa-heart favorite-color"></i>
+                                <p class="favorite-color small-num">{{ image.favorites }}</p>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fa-solid fa-star star-color"></i>
+                                <p class="star-color small-num">{{ image.stars }}</p>
+                            </div>
+                        </div>
+                    </span>
+                </figure>
+            {% endfor %}
+        </article>
+    </section>
+</main>
+<script src="/static/javascript/index.js"></script>
+{% endblock %}

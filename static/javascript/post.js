@@ -1,10 +1,17 @@
+
+
 var post_id = document.querySelector('.main-post').id
 console.log(post_id)
 
-function autoResize() {
-    const textarea = document.getElementById("new-comment-input");
-    textarea.style.height = "auto";
-    textarea.style.height = textarea.scrollHeight + "px";
+const textarea = document.getElementById("new-comment-input");
+
+if (textarea) {
+    textarea.addEventListener('input', e => {
+        console.log('fart')
+        
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + "px";
+    })
 }
 
 reportButton = document.getElementById('report-post')
@@ -57,7 +64,6 @@ if (sendReportButton) {
 }
 
 modToolsButton = document.getElementById('mod-tools-open')
-
 if (modToolsButton) {
     const modTools = document.getElementById('mod-tools')
 
@@ -69,5 +75,27 @@ if (modToolsButton) {
             modToolsButton.id = 'mod-tools-open';
             modTools.classList.add('hidden');
         }
+    })
+}
+
+allTags = document.querySelectorAll('.added-tag')
+allTags.forEach(tag => {
+    tag.addEventListener('click', e => {
+        window.location.href = `/search/${e.target.innerHTML}`
+    })
+})
+
+adminDeletePostButton = document.getElementById('admin-delete-post-button')
+if (adminDeletePostButton) {
+    adminDeletePostButton.addEventListener('click', e => {
+        fetch(`/post/${post_id}/delete_post`)
+        .then(response => {
+            if (response.status = 200) {
+                window.location.href = '/'
+            }
+        })
+        .catch(error => {
+            console.log(err)
+        })
     })
 }

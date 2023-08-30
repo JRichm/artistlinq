@@ -22,8 +22,9 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 25vw;
-    padding: 50px 50px 25px 50px;
+    width: 100%;
+    max-width: 500px;
+    padding: 25px 25px 25px 25px;
 }
 
 #post-settings, #report-post {
@@ -51,7 +52,7 @@ main {
 .tag-list-box {
     display: flex;
     flex-wrap: wrap;
-    width: 500px;
+    width: 100%;
 }
 
 .added-tag {
@@ -100,7 +101,7 @@ main {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0px 150px 0px 50px;
+    padding: 0px 0px 0px 50px;
 }
 
 .new-comment-container {
@@ -139,18 +140,20 @@ main {
     flex-direction: column;
     background-color: #415a77;
     width: 25vw;
+    margin: 25px;
 }
 
 #new-comment-input {
-    outline: 2px solid #415a77;
+    outline: none;
     border: none;
-    overflow: hidden;
-    resize: none;
-    height: auto;
-    border-radius: 5px;
+    border-bottom: 2px solid #415a77;
     padding: 5px;
     color: white;
     background-color: transparent;
+    resize: none; /* Disable manual resizing by the user */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    padding: 5px;
+    font-size: 18px;
 }
 
 #new-comment-post-button {
@@ -355,7 +358,10 @@ main {
 .mod-tools-container {
     max-width: 80vw;
     width: 100%;
+    padding-top: 15px;
     margin-top: 20px;
+    border-top: 2px #283e57 solid;
+    border-bottom: 2px #283e57 solid;
 }
 
 .mod-tools-header p {

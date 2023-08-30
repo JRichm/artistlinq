@@ -4,7 +4,11 @@
 """  ###  PostgreSQL  Model  File ###  """
 """"""""""""""""""""""""""""""""""""""""""
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+import base64
 import os
+
+load_dotenv()
 
 db = SQLAlchemy()
 
@@ -25,7 +29,7 @@ class User(db.Model):
     isModerator = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
-
+    user_image_url = db.Column(db.VARCHAR)
 
 """ Post Table """
 class Post(db.Model):
@@ -34,10 +38,32 @@ class Post(db.Model):
     post_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     image_url = db.Column(db.VARCHAR, unique=True, nullable=False)
+    image_blob = db.Column(db.LargeBinary)
     caption = db.Column(db.VARCHAR)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
+    
+    def image_base64(self):
+        if self.image_blob:
+            return base64.b64encode(self.image_blob).decode('utf-8')
+        
+        return None
 
+    
+    def serialize(self):
+        return {
+            'post_id': self.post_id,
+            'user_id': self.user_id,
+            'author': db.session.query(User).filter(User.user_id == self.user_id).first(),
+            'image_url': self.image_url,
+            'image_base64': self.image_base64(),
+            'caption': self.caption,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+            'likes': db.session.query(Like).filter(Like.post_id == self.post_id).count(),
+            'favorites': db.session.query(Favorite).filter(Favorite.post_id == self.post_id).count(),
+            'stars': db.session.query(Star).filter(Star.post_id == self.post_id).count()
+        } 
 
 """ Comment Table """
 class Comment(db.Model):
@@ -132,18 +158,9 @@ class ContentReport(db.Model):
 """ ###       Database Config      ### """
 """"""""""""""""""""""""""""""""""""""""""
 
-def connect_to_db(flask_app, db_uri="postgresql:///art-station", echo=True):
-    flask_app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("POSTGRES_URI")
-    flask_app.config["SQLALCHEMY_ECHO"] = echo
-    flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+def connect_to_db(flask_app, echo=True):
 
     db.app = flask_app
     db.init_app(flask_app)
 
-    print("Connected to the db!")
-    
-    
-
-if __name__ == "__main__":
-    from server import app
-    connect_to_db(app)
+    print("Connected to the db!")    

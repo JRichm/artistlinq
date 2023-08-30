@@ -1,7 +1,15 @@
-1) when creating a new user, check to see if email is already taken.
-2) when searching for tags, clear search input if enter key pushed
-3) when searching for tags, do not show duplicate tag bubbles
+• when creating a new user, check to see if email is already taken.
+• when searching for tags, clear search input if enter key pushed
+• when searching for tags, do not show duplicate tag bubbles
         if user searches for 'nature', the bubble for the users input shows up
         but another bubble for the already saved 'nature' tag also shows up
         only show one
-4) make login button hover cursor pointer
+        
+• make login button hover cursor pointer
+• track how many people view posts
+• order search and posts by amount of views
+• change pages right after user posts
+• disable post button after user posts
+• 'Forgot Password' doesnt work
+• update delete post button
+• just add something

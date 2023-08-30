@@ -80,6 +80,10 @@ hr {
     display: none !important;
 }
 
+.like-color {
+    color: #198754;
+}
+ 
 .like-button {
     color: #198754;
     border: 2px solid #198754;
@@ -99,6 +103,10 @@ hr {
     background-color: #198754;
 }
 
+.favorite-color {
+    color: #dc3545;
+}
+
 .favorite-button {
     color: #dc3545;
     border: 2px solid #dc3545;
@@ -116,6 +124,10 @@ hr {
     border: none;
     color: #701d25;
     background-color: #dc3545;
+}
+
+.star-color {
+    color: #ffc412;
 }
 
 .star-button {
@@ -152,16 +164,19 @@ hr {
     0% {
         opacity: 1;
         transform: translateY(-100%);
+        background-color: white;
     }
 
     10% {
         opacity: 1;
         transform: translateY(0);
+        background-color: #96a9c2;
     }
     
     85% {
         opacity: 1;
         transform: translateY(0);
+        background-color: #778da9;
     }
     
     100% {
@@ -171,5 +186,108 @@ hr {
 }
 
 .flash-message {
-    margin: 0px;
+    margin: 0px !important;
 }
+
+@media (max-width: 1600px) {
+    .hidden-sixteen {
+        display:none !important;
+    }
+}
+
+@media (max-width: 1100px) {
+    .hidden-thousand {
+        display:none !important;
+    }
+
+    #base-nav {
+        height: 50px;
+    }
+    
+    #base-nav a {
+        font-size: 90% !important;
+    }
+    
+    #base-nav i {
+        font-size: 20px !important;
+    }
+
+    #base-nav-user-icon {
+        display: none !important;
+    }
+
+    .nav-span {
+        align-self: center !important;
+    }
+
+    .left-nav {
+        width: 50px !important;
+        font-size: 16px !important;
+    }
+    
+    .main-section {
+        justify-content: flex-start !important;
+        width: 98vw !important;
+    }
+
+    .posts {
+        width: 85% !important;
+    }
+
+    .image-board {
+        justify-content: flex-start !important;
+    }
+
+    .image-column {
+        width: 95% !important;
+    }
+
+    .img-container {
+        width: 100% !important;
+    }
+
+    .post-title {
+        height: 30px !important;
+    }
+
+    .post-caption {
+        font-size: 18px !important
+    }
+
+    .post-tags, .post-author-name {
+        font-size: 10px !important;
+    }
+
+    .filtered-posts {
+        width: 100% !important;
+        max-width: 90vw!important;
+    }
+
+    .post-figure {
+        width: 320px!important;
+    }
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.stat-item i {
+    margin-bottom: 0px;
+    margin: 15px 5px 0px 5px;
+}
+
+.stat-item p {
+    margin: 0px 5px 0px 5px !important;
+} 
+
+.small-num {
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: -2px;
+    font-size: 12px;
+}
+
+

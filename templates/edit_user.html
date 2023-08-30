@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
-{% block title %}Art-Station [EDIT - {{ session.get('username') }}]{% endblock %}
+{% block title %}ArtistLinq - edit {{ session.get('username') }}{% endblock %}
 {% block head %}
     <link rel="stylesheet" href="/static/css/edit_user.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.1.0/cropper.min.css" integrity="sha512-vmXqikRa5kmI3gOQygzml5nV+5NGxG8rt8KWHKj8JYYK12JUl2L8RBfWinFGTzvpwwsIRcINy9mhLyodnmzjig==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
 {% block body %}
@@ -9,7 +10,11 @@
     <section class="user-info-head">
         <article class="user-info-container">
             <div class="user-image-container">
-                <img class="user-image" src="/static/images/user_icon.png">
+                {% if user.user_image_url %}
+                    <img class="user-image" src="../../.{{ user.user_image_url }}">
+                {% else %}
+                    <img class="user-image" src="../../../static/images/user_icon.png">
+                {% endif %}
             </div>
             <div class="user-info">
                 <h2 style="margin: 10px 10px 15px 0px;">{{ user.username }}</h2>
@@ -33,7 +38,7 @@
 
                 {% for field in settings['general'] %}
                     {% if field.type != 'CSRFTokenField' %}
-                    <span>
+                    <span class="setting-span">
                         {{ field.label }} {{ field }}
                     </span>
                     {% endif %}
@@ -46,37 +51,25 @@
                 <hr>
                 <form class="appearance-settings settings" method="post">
                     {{ settings['appearance'].csrf_token }}
-                    <span>
+                    <div id="new-icon-container" class="hidden">
+                        <div style="width: 400px; height: 400px;">
+                            <img src="" id="image">
+                            <button id="cropImageBtn">Crop Image</button>
+                        </div>
+
+                        <img src="" id="output">
+                    </div>
+                    <span class="setting-span">
                         {{ settings['appearance'].new_icon.label }}
                         {{ settings['appearance'].new_icon }}
                     </span>
-                    <span class="user-icons-span">
-                        <p class="user-icons-header">Your Icons</p>
-                        <div id="user-icons">
-                            {% for square in range(4) %}
-                            <div class="user-icon">
-
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </span>
-                    <span>
+                    <span class="setting-span">
                         {{ settings['appearance'].new_background.label }}
                         {{ settings['appearance'].new_background }}
-                    </span>
-                    <span class="user-backgrounds-span">
-                        <p class="user-backgrounds-header">Your Icons</p>
-                        <div id="user-backgrounds">
-                            {% for square in range(3) %}
-                            <div class="user-background">
-
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </span>
-    
+                    </span>    
                     <input type="submit" value="Save Changes" id="save-changes-button">
                 </form>
+                <script src="/static/javascript/edit_user_appearance.js/"></script>
             {% elif endpoint == 'showcase' %}
                 <h1>Update Showcase</h1>
                 <hr>
@@ -105,6 +98,7 @@
         </article>  
     </section>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.js"></script>
 <script>
     selectedButton = document.getElementById('{{ endpoint }}' + '-button')
     selectedButton.classList.add('edit-user-selected-nav-button')

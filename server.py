@@ -7,19 +7,29 @@
 from flask import Flask, render_template, redirect, request, url_for, flash, jsonify, session
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.utils import secure_filename
 from jinja2 import StrictUndefined
 from dotenv import load_dotenv
 from model import connect_to_db, db
+# from seed_database import create_db
 import os
+import base64
+from datetime import datetime
 
-load_dotenv()
+dotenv_path = '../../../etc/secrets/.env'
+load_dotenv(dotenv_path)
 
 app = Flask(__name__)
-connect_to_db(app)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
+app.config["SQLALCHEMY_ECHO"] = False
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
+        
+# create_db(app)    
+connect_to_db(app)
 
 app.jinja_env.undefined = StrictUndefined
 
@@ -27,6 +37,7 @@ import crud
 import forms
 
 image_foler = './static/posts/images'
+thumbnail_folder = './static/posts/thumbnails'
 os.makedirs(image_foler, exist_ok=True)
 
 """"""""""""""""""""""""""""""""""""""""""
@@ -35,14 +46,26 @@ os.makedirs(image_foler, exist_ok=True)
 
     ### " View Homepage " ###
 @app.route('/')
-def index():
+def index(images=None):
     print('\n\tapp.route("/")')
-    images=crud.get_50_images()
-    featured = crud.get_featured_users()
+    if not images:
+        print('no images given, finding most recent (50)')
+        images=crud.get_50_images()
+    
+    if images:
+        serialized_results = [post.serialize() for post in images]
+        
+        print('theses are the posts for this page:\n', serialized_results)
+
+        for image in serialized_results:
+            image['tags'] = crud.get_tags_from_post_id(image['post_id'])
+    else:
+        print('there are no images for this page')
+
     username = check_login()
     user = crud.get_user_by_username(username)
-    print('\n\tapp.route("/")')
-    return render_template('index.html', username=username, images=images, featured=featured, user=user)
+    
+    return render_template('index.html', username=username, images=serialized_results, user=user)
   
   
     ### " View Login/New User " ###
@@ -97,6 +120,10 @@ def new_post():
 def view_post(post_id):
     print(f'\n\tapp.route("/post/{post_id}")')
     post = crud.get_post_from_id(post_id)
+    
+    if not post:
+        return redirect(url_for('index'))
+    
     post_author = crud.get_user_by_id(post.user_id)
     post_tags = crud.get_tags_from_post_id(post_id)
     post_comments = crud.get_comments_from_post_id(post_id)
@@ -146,10 +173,18 @@ def post_settings(post_id):
     post_tags = crud.get_tags_from_post_id(post_id)
     username = check_login()
     user = crud.get_user_by_username(username)
+    post_reports = 'undefined'
     
     if post_author.username != username:
         flash('No edit access!')
         return redirect(url_for('view_post', post_id=post_id))
+    
+            
+    if user and user.isModerator:
+        post_reports = crud.get_reports_for_post(post_id)
+    
+    print('\n\n\n')
+    print(post_reports)
     
     return render_template('post.html',
                            username=username,
@@ -158,7 +193,10 @@ def post_settings(post_id):
                            post_author=post_author,
                            post_settings=post_settings_form,
                            post_tags=post_tags,
-                           endpoint='post_settings')
+                           userLikes=None,
+                           post_comments=None,
+                           endpoint='post_settings',
+                           post_reports=post_reports)
     
 
 
@@ -181,8 +219,6 @@ def edit_user(username, edit_endpoint):
 
             if updated_user is not None:
                 user = updated_user
-            else:
-                flash('Failed to update user profile')
 
             return redirect(url_for('edit_user', username=user.username, edit_endpoint=edit_endpoint))
 
@@ -226,18 +262,17 @@ def admin_user_settings(search_username):
         if not admin_view_user:
             flash('No User Found!')
             return redirect('/admin/user_settings')
+        
+        edit_user_form = forms.AdminUserSettings()
             
         return render_template('admin.html',
                                user=user,
                                username=username,
                                endpoint='user_settings',
-                               admin_view_user=admin_view_user
+                               admin_view_user=admin_view_user,
+                               edit_user_form=edit_user_form
         )
                                
-    
-    
-    
-
 
 """"""""""""""""""""""""""""""""""""""""""
 """     ###     API Routes     ###     """
@@ -255,10 +290,10 @@ def publish_new_post():
     
         
     if request.method == 'POST':
-        image_url = os.path.join(image_foler, post_file.filename)
-        post_file.save(image_url)
+        image_data = post_file.read() 
+
+        post = crud.add_new_post(username, image_url, post_title, image_data)
         
-        post = crud.add_new_post(username, image_url, post_title)
         for tag_name in post_tags:
             tag = crud.get_tag_from_name(tag_name)
             crud.add_tag_to_post(tag['id'], post.post_id)
@@ -305,15 +340,19 @@ def report_post(post_id):
 def delete_post(post_id):
     print(f'\n\tapp.route("/post/{post_id}/delete_post")')
     username = check_login()
+    isAdmin = crud.get_user_by_username(username).isModerator
+    print('\n deleting post')
+    print(isAdmin)
     post = crud.get_post_from_id(post_id)
     post_author = crud.get_user_by_id(post.user_id)
-    if post_author.username != username:
-        flash('Error deleting post("Not original author")') 
-        return redirect(url_for('view_post', post_id=post_id))
     
-    else:
+    if post_author.username == username or isAdmin == True:
         crud.delete_post(post_id)
         return redirect(url_for('index'))
+    
+    else:
+        flash('Error deleting post("Not original author")') 
+        return redirect(url_for('view_post', post_id=post_id))
     
     
     ### " Search Tags from Substring " ###
@@ -322,7 +361,9 @@ def search_tags():
     print(f'\n\tapp.route("/search_tags")')
     search_key = request.args.get('key')
     tags = crud.get_tags_from_substring(search_key)
-    return tags
+    if tags:
+        return tags
+    return []
 
 
     ### " Search Tags by name " ###
@@ -330,14 +371,16 @@ def search_tags():
 def get_tag_name():
     tag_name = request.args.get('tag')
     tag = crud.get_tag_from_name(tag_name)
-    return tag
+    if tag:
+        return tag
+    return []
 
 
     ### " Search Tags by name " ###
 @app.route('/create_new_tag', methods=['POST'])
 def create_new_tag():
     tag_data = request.get_json()
-    tag_name = tag_data.get('tag')
+    tag_name = tag_data.get('tag_name')
     return crud.create_new_tag(tag_name)
 
 
@@ -349,18 +392,40 @@ def get_users_images():
     return crud.get_users_images(view_user.user_id)
 
 
-@app.route('/handle_buttons/<post_id>', methods=['POST'])
-def handle_buttons(post_id):
+    ### " Get list of posts with specific substring " ###
+@app.route('/search/<search_value>', methods=['GET'])
+def search(search_value):
+    print('\n\n\n\n')
+    print('user is searching')
+    if search_value:
+        search_results = crud.search_posts(search_value)
+        serialized_results = [post.serialize() for post in search_results]
+
+        print('\n\n\n')
+        print(serialized_results)
+        
+        user = None
+        
+        username = check_login()
+        if username:
+            user = crud.get_user_by_username(username)
+
+        return render_template('filtered_posts.html', username=username, user=user, images=serialized_results)
+    else:
+        return jsonify({'error': 'No search string provided'}), 400
     
-    print('\n\n\n\n\ntime to handle buttons:')
+
+@app.route('/handle_buttons/<post_id>', methods=['POST'])
+def handle_buttons(post_id):    
+    user_id = get_current_user_id()
+    
+    if not user_id:
+        return redirect(url_for('login'))
     
     like_button = request.form.get('like-button')
     favorite_button = request.form.get('favorite-button')
     star_button = request.form.get('star-button')
     
-    print(session.get('username'))
-    
-    user_id = get_current_user_id()
     likeData = crud.get_user_like_data(post_id, user_id)
         
     if like_button == 'like':
@@ -384,10 +449,35 @@ def handle_buttons(post_id):
     return redirect(url_for('view_post', post_id=post_id))
 
 
+    ### " Save User Appearance Settings " ###
+@app.route('/update_user_appearance', methods=['POST'])
+def update_appearance():    
+    
+    print(f'\n\tapp.route("/update_user_appearance")')
+    print(request.files['newIcon'])
+    
+    newIconFile = request.files['newIcon']
+    username = session.get('username')
+    user = crud.get_user_by_username(username)
+    image_url = ''
+    
+    if request.method == 'POST':
+        original_filename = newIconFile.filename
+        _, file_extension = os.path.splitext(original_filename)
+        
+        new_filename = username + file_extension
+        
+        image_url = os.path.join(thumbnail_folder, new_filename)
+        newIconFile.save(image_url)
+        
+        return redirect(url_for('edit_user', username=username, edit_endpoint='general'))
+        
+    return 'true'
+
+
 """"""""""""""""""""""""""""""""""""""""""
 """  ###     Server Methods     ###    """
 """"""""""""""""""""""""""""""""""""""""""
-
 
     ### " Check Login " ###
 def check_login():
@@ -426,4 +516,5 @@ def flash_errors(form):
     
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=5000, debug=True)
+    

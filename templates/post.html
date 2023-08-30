@@ -1,9 +1,58 @@
 
 
 {% extends 'base.html' %}
-{% block title %}Art-Station [POST - {{post.post_id}}]{% endblock %}
+{% block title %}Art-Station - {{post.post_id}}{% endblock %}
 {% block head %}
     <link rel="stylesheet" href="../../static/css/post.css">
+    <style>
+        @media (max-width: 1000px) {
+            .post-section {
+                flex-direction: column;
+            }
+
+            .post-details {
+                width: 100%;
+                padding: 0px;
+            }
+
+            .secondary-section {
+                flex-direction: column;
+            }
+
+            .added-tag {
+                font-size: 10px;
+            }
+
+            .bottom-container {
+                display: flex;
+                justify-content: flex-start;
+            }
+
+            .bottom-container button {
+                width: 50px;
+                height: 30px;
+                margin: 10px;
+            }
+
+            .comment-container {
+                padding: 0px;
+            }
+
+            .user-info {
+                display: none;
+            }
+
+            #new-comment-input {
+                font-size: 14px;
+            }
+
+            #new-comment-post-button {
+                width: 80px;
+                height: 30px;
+                font-size: 14px;
+            }
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
@@ -16,7 +65,7 @@
         </article>
         <aside class="post-details">
             <div class="top-container">
-                {% if user %}
+                {% if user != None %}
                     {% if post_author.username == user.username and post_settings %}
                         <h1>{{ post.caption }}<i id='post-settings' onclick="window.location.href='/post/{{ post.post_id }}/post_settings'" class="fa-solid fa-pen-to-square"></i></h1>
                     {% else %}
@@ -29,13 +78,15 @@
                     <input id="tag-search-input" type="text" placeholder="add tags">
                 {% endif %}
                 <div id="tag-list-box" class="tag-list-box">
-                    {% for tag in post_tags %}
-                        <p class="added-tag">{{ tag['tag_name'] }}</p>
-                    {% endfor %}
+                    {% if post_tags %}
+                        {% for tag in post_tags %}
+                            <p class="added-tag">{{ tag['tag_name'] }}</p>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
             <div class="bottom-container">
-                {% if userLikes and user %}
+                {% if userLikes %}
                 <form id="post-buttons" class="post-buttons" action="{{ url_for('handle_buttons', post_id=post.post_id) }}" method="POST">
                     <button type="submit" class="like-button" name="like-button" value="like"><i class="fa-solid fa-thumbs-up"></i></button>
                     <button type="submit" class="favorite-button" name="favorite-button" value="favorite"><i class="fa-solid fa-heart"></i></button>
@@ -72,7 +123,6 @@
             </div>
         </span>
         {% endif %}
-        <hr style="position: absolute; align-self: flex-end; width: 1555px; height: 2px; margin: -15px;">
     </section>
     {% if user and user.isModerator %}
         <section class="mod-tools-container">
@@ -93,27 +143,29 @@
                             <th>Report Date</th>
                         </thead>
                         <tbody>
-                            {% for report in post_reports %}
-                            <tr>
-                                <td style="text-align:right;">{{ report.report_id }}</td>
-                                <td style="text-align:center;">{% if report.is_hateful %}✓{% endif %}</td>
-                                <td style="text-align:center;">{% if report.is_spam %}✓{% endif %}</td>
-                                <td style="text-align:center;">{% if report.is_violent %}✓{% endif %}</td>
-                                <td style="text-align:center;">{% if report.is_explicit %}✓{% endif %}</td>
-                                <td style="text-align:center;">{% if report.is_other_report %}✓{% endif %}</td>
-                                <td style="text-align:right;">{{ report.original_report_note }}</td>
-                                <td style="text-align:center;">{{ report.created_at.strftime('%m/%d/%Y') }}</td>
-                            </tr>
-                            {% endfor %}
+                            {% if post_reports is defined %}
+                                {% for report in post_reports %}
+                                <tr>
+                                    <td style="text-align:right;">{{ report.report_id }}</td>
+                                    <td style="text-align:center;">{% if report.is_hateful %}✓{% endif %}</td>
+                                    <td style="text-align:center;">{% if report.is_spam %}✓{% endif %}</td>
+                                    <td style="text-align:center;">{% if report.is_violent %}✓{% endif %}</td>
+                                    <td style="text-align:center;">{% if report.is_explicit %}✓{% endif %}</td>
+                                    <td style="text-align:center;">{% if report.is_other_report %}✓{% endif %}</td>
+                                    <td style="text-align:right;">{{ report.original_report_note }}</td>
+                                    <td style="text-align:center;">{{ report.created_at.strftime('%m/%d/%Y') }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
                 <div class="options-container">
                     <div class="options">
+                        <button id="admin-delete-post-button">Delete Post</button>
                     </div>
                 </div>
             </article>
-            <hr style="margin: -10px;">
         </section>
     {% endif %}
     <section class="secondary-section">
@@ -128,7 +180,7 @@
                     <p>{{ username }}</p>
                 </div>
                 <form class="new-comment-box" method="POST" action="{{ url_for('view_post', post_id=post.post_id) }}">
-                    {{ commentForm.comment(id="new-comment-input") }}
+                    {{ commentForm.comment(id="new-comment-input", rows="2", cols="20", wrap="hard") }}
                     {{ commentForm.submit(id="new-comment-post-button", type="submit") }}
                     {{ commentForm.csrf_token }}
                 </form>
@@ -151,7 +203,7 @@
                         <p>{{ comment.username }}</p>
                     </div>
                     <div class="comment-area">
-                        <textarea class="comment-text" readonly>{{ comment.comment_text }}</textarea>
+                        <p class="comment-text" readonly>{{ comment.comment_text }}</p>
                         <div class="comment-buttons"></div>
                     </div>
                 </div>

@@ -99,58 +99,78 @@ class UserSettingsGeneral(FlaskForm):
     email = StringField('Email')
     new_password = PasswordField('Update Password')
     new_password_confirm = PasswordField('Confirm Password')
-    old_password = PasswordField('Old Password')
+    old_password = PasswordField('Current Password')
     bio = TextAreaField(render_kw={"placeholder": 'bio'})
     
     def save_changes(self, user):
         print(user.user_id)
         
-        new_username = self.username.data
-        new_email = self.email.data
-        new_password = self.new_password.data
-        new_password_confirm = self.new_password_confirm.data
-        old_password = self.old_password.data
-        new_bio = self.bio.data
+        new_username_data = self.username.data
+        new_email_data = self.email.data
+        new_password_data = self.new_password.data
+        new_password_confirm_data = self.new_password_confirm.data
+        old_password_data = self.old_password.data
+        new_bio_data = self.bio.data
+            
+        # Return if no input
+        if not (new_username_data or new_password_data or new_email_data or new_bio_data):
+            return None
         
-        # check if user is updating username, email, or password
-        if new_username or new_password or new_email:
-            # user must input old password to update
-            if not old_password:
+        # Require password if user updating username, password or email
+        if new_username_data or new_password_data or new_email_data:
+            if not old_password_data:
                 self.old_password.errors.append("Please enter password to update username/email/password")
+                flash("Please enter password to update username/email/password")
+                print('\nreturn: no password')
                 return None
 
             # validate old password
-            if not check_password_hash(user.password_hash, old_password):
+            elif not check_password_hash(user.password_hash, old_password_data):
+                flash("Incorrect password! Try again")
                 self.old_password.errors.append("Incorrect password")
-                return None
-
-        # New password validation
-        if new_password or new_password_confirm:
-            if new_password != new_password_confirm:
-                self.new_password.errors.append("Passwords do not match")
+                print('\nreturn: wrong password\n')
                 return None
             
-        # Check if any changes were made to user information
-        if not (new_username or new_password or new_email or new_bio):
-            flash("No changes were made.")
-            return None
-
-        # Update user information
-        if new_username:
-            user.username = new_username
-            crud.update_username(user.user_id, user.username)
-            session['username'] = user.username
+            # updating username
+            if new_username_data:
+                existing_user = crud.get_user_by_username(new_username_data)
+                if existing_user:
+                    flash('Username already in use!')
+                    self.username.errors.append("Username in use")
+                    print('\nreturn: username in use\n')
+                    return None
+                else:
+                    user.username = new_username_data
+                    crud.update_username(user.user_id, user.username)
+                    session['username'] = user.username
+                    print('\n**\n\tupdated username!\n**\n')
+                    
+            # updating email
+            if new_email_data:
+                existing_user = crud.get_user_by_username(new_username_data)
+                if existing_user:
+                    flash('Email already in use!')
+                    self.email.errors.append("Email in use")
+                    print('\nreturn: email in use\n')
+                    return None
+                else:
+                    user.email = new_email_data
+                    crud.update_email(user.user_id, user.email)
+                    print('\n**\n\tupdated email!\n**\n')
             
-        if new_password:
-            user.password_hash = generate_password_hash(new_password)
-            crud.update_password(user.user_id, user.password_hash)
-            
-        if new_email:
-            user.email = new_email
-            crud.update_email(user.user_id, user.email)
-            
-        if new_bio:
-            user.bio = new_bio
+            # updating password
+            if new_password_data or new_password_confirm_data:
+                if new_password_data != new_password_confirm_data:
+                    flash("Passwords do not match")
+                    self.new_password.errors.append("Passwords do not match")
+                    return None
+                else:
+                    user.password_hash = generate_password_hash(new_password_data)
+                    crud.update_password(user.user_id, user.password_hash)
+                    print('\n**\n\tupdated password!\n**\n')
+                    
+        if new_bio_data:
+            user.bio = new_bio_data
             crud.update_bio(user.user_id, user.bio)
 
         flash("User profile updated successfully.")
@@ -158,7 +178,7 @@ class UserSettingsGeneral(FlaskForm):
     
     
 class UserSettingsAppearance(FlaskForm):
-    new_icon = FileField('User Icon')
+    new_icon = FileField('User Icon', render_kw={'id': 'new-icon-input'})
     new_background = FileField('Profile Background')
     
 
@@ -192,4 +212,15 @@ class ReportPostForm(FlaskForm):
             "other_data": other_data,
         })
         
-        
+    
+class AdminUserSettings(FlaskForm):
+    # user access
+    canPost = BooleanField('Post Content')
+    
+    # user type
+    isModerator = BooleanField('Admin Account')
+    isArtist = BooleanField('Artist Account')
+    
+    # user operations (ban/delete account)
+    deleteUser = SubmitField('Delete User')
+    

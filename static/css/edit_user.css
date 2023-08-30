@@ -64,22 +64,17 @@ main {
     background-color: #223049;
     width: 900px;
     min-height: 400px;
+    padding: 30px;
 }
 
 .settings-box h1, h2 {
     color: white;
-    margin: 33px;
+    margin: 0px;
 }
 
 .settings {
     display: flex;
     flex-direction: column;
-}
-
-.settings span {
-    display: flex;
-    flex-direction: column;
-    margin: 15px 30px 10px 30px;
 }
 
 .settings label {
@@ -89,7 +84,7 @@ main {
 }
 
 .settings input, select {
-    max-width: 500px;
+    max-width: (119, 22, 22)00px;
 }
 
 .settings input:focus {
@@ -115,6 +110,13 @@ main {
     border-radius: 3px;
     border: #415a77 1px solid;
     color: white;
+}
+
+.setting-span {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    margin-bottom: 20px;
 }
 
 
@@ -174,7 +176,6 @@ main {
     background-color: transparent;
     color: #1ba565;
     border: 2px #198754 solid;
-    margin: 25px;
     height: 40px;
     width: 150px;
     align-self: end;
@@ -197,4 +198,21 @@ main {
     -webkit-text-fill-color: #ffffff;
     transition: background-color 5000s ease-in-out 0s;
     box-shadow: inset 0 0 20px 20px #223049;
+}
+
+#new-icon-container {
+    margin-bottom: 40px;
+}
+
+img {
+    display: block;
+}
+
+#output {
+    margin: 0 5px;
+}
+
+#image {
+    max-width: 100%;
+    max-height: 100%;
 }

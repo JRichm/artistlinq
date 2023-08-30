@@ -39,11 +39,12 @@ def create_new_tag(tag_name):
 
 
 # new post
-def add_new_post(username, image_url, post_title):
+def add_new_post(username, image_url, post_title, image_data):
     user_id = get_user_by_username(username).user_id
     post = Post(
         user_id = user_id,
         image_url = image_url,
+        image_blob = image_data,
         caption = post_title,
         created_at = datetime.now(),
         updated_at = datetime.now()
@@ -135,57 +136,92 @@ def new_report(report_user, post_id, comment_id,
 """      Read       """
 # get all users
 def get_users():
-    return User.query.all()
+    users = User.query.all()
+    if not users:
+        return None
+    return users
 
 # get user by id
 def get_user_by_id(user_id):
-    return User.query.get(user_id)
+    user = User.query.get(user_id)
+    if not user:
+        return None
+    return user
 
 # get user by email
 def get_user_by_email(email):
-    return User.query.filter(User.email == email).first()
+    user = User.query.filter(User.email == email).first()
+    if not user:
+        return None
+    return user
 
 # get user by username
 def get_user_by_username(username):
-    return User.query.filter(User.username == username).first()
+    print('\ngetting user')
+    user = User.query.filter(User.username == username).first()
+    if not user:
+        print('\tno user')
+        return None
+    print('\tuser: ', user.username)
+    return user
 
 def get_tags_from_substring(substring):
     substring = substring.lower()
+    print('searching for tags beginning with: ', substring)
     tags = Tag.query.filter(Tag.tag_name.ilike(f'{substring}%')).all()
+    if not tags:
+        print('no tags found')
+        return None
     tags_data = [{'id': tag.tag_id, 'name': tag.tag_name} for tag in tags]
     return jsonify(tags_data)
 
 def get_tag_from_name(tag_name):
     tag_name = tag_name.lower()
     tag = Tag.query.filter(Tag.tag_name == tag_name).first()
-    if tag is None:
-        return jsonify({'error': 'Tag not found'})
-
+    if not tag:
+        return None
     tag_data = {'id': tag.tag_id, 'name': tag.tag_name}
     return tag_data
 
 def get_post_from_id(post_id):
-    return Post.query.get(post_id)
+    post = Post.query.get(post_id)
+    if not post:
+        return None
+    return post
 
 def get_tags_from_post_id(post_id):
     tag_query = db.session.query(Tag.tag_name).join(PostedTag).filter(PostedTag.post_id == post_id).all()
+    if not tag_query:
+        return None
     tag_list = [{'tag_name': tag.tag_name} for tag in tag_query]
     return tag_list
 
+def search_posts(search_string):
+    caption_matches = Post.query.filter(Post.caption.ilike(f'%{search_string}%')).all()
+    tag_matches = Post.query.join(PostedTag).join(Tag).filter(Tag.tag_name.ilike(f'%{search_string}%')).all()
+    if not caption_matches and not tag_matches:
+        return None
+    search_results = caption_matches + tag_matches
+    return search_results
+
 def get_posted_tags_from_post(post_id):
     tag_query = db.session.query(PostedTag).filter(PostedTag.post_id == post_id).all()
+    if not tag_query:
+        return None
     tag_list = [{'post_tag_id': tag.post_tag_id, 'tag_id': tag.tag_id, 'post_id': tag.post_id} for tag in tag_query]
     return tag_list
 
 def get_users_images(user_id):
     post_query = Post.query.filter(Post.user_id == user_id).all()
+    if not post_query:
+        return None
     image_list = [{'id': post.post_id, 'url': post.image_url, 'caption': post.caption} for post in post_query]
     return image_list
 
 def get_50_images():
     post_query = db.session.query(Post).order_by(Post.post_id.desc()).limit(50).all()
-    image_list = [{'id': post.post_id, 'user_id': post.user_id, 'url': post.image_url, 'caption': post.caption} for post in post_query]
-    return image_list
+    
+    return post_query
 
 def get_featured_users():
     user_query = db.session.query(User).order_by(User.user_id.desc()).limit(5).all()
@@ -250,12 +286,20 @@ def get_reports_for_post(post_id):
     
 """     Update      """
 def update_username(user_id, new_username):
-    get_user_by_id(user_id).username = new_username
-    db.session.commit()
+    if get_user_by_username(new_username):
+        print('\n\n\tduplicate usernames not allowed')
+        return None
+    else:
+        get_user_by_id(user_id).username = new_username
+        db.session.commit()
 
 def update_email(user_id, new_email):
-    get_user_by_id(user_id).email = new_email
-    db.session.commit()
+    if get_user_by_email(new_email):
+        print('\n\n\tduplicate emails not allowed')
+        return None
+    else:
+        get_user_by_id(user_id).email = new_email
+        db.session.commit()
 
 def update_password(user_id, new_password_hash):
     get_user_by_id(user_id).password_hash = new_password_hash
@@ -265,6 +309,9 @@ def update_bio(user_id, new_bio):
     get_user_by_id(user_id).bio = new_bio
     db.session.commit()
 
+def update_user_image_url(user_id, image_url):
+    get_user_by_id(user_id).user_image_url = image_url
+    db.session.commit()
 
 def setMod(user_id):
     print('\n\n\n\n\n\n new mod')
@@ -274,8 +321,12 @@ def setMod(user_id):
     
     
 """     Delete      """
-
 def delete_post(post_id):
+    # remove related entries from the content_reports table
+    reports = ContentReport.query.filter_by(post_id=post_id).all()
+    for report in reports:
+        db.session.delete(report)
+    
     # remove related entries from the comment table
     comments = Comment.query.filter_by(post_id=post_id).all()
     for comment in comments:
