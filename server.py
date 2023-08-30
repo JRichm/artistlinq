@@ -48,14 +48,19 @@ os.makedirs(image_foler, exist_ok=True)
 def index(images=None):
     print('\n\tapp.route("/")')
     if not images:
+        print('no images given, finding most recent (50)')
         images=crud.get_50_images()
-        
+    
     if images:
         serialized_results = [post.serialize() for post in images]
-    
+        
+        print('theses are the posts for this page:\n', serialized_results)
+
         for image in serialized_results:
             image['tags'] = crud.get_tags_from_post_id(image['post_id'])
-    
+    else:
+        print('there are no images for this page')
+
     username = check_login()
     user = crud.get_user_by_username(username)
     
